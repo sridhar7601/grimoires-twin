@@ -15,12 +15,19 @@ comes from files in `results/` and is reproduced by the commands in this README.
 | **Layer 1** — Python solver, 300 people: t90 | **135.9 s** | **57.3 s** (−58 %) |
 | people over the 30 s smoke threshold | 54 | 6 (−89 %) |
 | main entrance closed by smoke at | 21.7 s | 21.7 s |
-| **Layer 2** — Isaac Sim twin, 40 characters: t90 | *base run in progress* | **31.0 s**, 40/40 reached their exit |
+| **Layer 2** — Isaac Sim twin, 40 characters (doors open): t90 | **62.6 s** | **30.0 s** — 40/40 out in both |
 
 The base plan sends everyone to the front doors; the fire kills the main entrance at 22 s and
 277 of 300 people queue through one door. Opening the two wing exits and alarming earlier
 clears 90 % in under a minute. Across **five fire origins × 24 plans** the base plan ranks
 **last under every fire** (`docs/results/robustness_table.md`).
+
+The twin agrees on the ordering with doors open (headline, as Layer 1 assumes) and with the
+asset's door leaves closed (base 68.3 s vs winner 31.0 s) — see `docs/results/certificate.md`.
+
+Videos (in `renders/`, not in git): `hospital_map_layer1.mp4` (top-down, 300 people, smoke),
+`hospital_map_layer2_twin.mp4` (top-down, the twin's 40 characters), `hospital_dollhouse_overlay.mp4`
+(real Isaac render, roof off, rings on every character from the recorded positions).
 
 Honest framing, kept exact: *rehearses / finds / ranks* — never *predicts*; *exit saturated*
 — never *crush*; no crowd-density figure anywhere; simplified grid smoke model; the twin has
