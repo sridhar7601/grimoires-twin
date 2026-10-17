@@ -13,7 +13,7 @@ REPO=/home/nvidia/Documents/grimoires-twin
 IMG=nvcr.io/nvidia/isaac-sim:6.0.1
 PATCH=/home/nvidia/ira_patch/simulation_util.py
 MP=/isaac-sim/extscache/omni.metropolis.pipeline-0.0.9+110.1.2.lx64.cp312/omni/metropolis/pipeline/simulation_util.py
-STATUS=$HOME/film_queue.status
+STATUS=${FILM_QUEUE_STATUS:-$HOME/film_queue.status}   # override to run a second queue
 
 status() { echo "$(date +%F\ %T)  $*" | tee -a "$STATUS"; }
 
