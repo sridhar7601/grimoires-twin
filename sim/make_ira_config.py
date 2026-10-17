@@ -51,12 +51,12 @@ CAMERAS = {  # the placement proven on the hospital in Phase 0 (d = h / sin(thet
 # CCTV demo: six fixed cameras authored in the stage (world metres, Z-up), ceiling height, looking down a little.
 # Positions were read off the walkable grid (hospital_plan.json); each one stands on a main-region cell.
 CCTV_CAMS = [  # (name, label, (x, y, z), (target x, target y, target z))
-    ("CAM01", "LOBBY / MAIN ENTRANCE E1", (8.5, -2.0, 2.7), (-1.25, 0.0, 0.8)),
-    ("CAM02", "CENTRAL CORRIDOR",         (-20.0, 10.5, 2.7), (5.0, 9.0, 0.8)),
-    ("CAM03", "WEST WING / EXIT E4",      (-36.0, 17.5, 2.7), (-38.25, 9.5, 0.8)),
-    ("CAM04", "NORTH-WEST WING / EXIT E2", (-37.0, 25.5, 2.7), (-40.75, 32.5, 0.8)),
-    ("CAM05", "EAST WING / EXIT E3",      (24.0, 23.5, 2.7), (21.5, 31.0, 0.8)),
-    ("CAM06", "OUTSIDE / MAIN ENTRANCE",  (-1.25, -7.0, 3.2), (-1.25, -1.0, 0.8)),
+    ("CAM01", "LOBBY / MAIN ENTRANCE E1", (8.5, -2.0, 2.7), (-1.25, 0.0, 0.8)),      # east end of the lobby, looking at the door + fire
+    ("CAM02", "CENTRAL CORRIDOR",         (-20.0, 10.5, 2.7), (5.0, 9.0, 0.8)),       # long corridor, looking east
+    ("CAM03", "WEST WING / EXIT E4",      (-28.0, 11.0, 2.7), (-38.25, 9.5, 0.8)),    # west corridor (y 9-12), looking west at E4 in its south wall
+    ("CAM04", "NORTH-WEST WING / EXIT E2", (-34.0, 31.5, 2.7), (-40.75, 33.0, 0.8)),  # NW corridor (y 29.5-32.5), looking WNW at E2 in the north wall
+    ("CAM05", "EAST WING / EXIT E3",      (16.0, 30.5, 2.7), (20.5, 31.0, 0.8)),      # NE block (x 15-20.5, y 29-32), looking east at E3 in its east wall
+    ("CAM06", "WEST WING WARDS",          (-29.0, 22.0, 2.7), (-40.0, 21.8, 0.8)),    # ward corridor (y 21.5-22.5), looking west
 ]
 CCTV_FOCAL_MM = 12.0        # ~82 deg horizontal on the 20.955 mm aperture: a wide security lens
 CCTV_RESOLUTION = [640, 360]

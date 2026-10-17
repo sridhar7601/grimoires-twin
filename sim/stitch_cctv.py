@@ -22,7 +22,7 @@ FONT = cv2.FONT_HERSHEY_SIMPLEX
 # (name, label, watches exit or None) — labels mirror CCTV_CAMS in make_ira_config.py without importing pxr
 CAMS = [("CAM01", "LOBBY / MAIN ENTRANCE E1", "E1"), ("CAM02", "CENTRAL CORRIDOR", None),
         ("CAM03", "WEST WING / EXIT E4", "E4"), ("CAM04", "NORTH-WEST WING / EXIT E2", "E2"),
-        ("CAM05", "EAST WING / EXIT E3", "E3"), ("CAM06", "OUTSIDE / MAIN ENTRANCE E1", "E1")]
+        ("CAM05", "EAST WING / EXIT E3", "E3"), ("CAM06", "WEST WING WARDS", None)]
 TILE_W, TILE_H, COLS = 640, 360, 2
 BG = (18, 18, 22)
 
