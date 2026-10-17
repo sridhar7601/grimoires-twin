@@ -48,6 +48,16 @@ Winner faster under this setup too: **yes**. Same seed and spawn positions in bo
 Winner faster under this setup too: **yes**. Same seed and spawn positions in both setups.
 Caveats: base: 2 never came within 1.5 m of an exit target — they stopped 1.6, 1.8 m short behind characters parked on it; winner: 6 of 40 still reached E1 after its smoke closure (they had already set off; IRA does not re-route mid-walk).
 
+## Sensitivity — the same Flow-fire run repeated (same seed; film render with brighter flames)
+
+| plan | Layer-2 t50 / t90 / t100 (headline setup) | Layer-2 t50 / t90 / t100 (this setup) | exits used (this setup) | door crowding (this setup) |
+|---|---|---|---|---|
+| base `G-E12-a30-s25` | 55.1 / 62.6 / 74.5 | 74.4 / 105.8 / not reached in 193 s | E2 37 | none (no one within 2 m of a door before exit) |
+| winner `G-E1234-a5-s25` | 23.5 / 30.0 / 34.6 | 24.2 / 45.1 / 60.0 | E1 11, E2 3, E3 13, E4 13 | 1.0 p/m² at E4 (6 people), 0 s over 4/m² |
+
+Winner faster under this setup too: **yes**. Same seed and spawn positions in both setups.
+Caveats: base: 3 never came within 1.5 m of an exit target — they stopped 1.5, 1.9 m short behind characters parked on it; winner: 6 of 40 still reached E1 after its smoke closure (they had already set off; IRA does not re-route mid-walk).
+
 ## Door-crowding flag — does it fire when it should?
 
 A deliberately bad plan `G-E1234-a0-s0` (everyone released at once) on the same fire and seed: 5.1 p/m² at E4 (32 people), 6 s over 4/m², t90 24.4 s. Faster on paper, flagged in red — this is the case the agent's alarm/stagger floors exist for, and the flag now catches it from the data rather than from a rule.
