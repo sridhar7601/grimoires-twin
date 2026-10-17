@@ -32,7 +32,8 @@ import re  # noqa: E402
 
 # Top-level prims of the NVIDIA hospital switched off (active = false) in OUR layer; the venue file is untouched.
 DOOR_LEAVES = re.compile(r"^(SM_Door|GlassDoor)", re.I)          # leaves only: walls, frames and trims stay
-DOLLHOUSE_CUT = re.compile(r"(roof|ceil|Geo_M_Light2)", re.I)      # roof, ceilings, hanging fixture meshes; lights stay
+DOLLHOUSE_CUT = re.compile(r"(roof|ceil|Geo_M_Light2|Light_test)", re.I)  # roof, ceilings, fixture + ceiling-panel meshes (none are lights)
+DOLLHOUSE_DOME_EXPOSURE = -3.0   # the venue's only real light is an untextured 10000-nit dome: with the roof off it floods the floor
 
 CAMERAS = {  # the placement proven on the hospital in Phase 0 (d = h / sin(theta) must overlap distance_range)
     "ceiling_cameras": {"num": 3, "maximum_coverage": {
@@ -107,8 +108,22 @@ def author_stage(out_usda, venue_usd, venue, open_exits, rects, zone_h=3.0, cut=
         off[rx.pattern] = len(hits)
     author_stage.switched_off = off
     if film_target is not None:
-        UsdGeom.Scope.Define(stage, "/World/FilmTargets")
-        UsdGeom.Xform.Define(stage, "/World/FilmTargets/Centre").AddTranslateOp().Set(film_target)
+        # IRA's aim_at_targets rejects poses this high, so the overhead camera is authored here and
+        # handed to the writer via sensor_prim_list. A USD camera with identity rotation looks down -Z
+        # with +Y up: straight down, north at the top of the frame, the building's long (x) axis across.
+        h, focal = film_target
+        rng = UsdGeom.Imageable(root).ComputeWorldBound(Usd.TimeCode.Default(), "default").ComputeAlignedRange()
+        x, y = (rng.GetMin()[0] + rng.GetMax()[0]) / 2.0, (rng.GetMin()[1] + rng.GetMax()[1]) / 2.0   # centre of the whole building
+        dome = src.GetPrimAtPath(root.GetPath().AppendChild("DomeLight"))
+        if dome and dome.IsValid():
+            stage.OverridePrim(dome.GetPath()).CreateAttribute("inputs:exposure", Sdf.ValueTypeNames.Float).Set(DOLLHOUSE_DOME_EXPOSURE)
+        UsdGeom.Scope.Define(stage, "/World/FilmCams")
+        cam = UsdGeom.Camera.Define(stage, "/World/FilmCams/Overhead")
+        cam.AddTranslateOp().Set((x, y, h))
+        cam.CreateFocalLengthAttr(focal)
+        cam.CreateHorizontalApertureAttr(20.955)
+        cam.CreateVerticalApertureAttr(20.955 * 9.0 / 16.0)
+        cam.CreateClippingRangeAttr((0.5, 1000.0))
 
     # NavMesh areas must be registered in the stage's navmesh settings as well as named on volumes.
     # values must be typed for the usda text format: float3 colour, double cost (plain tuples do not round-trip)
@@ -201,7 +216,7 @@ def main():
               oy_ + (sum(j for _, j in main_cells) / len(main_cells) + 0.5) * res_, 0.0)
     stage_rel = f"assets/hospital/hospital_evac_{tag}{'_dollhouse' if a.dollhouse else ''}.usda"
     author_stage(R(stage_rel), R(a.venue_usd), venue, open_exits, rects, cut=cut,
-                 film_target=centre if a.dollhouse else None)
+                 film_target=(46.0, 10.0) if a.dollhouse else None)   # 46 m, 10 mm: ~96 x 54 m in 16:9 for a 75 x 47 m building
 
     template = json.load(open(R(a.template)))
     trees = {}
@@ -225,6 +240,8 @@ def main():
     if a.measure_only:
         cameras = {"ceiling_cameras": dict(CAMERAS["ceiling_cameras"], num=1)}
     elif a.dollhouse:
+        cameras = None   # camera authored in the stage (author_stage); writer renders it via sensor_prim_list
+    elif False:  # previous IRA-placed overhead attempt, kept for reference: aim_at_targets fails at 38 m
         # 74 x 40 m footprint: 10 mm lens (~93 deg horizontal) at ~38-40 m covers it in 16:9.
         # d = h / sin(theta): h 38-40, theta 84-88 -> d 38.0-40.2.  yaw picks which side the camera sits on.
         cameras = {"cam_overhead": {"num": 1, "aim_at_targets": {
@@ -243,13 +260,15 @@ def main():
     common = {"output_dir": C(out_dir), "semantic_filter_predicate": "class:character|robot;id:*",
               "camera_params": True, "object_info_bounding_box_3d": True, "start_frame": 20}
     writer = (dict(common, resolution=[320, 180], rgb=False, object_info_bounding_box_2d_tight=False) if a.measure_only   # 3D boxes: cheap cross-check of the dump
-              else dict(common, resolution=[1280, 720], rgb=True, object_info_bounding_box_2d_tight=not (a.film or a.dollhouse)))
+              else dict(common, resolution=[1920, 1080], rgb=True, object_info_bounding_box_2d_tight=False,
+                        sensor_prim_list=["/World/FilmCams/Overhead"]) if a.dollhouse
+              else dict(common, resolution=[1280, 720], rgb=True, object_info_bounding_box_2d_tight=not a.film))
     groups = {f"evac_{e}": {"num": nums[e], "asset_path": "Isaac/People/Characters/",
                             "spawn_areas": [f"Zone_{e}"], "behavior_tree": C(trees[e])} for e in open_exits if nums[e] > 0}
     cfg = {"isaacsim.replicator.agent": {
         "version": "1.6.0", "seed": a.seed, "simulation_duration": float(round(duration, 1)),
         "environment": {"base_stage_asset_path": C(stage_rel)},
-        "sensor": {"groups": cameras},
+        **({"sensor": {"groups": cameras}} if cameras else {}),
         "character": {"groups": groups},
         "replicator": {"writers": {"IRABasicWriter": writer}}}}
     yaml_rel = f"sim/ira/hospital_{tag}{suffix}.yaml"

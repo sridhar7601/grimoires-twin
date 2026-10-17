@@ -23,3 +23,5 @@ __pycache__/
 
 # stitched videos (large; live in renders/ locally)
 results/films/
+
+.DS_Store
