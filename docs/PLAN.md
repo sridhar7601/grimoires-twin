@@ -69,6 +69,8 @@ Copy `scenarios/mall_*.json` → `scenarios/hospital_base_plan.json`, `hospital_
 
 **Artifact:** the two-layer certificate. Everything after this adds depth, not validity.
 
+**Outcome (2026-10-17):** ✅ `docs/results/certificate.md` — base vs winner, same fire/seed, both layers. **They AGREE on ordering:** Layer 1 winner t90 57.3 s vs base 135.9 s; Layer 2 (Isaac twin, 40 characters, 40/40 reached their exit in both runs) winner 31.0 s vs base 68.3 s. Unusable-exit agreement is *not yet testable* — no smoke in the twin until Phase 4 — and the certificate says so rather than claiming it. The congestion caveat showed up as predicted: Layer-2/Layer-1 t90 ratio 0.50 (base) and 0.54 (winner), i.e. the twin clears ~2× faster at both plans because IRA has no door queuing while Layer 1 holds the SFPE 1.3 p/m/s cap — same direction, a known modelling difference, not a disagreement. `sim/certificate.py` reads the two `measure.py` reports + `solve_hospital.json`; nothing hand-typed.
+
 ---
 
 ## Phase 4 — the hazard inside the twin
