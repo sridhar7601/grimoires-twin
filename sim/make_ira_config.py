@@ -33,7 +33,11 @@ import re  # noqa: E402
 # Top-level prims of the NVIDIA hospital switched off (active = false) in OUR layer; the venue file is untouched.
 DOOR_LEAVES = re.compile(r"^(SM_Door|GlassDoor)", re.I)          # leaves only: walls, frames and trims stay
 DOLLHOUSE_CUT = re.compile(r"(roof|ceil|Geo_M_Light2|Light_test)", re.I)  # roof, ceilings, fixture + ceiling-panel meshes (none are lights)
-DOLLHOUSE_DOME_EXPOSURE = -3.0   # the venue's only real light is an untextured 10000-nit dome: with the roof off it floods the floor
+DOLLHOUSE_DOME_EXPOSURE = -3.0
+# Omniverse Flow fire: the extension's own preset, authored in cm and Y-up. Referenced into this metre,
+# Z-up stage it is NOT rescaled, so sizes and accelerations are set here (x0.01 for cm -> m).
+FLOW_FIRE = {"radius": 0.75, "height": 0.6, "cell": 0.08, "gravity": -1.0, "buoyancy_per_temp": 0.06,
+             "smoke_per_burn": 6.0, "smoke_fade": 0.15}   # the venue's only real light is an untextured 10000-nit dome: with the roof off it floods the floor
 
 CAMERAS = {  # the placement proven on the hospital in Phase 0 (d = h / sin(theta) must overlap distance_range)
     "ceiling_cameras": {"num": 3, "maximum_coverage": {
@@ -88,7 +92,7 @@ def rectangles(label, gx, gy, min_cells=2):
     return out
 
 
-def author_stage(out_usda, venue_usd, venue, open_exits, rects, zone_h=3.0, cut=(), film_target=None):
+def author_stage(out_usda, venue_usd, venue, open_exits, rects, zone_h=3.0, cut=(), film_target=None, fire_world=None):
     stage = Usd.Stage.CreateNew(out_usda)
     rel = os.path.relpath(os.path.abspath(venue_usd), os.path.dirname(os.path.abspath(out_usda)))
     stage.GetRootLayer().subLayerPaths.append(rel if rel.startswith(".") else "./" + rel)
@@ -107,6 +111,23 @@ def author_stage(out_usda, venue_usd, venue, open_exits, rects, zone_h=3.0, cut=
             stage.OverridePrim(c.GetPath()).SetActive(False)
         off[rx.pattern] = len(hits)
     author_stage.switched_off = off
+    if fire_world is not None:
+        import glob as _glob
+        presets = sorted(_glob.glob("/isaac-sim/extscache/omni.flowusd-*/data/presets/Fire/Fire.usda"))
+        if not presets:
+            raise SystemExit("--flow: Fire preset not found (run inside the Isaac Sim container)")
+        fire = stage.DefinePrim("/World/Fire", "Xform")
+        fire.GetReferences().AddReference(presets[-1])
+        F, V = Sdf.ValueTypeNames.Float, Sdf.ValueTypeNames.Float3
+        em = stage.OverridePrim("/World/Fire/flowEmitterSphere")
+        em.CreateAttribute("position", V).Set((fire_world[0], fire_world[1], FLOW_FIRE["height"]))
+        em.CreateAttribute("radius", F).Set(FLOW_FIRE["radius"])
+        stage.OverridePrim("/World/Fire/flowSimulate").CreateAttribute("densityCellSize", F).Set(FLOW_FIRE["cell"])
+        adv = stage.OverridePrim("/World/Fire/flowSimulate/advection")
+        adv.CreateAttribute("gravity", V).Set((0.0, 0.0, FLOW_FIRE["gravity"]))          # Y-up preset -> Z-up stage
+        adv.CreateAttribute("buoyancyPerTemp", F).Set(FLOW_FIRE["buoyancy_per_temp"])
+        adv.CreateAttribute("smokePerBurn", F).Set(FLOW_FIRE["smoke_per_burn"])
+        stage.OverridePrim("/World/Fire/flowSimulate/advection/smoke").CreateAttribute("fade", F).Set(FLOW_FIRE["smoke_fade"])
     if film_target is not None:
         # IRA's aim_at_targets rejects poses this high, so the overhead camera is authored here and
         # handed to the writer via sensor_prim_list. A USD camera with identity rotation looks down -Z
@@ -157,10 +178,11 @@ def author_stage(out_usda, venue_usd, venue, open_exits, rects, zone_h=3.0, cut=
     stage.GetRootLayer().Save()
 
 
-def make_tree(template, out_path, alarm, stagger, seed, exit_id):
+def make_tree(template, out_path, wait_min, wait_max, seed, exit_id):
+    """Wait a seeded random time in [wait_min, wait_max] (the departure window), then MoveTo the exit."""
     t = json.loads(json.dumps(template))
     wait, move = t["root"]["children"][0], t["root"]["children"][1]
-    wait["modifiers"][0]["portOverrides"].update({"min": float(alarm), "max": float(alarm + stagger), "seed": int(seed)})
+    wait["modifiers"][0]["portOverrides"].update({"min": float(wait_min), "max": float(max(wait_max, wait_min)), "seed": int(seed)})
     move["portOverrides"]["target"]["value"] = f"/World/ExitTargets/{exit_id}"
     json.dump(t, open(out_path, "w"), indent=4)
 
@@ -180,6 +202,11 @@ def main():
     ap.add_argument("--measure-only", action="store_true",
                     help="numbers run: one tiny camera, no RGB/boxes (clearance comes from actor_sdg_dump.py's "
                          "position dump); the film gets its own full-camera run")
+    ap.add_argument("--fire", default="scenarios/hospital_fire_entrance.json", help="fire scenario (grid-local origin)")
+    ap.add_argument("--flow", action="store_true", help="Omniverse Flow fire + smoke at the fire origin (the visual of the same fire)")
+    ap.add_argument("--smoke-closure", action="store_true",
+                    help="honour Layer-1 exit closures (corridor_closed_at_s in --layer1-report): people who set off after an "
+                         "exit closes go to the nearest other open exit instead")
     ap.add_argument("--keep-doors", action="store_true",
                     help="keep the venue's door leaves (default: switch them off = doors open, as Layer 1 assumes)")
     ap.add_argument("--dollhouse", action="store_true",
@@ -209,20 +236,55 @@ def main():
     nums = {e: int(a.people * share[e] / total) for e in open_exits}
     nums[max(open_exits, key=lambda e: share[e])] += a.people - sum(nums.values())
 
+    fire_tag = "_fire" if (a.flow or a.smoke_closure) else ""          # keeps fire runs apart from the certified ones
+    suffix_bt = "_smoke" if a.smoke_closure else ""
     cut = ([] if a.keep_doors else [DOOR_LEAVES]) + ([DOLLHOUSE_CUT] if a.dollhouse else [])
     main_cells = [(i, j) for j, r in enumerate(venue["cells"]) for i, ch in enumerate(r) if ch == "m"]
     res_, (ox_, oy_) = venue["res"], venue["origin"]
     centre = (ox_ + (sum(i for i, _ in main_cells) / len(main_cells) + 0.5) * res_,
               oy_ + (sum(j for _, j in main_cells) / len(main_cells) + 0.5) * res_, 0.0)
-    stage_rel = f"assets/hospital/hospital_evac_{tag}{'_dollhouse' if a.dollhouse else ''}.usda"
+    stage_rel = f"assets/hospital/hospital_evac_{tag}{'_dollhouse' if a.dollhouse else ''}{fire_tag}.usda"
+    fire = json.load(open(R(a.fire)))
+    fire_world = (fire["origin"][0] + ox_, fire["origin"][1] + oy_)
     author_stage(R(stage_rel), R(a.venue_usd), venue, open_exits, rects, cut=cut,
-                 film_target=(46.0, 10.0) if a.dollhouse else None)   # 46 m, 10 mm: ~96 x 54 m in 16:9 for a 75 x 47 m building
+                 film_target=(46.0, 10.0) if a.dollhouse else None,   # 46 m, 10 mm: ~96 x 54 m in 16:9 for a 75 x 47 m building
+                 fire_world=fire_world if a.flow else None)
+
+    # ---- departure groups: (group name, people, spawn zone, wait_min, wait_max, target exit)
+    alarm, stagger = float(plan["alarm_delay_s"]), float(plan["stagger_s"])
+    closures = {}
+    if a.smoke_closure:
+        if not a.layer1_report:
+            raise SystemExit("--smoke-closure needs --layer1-report (it carries corridor_closed_at_s)")
+        closures = {e: t for e, t in json.load(open(R(a.layer1_report))).get("corridor_closed_at_s", {}).items()
+                    if t is not None and e in open_exits}
+    alt = {}
+    for e in closures:
+        others = [x for x in open_exits if x != e and x not in closures] or [x for x in open_exits if x != e]
+        lab2, _, _ = zone_labels(venue, others)                     # where this zone's people go if e is gone
+        votes = collections.Counter(lab2[c] for c, l in label.items() if l == e and c in lab2)
+        alt[e] = votes.most_common(1)[0][0]
+    specs = []
+    for e in open_exits:
+        n, lo, hi = nums[e], alarm, alarm + stagger
+        if n <= 0:
+            continue
+        if e in closures:
+            tc = closures[e]
+            f = min(max((tc - lo) / stagger, 0.0), 1.0) if stagger > 0 else (1.0 if lo < tc else 0.0)
+            n_early = int(round(f * n))
+            if n_early:
+                specs.append((f"evac_{e}", n_early, e, lo, min(tc, hi), e))
+            if n - n_early:
+                specs.append((f"evac_{e}_to_{alt[e]}", n - n_early, e, max(tc, lo), hi, alt[e]))
+        else:
+            specs.append((f"evac_{e}", n, e, lo, hi, e))
 
     template = json.load(open(R(a.template)))
     trees = {}
-    for e in open_exits:
-        trees[e] = f"sim/bt/evacuate_{tag}_{e}.json"
-        make_tree(template, R(trees[e]), plan["alarm_delay_s"], plan["stagger_s"], a.seed, e)
+    for g, n, zone, wmin, wmax, target in specs:
+        trees[g] = f"sim/bt/evacuate_{tag}{suffix_bt}_{g.replace('evac_', '')}.json"
+        make_tree(template, R(trees[g]), wmin, wmax, a.seed, target)
 
     duration = a.duration
     if duration is None:
@@ -233,7 +295,7 @@ def main():
         raise SystemExit("--dollhouse is its own film mode; do not combine with --film / --measure-only")
     dur_tag = f"{int(a.duration)}s" if a.duration else ""
     suffix = ("_measure" if a.measure_only else "_film" + dur_tag if a.film
-              else "_dollhouse" + dur_tag if a.dollhouse else "")
+              else "_dollhouse" + dur_tag if a.dollhouse else "") + fire_tag
     out_dir = f"results/ira_hospital_{tag}{suffix}"
     aim = {"height_range": [2.5, 3.0], "look_down_angle_range": [25.0, 45.0],
            "focal_length_range": [10.0, 15.0], "distance_range": [3.5, 7.0]}
@@ -263,8 +325,8 @@ def main():
               else dict(common, resolution=[1920, 1080], rgb=True, object_info_bounding_box_2d_tight=False,
                         sensor_prim_list=["/World/FilmCams/Overhead"]) if a.dollhouse
               else dict(common, resolution=[1280, 720], rgb=True, object_info_bounding_box_2d_tight=not a.film))
-    groups = {f"evac_{e}": {"num": nums[e], "asset_path": "Isaac/People/Characters/",
-                            "spawn_areas": [f"Zone_{e}"], "behavior_tree": C(trees[e])} for e in open_exits if nums[e] > 0}
+    groups = {g: {"num": n, "asset_path": "Isaac/People/Characters/", "spawn_areas": [f"Zone_{zone}"],
+                  "behavior_tree": C(trees[g])} for g, n, zone, _, _, _ in specs}
     cfg = {"isaacsim.replicator.agent": {
         "version": "1.6.0", "seed": a.seed, "simulation_duration": float(round(duration, 1)),
         "environment": {"base_stage_asset_path": C(stage_rel)},

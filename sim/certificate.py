@@ -39,6 +39,10 @@ def main():
     ap.add_argument("--layer1", required=True, help="solve_*.json (has before/after blocks)")
     ap.add_argument("--layer2-base", required=True, help="measure.py report for the base plan")
     ap.add_argument("--layer2-winner", required=True, help="measure.py report for the winner plan")
+    ap.add_argument("--layer2-note", default="", help="one line on how the twin runs were set up (e.g. doors open)")
+    ap.add_argument("--sensitivity-base", help="measure.py report: the same base run under a different twin setup")
+    ap.add_argument("--sensitivity-winner", help="measure.py report: the same winner run under a different twin setup")
+    ap.add_argument("--sensitivity-label", default="alternative twin setup")
     ap.add_argument("--out", required=True)
     ap.add_argument("--date", default="2026-10-17")
     a = ap.parse_args()
@@ -104,6 +108,18 @@ def main():
         f"| people | {s['people']} | {s['people']} | {l2['base']['people']} ({l2['base']['arrived']} arrived, {l2['base']['never_arrived']} never) | {l2['winner']['people']} ({l2['winner']['arrived']} arrived, {l2['winner']['never_arrived']} never) |",
         f"| over 30 s smoke threshold | {l1['base']['n_over_exposure_threshold']} | {l1['winner']['n_over_exposure_threshold']} | n/a (no smoke in twin yet) | n/a |",
         f"| rerouted / redirected | {l1['base']['rerouted']} | {l1['winner']['rerouted']} | {len(l2['base']['redirected'])} | {len(l2['winner']['redirected'])} |",
+    ]
+    if a.layer2_note:
+        md.insert(3, f"Twin setup: {a.layer2_note}\n")
+    if a.sensitivity_base and a.sensitivity_winner:
+        sb, sw = json.load(open(a.sensitivity_base)), json.load(open(a.sensitivity_winner))
+        agree = sw["t90_s"] is not None and (sb["t90_s"] is None or sw["t90_s"] < sb["t90_s"])
+        md += [f"\n## Sensitivity — {a.sensitivity_label}\n",
+               "| plan | Layer-2 t50 / t90 / t100 (headline setup) | Layer-2 t50 / t90 / t100 (" + a.sensitivity_label + ") |", "|---|---|---|",
+               f"| base `{l1['base']['plan_id']}` | {l2['base']['t50_s']} / {l2['base']['t90_s']} / {l2['base']['t100_s']} | {sb['t50_s']} / {sb['t90_s']} / {sb['t100_s']} |",
+               f"| winner `{l1['winner']['plan_id']}` | {l2['winner']['t50_s']} / {l2['winner']['t90_s']} / {l2['winner']['t100_s']} | {sw['t50_s']} / {sw['t90_s']} / {sw['t100_s']} |",
+               f"\nWinner faster under this setup too: **{'yes' if agree else 'NO'}**. Same seed and spawn positions in both setups.\n"]
+    md += [
         "\n## What this certificate claims — and does not\n",
         "- *Rehearses, finds, ranks* — never *predicts*. *Exit saturated / corridor closed* — never *crush*. No crowd-density figure anywhere.",
         "- Fix = plan knobs only (exits opened, alarm earlier, stagger). Fire origin, spread, people count and seed held fixed within each layer.",

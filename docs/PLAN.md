@@ -71,6 +71,8 @@ Copy `scenarios/mall_*.json` → `scenarios/hospital_base_plan.json`, `hospital_
 
 **Outcome (2026-10-17):** ✅ `docs/results/certificate.md` — base vs winner, same fire/seed, both layers. **They AGREE on ordering:** Layer 1 winner t90 57.3 s vs base 135.9 s; Layer 2 (Isaac twin, 40 characters, 40/40 reached their exit in both runs) winner 31.0 s vs base 68.3 s. Unusable-exit agreement is *not yet testable* — no smoke in the twin until Phase 4 — and the certificate says so rather than claiming it. The congestion caveat showed up as predicted: Layer-2/Layer-1 t90 ratio 0.50 (base) and 0.54 (winner), i.e. the twin clears ~2× faster at both plans because IRA has no door queuing while Layer 1 holds the SFPE 1.3 p/m/s cap — same direction, a known modelling difference, not a disagreement. `sim/certificate.py` reads the two `measure.py` reports + `solve_hospital.json`; nothing hand-typed.
 
+**Update (later, 2026-10-17):** the certified twin runs used the hospital as shipped, door leaves closed. The dollhouse film runs switch the 38 door leaves off (doors open, matching Layer 1's assumption) with the same seed and identical spawn positions, and they record every character every frame — so they are full Layer-2 runs. Measured: winner t90 **30.0 s** (t100 34.6), base **62.6 s** (t100 74.5); closed doors only lengthen the base plan's tail (t100 102.4 → 74.5 s). The certificate now uses doors open as the headline and doors closed as a sensitivity row; the winner is faster under both. Dollhouse film: roof/ceilings/panels off, the untextured 10 000-nit dome dimmed to exposure −3, an authored overhead camera at 46 m (IRA's `aim_at_targets` rejects poses that high), and `sim/stitch_dollhouse.py` draws a ring on every character from the recorded positions.
+
 ---
 
 ## Phase 4 — the hazard inside the twin
@@ -104,6 +106,8 @@ Copy `scenarios/mall_*.json` → `scenarios/hospital_base_plan.json`, `hospital_
 
 **Artifact:** two MP4s, side by side.
 
+**Backlog — do LAST (requested 2026-10-17):** a CCTV-style demo film: several cameras inside different rooms and corridors shown as a security-monitor grid, base vs Grimoires side by side. Presentation only — note the boundary with Bankai (cameras/perception) stated in ARCHITECTURE.md before building it.
+
 ---
 
 ## Phase 7 — the agent
@@ -112,6 +116,8 @@ Copy `scenarios/mall_*.json` → `scenarios/hospital_base_plan.json`, `hospital_
 - Nemotron (hosted) proposes the next variant from the ranking; NemoClaw / Hermes runs the loop with a human approving the final plan.
 
 **Artifact:** a recorded agent session producing the certificate end-to-end.
+
+**Progress (2026-10-17):** built, not yet run against Nemotron (needs a build.nvidia.com key). `sim/agent/tools.py` = the pipeline as functions (describe, rehearse, evaluate under all 5 fires, grid_search, certificate, start_twin / twin_status over SSH); verified against the robustness table (182.8 / 353.0). `sim/agent/grimoires_mcp.py` = the same as an MCP server (7 tools; `uv run --with "mcp<2"`), verified by calling `evaluate_plan` through MCP. `sim/agent/nemotron_loop.py` = Nemotron proposes a plan → scored under all 5 fires → Nemotron sees the result → next proposal; starts from the grid ranking, stops on `done`, ends with human approval, optional `--twin`, writes `docs/results/agent_session.md`. Hermes has no `mcp_servers` configured yet; the server docstring has the snippet.
 
 ---
 
