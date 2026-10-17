@@ -28,6 +28,13 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from make_exit_targets import inside_points  # noqa: E402
 from plan import plan_id  # noqa: E402
 
+import re  # noqa: E402
+
+# Top-level prims of the NVIDIA hospital switched off (active = false) in OUR layer; the venue file is untouched.
+DOOR_LEAVES = re.compile(r"^(SM_Door|GlassDoor)", re.I)          # leaves only: walls, frames and trims stay
+DOLLHOUSE_CUT = re.compile(r"(roof|ceil|Geo_M_Light2|Light_test)", re.I)  # roof, ceilings, fixture + ceiling-panel meshes (none are lights)
+DOLLHOUSE_DOME_EXPOSURE = -3.0   # the venue's only real light is an untextured 10000-nit dome: with the roof off it floods the floor
+
 CAMERAS = {  # the placement proven on the hospital in Phase 0 (d = h / sin(theta) must overlap distance_range)
     "ceiling_cameras": {"num": 3, "maximum_coverage": {
         "height_range": [2.5, 3.0], "look_down_angle_range": [25.0, 45.0], "focal_length_range": [10.0, 15.0],
@@ -81,7 +88,7 @@ def rectangles(label, gx, gy, min_cells=2):
     return out
 
 
-def author_stage(out_usda, venue_usd, venue, open_exits, rects, zone_h=3.0):
+def author_stage(out_usda, venue_usd, venue, open_exits, rects, zone_h=3.0, cut=(), film_target=None):
     stage = Usd.Stage.CreateNew(out_usda)
     rel = os.path.relpath(os.path.abspath(venue_usd), os.path.dirname(os.path.abspath(out_usda)))
     stage.GetRootLayer().subLayerPaths.append(rel if rel.startswith(".") else "./" + rel)
@@ -90,6 +97,33 @@ def author_stage(out_usda, venue_usd, venue, open_exits, rects, zone_h=3.0):
         stage.GetRootLayer().defaultPrim = src.GetDefaultPrim().GetName()
     UsdGeom.SetStageUpAxis(stage, UsdGeom.GetStageUpAxis(src))
     UsdGeom.SetStageMetersPerUnit(stage, UsdGeom.GetStageMetersPerUnit(src))
+
+    # Switch off top-level venue prims (door leaves, roof...) with `over` prims in this layer.
+    root = src.GetDefaultPrim()
+    off = {}
+    for rx in cut:
+        hits = [c for c in root.GetChildren() if rx.search(c.GetName())]
+        for c in hits:
+            stage.OverridePrim(c.GetPath()).SetActive(False)
+        off[rx.pattern] = len(hits)
+    author_stage.switched_off = off
+    if film_target is not None:
+        # IRA's aim_at_targets rejects poses this high, so the overhead camera is authored here and
+        # handed to the writer via sensor_prim_list. A USD camera with identity rotation looks down -Z
+        # with +Y up: straight down, north at the top of the frame, the building's long (x) axis across.
+        h, focal = film_target
+        rng = UsdGeom.Imageable(root).ComputeWorldBound(Usd.TimeCode.Default(), "default").ComputeAlignedRange()
+        x, y = (rng.GetMin()[0] + rng.GetMax()[0]) / 2.0, (rng.GetMin()[1] + rng.GetMax()[1]) / 2.0   # centre of the whole building
+        dome = src.GetPrimAtPath(root.GetPath().AppendChild("DomeLight"))
+        if dome and dome.IsValid():
+            stage.OverridePrim(dome.GetPath()).CreateAttribute("inputs:exposure", Sdf.ValueTypeNames.Float).Set(DOLLHOUSE_DOME_EXPOSURE)
+        UsdGeom.Scope.Define(stage, "/World/FilmCams")
+        cam = UsdGeom.Camera.Define(stage, "/World/FilmCams/Overhead")
+        cam.AddTranslateOp().Set((x, y, h))
+        cam.CreateFocalLengthAttr(focal)
+        cam.CreateHorizontalApertureAttr(20.955)
+        cam.CreateVerticalApertureAttr(20.955 * 9.0 / 16.0)
+        cam.CreateClippingRangeAttr((0.5, 1000.0))
 
     # NavMesh areas must be registered in the stage's navmesh settings as well as named on volumes.
     # values must be typed for the usda text format: float3 colour, double cost (plain tuples do not round-trip)
@@ -146,6 +180,10 @@ def main():
     ap.add_argument("--measure-only", action="store_true",
                     help="numbers run: one tiny camera, no RGB/boxes (clearance comes from actor_sdg_dump.py's "
                          "position dump); the film gets its own full-camera run")
+    ap.add_argument("--keep-doors", action="store_true",
+                    help="keep the venue's door leaves (default: switch them off = doors open, as Layer 1 assumes)")
+    ap.add_argument("--dollhouse", action="store_true",
+                    help="film run: roof/ceilings off, ONE 1280x720 camera ~38-40 m above the building centre looking almost straight down")
     ap.add_argument("--film", action="store_true",
                     help="film run: two 1280x720 RGB cameras aimed at exit prims (main entrance + busiest other open exit); "
                          "combine with --duration 60 for a short cut")
@@ -171,8 +209,14 @@ def main():
     nums = {e: int(a.people * share[e] / total) for e in open_exits}
     nums[max(open_exits, key=lambda e: share[e])] += a.people - sum(nums.values())
 
-    stage_rel = f"assets/hospital/hospital_evac_{tag}.usda"
-    author_stage(R(stage_rel), R(a.venue_usd), venue, open_exits, rects)
+    cut = ([] if a.keep_doors else [DOOR_LEAVES]) + ([DOLLHOUSE_CUT] if a.dollhouse else [])
+    main_cells = [(i, j) for j, r in enumerate(venue["cells"]) for i, ch in enumerate(r) if ch == "m"]
+    res_, (ox_, oy_) = venue["res"], venue["origin"]
+    centre = (ox_ + (sum(i for i, _ in main_cells) / len(main_cells) + 0.5) * res_,
+              oy_ + (sum(j for _, j in main_cells) / len(main_cells) + 0.5) * res_, 0.0)
+    stage_rel = f"assets/hospital/hospital_evac_{tag}{'_dollhouse' if a.dollhouse else ''}.usda"
+    author_stage(R(stage_rel), R(a.venue_usd), venue, open_exits, rects, cut=cut,
+                 film_target=(46.0, 10.0) if a.dollhouse else None)   # 46 m, 10 mm: ~96 x 54 m in 16:9 for a 75 x 47 m building
 
     template = json.load(open(R(a.template)))
     trees = {}
@@ -185,12 +229,24 @@ def main():
         duration = (json.load(open(a.layer1_report))["t100_s"] + a.margin) if a.layer1_report else 180.0
     if a.measure_only and a.film:
         raise SystemExit("--measure-only and --film are different runs; pick one")
-    suffix = "_measure" if a.measure_only else ("_film" + (f"{int(a.duration)}s" if a.duration else "") if a.film else "")
+    if a.dollhouse and (a.measure_only or a.film):
+        raise SystemExit("--dollhouse is its own film mode; do not combine with --film / --measure-only")
+    dur_tag = f"{int(a.duration)}s" if a.duration else ""
+    suffix = ("_measure" if a.measure_only else "_film" + dur_tag if a.film
+              else "_dollhouse" + dur_tag if a.dollhouse else "")
     out_dir = f"results/ira_hospital_{tag}{suffix}"
     aim = {"height_range": [2.5, 3.0], "look_down_angle_range": [25.0, 45.0],
            "focal_length_range": [10.0, 15.0], "distance_range": [3.5, 7.0]}
     if a.measure_only:
         cameras = {"ceiling_cameras": dict(CAMERAS["ceiling_cameras"], num=1)}
+    elif a.dollhouse:
+        cameras = None   # camera authored in the stage (author_stage); writer renders it via sensor_prim_list
+    elif False:  # previous IRA-placed overhead attempt, kept for reference: aim_at_targets fails at 38 m
+        # 74 x 40 m footprint: 10 mm lens (~93 deg horizontal) at ~38-40 m covers it in 16:9.
+        # d = h / sin(theta): h 38-40, theta 84-88 -> d 38.0-40.2.  yaw picks which side the camera sits on.
+        cameras = {"cam_overhead": {"num": 1, "aim_at_targets": {
+            "height_range": [38.0, 40.0], "look_down_angle_range": [84.0, 88.0], "focal_length_range": [10.0, 10.0],
+            "distance_range": [38.0, 40.5], "yaw_range": [265.0, 275.0], "targets": ["/World/FilmTargets/Centre"]}}}
     elif a.film:
         # Aim at exit *prims* (Xforms): IRA uses the prim position directly, which sidesteps the
         # character-bbox crash in aim_at_targets. Main entrance first, then the busiest other open exit.
@@ -204,13 +260,15 @@ def main():
     common = {"output_dir": C(out_dir), "semantic_filter_predicate": "class:character|robot;id:*",
               "camera_params": True, "object_info_bounding_box_3d": True, "start_frame": 20}
     writer = (dict(common, resolution=[320, 180], rgb=False, object_info_bounding_box_2d_tight=False) if a.measure_only   # 3D boxes: cheap cross-check of the dump
+              else dict(common, resolution=[1920, 1080], rgb=True, object_info_bounding_box_2d_tight=False,
+                        sensor_prim_list=["/World/FilmCams/Overhead"]) if a.dollhouse
               else dict(common, resolution=[1280, 720], rgb=True, object_info_bounding_box_2d_tight=not a.film))
     groups = {f"evac_{e}": {"num": nums[e], "asset_path": "Isaac/People/Characters/",
                             "spawn_areas": [f"Zone_{e}"], "behavior_tree": C(trees[e])} for e in open_exits if nums[e] > 0}
     cfg = {"isaacsim.replicator.agent": {
         "version": "1.6.0", "seed": a.seed, "simulation_duration": float(round(duration, 1)),
         "environment": {"base_stage_asset_path": C(stage_rel)},
-        "sensor": {"groups": cameras},
+        **({"sensor": {"groups": cameras}} if cameras else {}),
         "character": {"groups": groups},
         "replicator": {"writers": {"IRABasicWriter": writer}}}}
     yaml_rel = f"sim/ira/hospital_{tag}{suffix}.yaml"
@@ -224,6 +282,7 @@ def main():
     print(f"plan {pid}  open exits {open_exits}  people {nums}  duration {duration:.0f} s")
     print(f"zones: {len(label)} cells -> {len(rects)} NavMeshVolume boxes (min {a.min_rect_cells} cells); "
           + ", ".join(f"{e}: {share[e]} cells" for e in open_exits))
+    print(f"switched off (top-level prims): {getattr(author_stage, 'switched_off', {})}")
     print(f"wrote {stage_rel}\nwrote {', '.join(trees.values())}\nwrote {yaml_rel}")
 
 

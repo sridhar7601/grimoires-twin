@@ -20,3 +20,8 @@ renders/*.mp4
 # --- python -----------------------------------------------------------------------
 __pycache__/
 *.pyc
+
+# stitched videos (large; live in renders/ locally)
+results/films/
+
+.DS_Store
