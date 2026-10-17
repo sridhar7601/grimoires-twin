@@ -16,10 +16,11 @@ which opening they use, how many clear each opening per second, when each
 opening becomes impassable, and how many smoke-seconds each person accumulates.
 
 It is NOT crowd dynamics. People do not push and are not stopped by the person in
-front, so they can pass through each other in a queue. Therefore this script
-deliberately reports NO density figure -- a density measured on overlapping
-bodies is meaningless. Use the throughput, timing and exposure numbers, never a
-persons-per-square-metre number from this.
+front, so they can pass through each other in a queue. The one density-shaped
+number it reports, `door_crowding` (crowding.py), is therefore DEMAND -- how many
+not-yet-out people stand within 2 m of a door at once -- a crush-RISK flag, never
+a crush prediction. Use throughput, timing, exposure and that flag; never read
+it as a physical persons-per-square-metre.
 
 The smoke is a simplified front model (see smoke.py), not fire physics.
 
@@ -39,6 +40,7 @@ from grid import INF, NB, RES, build_grid, cell_of, center, dijkstra, span_cells
 import smoke as smoke_mod  # noqa: E402
 from smoke import SmokeField  # noqa: E402
 from plan import load_fire, load_plan, plan_id  # noqa: E402
+from crowding import door_crowding  # noqa: E402
 
 MIN_SPEED = 0.3   # m/s floor, as in the template
 ALPHA = 4.0       # route cost multiplier is 1 + ALPHA * smoke level: people avoid smoky routes
@@ -144,6 +146,17 @@ def run(venue, plan, fire, seed=42, fps=4.0, max_t=300.0, people=450, walk_speed
     exit_width = {eid: _exit_width(ed) for eid, ed in v["exits"].items() if ed["open"]}
     exit_cap = {eid: max(door_flow_pms * w, 1e-6) for eid, w in exit_width.items()}
     exit_next_free = {eid: -1e9 for eid in exit_cap}
+
+    # Door centres (grid-local metres) for the crowding flag; people still inside, every second.
+    def _door_centre(ed):
+        if "centre" in ed:
+            return tuple(ed["centre"])
+        if "cells" in ed:
+            cs = [center(i, j) for i, j in ed["cells"]]
+            return (sum(c[0] for c in cs) / len(cs), sum(c[1] for c in cs) / len(cs))
+        return ((ed["x0"] + ed["x1"]) / 2.0, RES * 1.5)
+    door_centre = {eid: _door_centre(ed) for eid, ed in v["exits"].items() if ed["open"]}
+    crowd_frames = []
     series, positions_per_frame, track_rows = [], [], [[] for _ in persons]
     last_t0 = max((p["t0"] for p in persons), default=0.0)
     dist = owner = dist_b = owner_b = blocked_now = dense_now = None
@@ -171,6 +184,8 @@ def run(venue, plan, fire, seed=42, fps=4.0, max_t=300.0, people=450, walk_speed
 
         frame, still_in, any_mobile = ([None] * N if out else None), 0, False
         whole_second = (f % max(1, int(round(fps))) == 0)
+        if whole_second:
+            crowd_frames.append((t, [(p["x"], p["y"]) for p in persons if p["out"] is None]))
         for idx, p in enumerate(persons):
             if p["out"] is not None:
                 continue
@@ -286,6 +301,7 @@ def run(venue, plan, fire, seed=42, fps=4.0, max_t=300.0, people=450, walk_speed
         "door_flow_pms": door_flow_pms,
         "exit_capacity_ps": {k: round(c, 2) for k, c in exit_cap.items()},
         "gate_throughput_total": gate_counts, "exit_throughput_total": exit_counts,
+        "door_crowding": door_crowding(crowd_frames, door_centre, 1.0),
         "gate_peak_rate_ps": {k: _peak_rate(ev) for k, ev in gate_events.items()},
         "exit_peak_rate_ps": {k: _peak_rate(ev) for k, ev in exit_events.items()},
         "corridor_closed_at_s": closed_at,
@@ -297,9 +313,9 @@ def run(venue, plan, fire, seed=42, fps=4.0, max_t=300.0, people=450, walk_speed
                   "route field is recomputed every replan_s, smoky routes cost more and dense "
                   "smoke is avoided; speed falls with smoke level; positions baked as USD time "
                   "samples. Routing, throughput, "
-                  "timing and exposure only -- people do not collide, so NO density figure is "
-                  "derived or claimed from this run. Smoke is a simplified front model, not fire "
-                  "physics."),
+                  "timing and exposure -- people queue at the SFPE door cap but do not collide, so "
+                  "door_crowding is DEMAND at the door (crush-risk flag), never a crush prediction. "
+                  "Smoke is a simplified front model, not fire physics."),
     }
 
     # ------------------------------------------------------------------ write USD

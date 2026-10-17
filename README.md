@@ -16,21 +16,28 @@ comes from files in `results/` and is reproduced by the commands in this README.
 | people over the 30 s smoke threshold | 54 | 6 (−89 %) |
 | main entrance closed by smoke at | 21.7 s | 21.7 s |
 | **Layer 2** — Isaac Sim twin, 40 characters (doors open): t90 | **62.6 s** | **30.0 s** — 40/40 out in both |
+| Layer 2 with Omniverse Flow fire, entrance closed at 21.7 s: t90 | 120.2 s (38/40 out) | 45.1 s (40/40 out) |
+| door-crowding flag, worst door (demand, Layer 1) | 1.3 p/m² (8 people) | 2.4 p/m² (15 people) — both green |
 
 The base plan sends everyone to the front doors; the fire kills the main entrance at 22 s and
 277 of 300 people queue through one door. Opening the two wing exits and alarming earlier
 clears 90 % in under a minute. Across **five fire origins × 24 plans** the base plan ranks
 **last under every fire** (`docs/results/robustness_table.md`).
 
-The twin agrees on the ordering with doors open (headline, as Layer 1 assumes) and with the
-asset's door leaves closed (base 68.3 s vs winner 31.0 s) — see `docs/results/certificate.md`.
+The twin agrees on the ordering with doors open (headline, as Layer 1 assumes), with the
+asset's door leaves closed (base 68.3 s vs winner 31.0 s) and with real Flow fire closing the
+entrance (120.2 s vs 45.1 s) — see `docs/results/certificate.md`. The door-crowding flag
+(`sim/crowding.py`: people not yet out within 2 m of a door, same definition in both layers,
+red at 4 p/m²) stays green for both plans and goes red for the "everyone at once" plan
+(5.1 p/m², 32 people on one door) — it is *demand* at the door, a crush-risk flag, not a crush model.
 
 Videos (in `renders/`, not in git): `hospital_map_layer1.mp4` (top-down, 300 people, smoke),
 `hospital_map_layer2_twin.mp4` (top-down, the twin's 40 characters), `hospital_dollhouse_overlay.mp4`
-(real Isaac render, roof off, rings on every character from the recorded positions).
+(real Isaac render, roof off, rings on every character from the recorded positions),
+`hospital_dollhouse_fire.mp4` (same, with the Flow fire burning at the entrance).
 
-Honest framing, kept exact: *rehearses / finds / ranks* — never *predicts*; *exit saturated*
-— never *crush*; no crowd-density figure anywhere; simplified grid smoke model; the twin has
+Honest framing, kept exact: *rehearses / finds / ranks* — never *predicts*; *exit saturated / door crowding (demand)*
+— never *crush*; the only density-shaped number is the door-crowding flag, labelled as risk, never prediction; simplified grid smoke model; the twin has
 no door queuing (so it clears faster — stated next to every Layer-2 number); proxy venue;
 *most robust plan among those tried*, not optimal.
 
@@ -84,7 +91,9 @@ bash sim/usdpy.sh sim/make_ira_config.py --plan scenarios/hospital_winner_plan.j
 python3 sim/measure.py --venue results/hospital_plan.json --plan scenarios/hospital_winner_plan.json \
     --positions results/ira_hospital_winner_measure/agent_positions.jsonl --report results/layer2_winner.json
 python3 sim/certificate.py --layer1 results/solve_hospital.json --layer2-base results/layer2_base.json \
-    --layer2-winner results/layer2_winner.json --out docs/results/certificate.md
+    --layer2-winner results/layer2_winner.json --out docs/results/certificate.md \
+    --sensitivity "Flow fire::results/layer2_base_fire.json::results/layer2_winner_fire.json" \
+    --crowding-check results/rehearse_hospital_loophole_a0s0.json      # repeatable --sensitivity; the flag check is optional
 ```
 
 Three things that were not obvious and are handled in code: NVIDIA environments mark walls
