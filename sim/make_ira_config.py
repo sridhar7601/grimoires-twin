@@ -55,8 +55,9 @@ CCTV_CAMS = [  # (name, label, (x, y, z), (target x, target y, target z))
     ("CAM02", "CENTRAL CORRIDOR",         (-20.0, 10.5, 2.7), (5.0, 9.0, 0.8)),       # long corridor, looking east
     ("CAM03", "WEST WING / EXIT E4",      (-28.0, 11.0, 2.7), (-38.25, 9.5, 0.8)),    # west corridor (y 9-12), looking west at E4 in its south wall
     ("CAM04", "NORTH-WEST WING / EXIT E2", (-34.0, 31.5, 2.7), (-40.75, 33.0, 0.8)),  # NW corridor (y 29.5-32.5), looking WNW at E2 in the north wall
-    ("CAM05", "EAST WING / EXIT E3",      (16.0, 30.5, 2.7), (20.5, 31.0, 0.8)),      # NE block (x 15-20.5, y 29-32), looking east at E3 in its east wall
-    ("CAM06", "WEST WING WARDS",          (-29.0, 22.0, 2.7), (-40.0, 21.8, 0.8)),    # ward corridor (y 21.5-22.5), looking west
+    # Each extra camera costs ~0.9 s per rendered frame (six cameras: 5.5 s/frame). Two spares, verified walkable:
+    # ("CAM05", "EAST WING / EXIT E3",    (16.0, 30.5, 2.7), (20.5, 31.0, 0.8)),      # NE block (x 15-20.5, y 29-32), looking east at E3
+    # ("CAM06", "WEST WING WARDS",        (-29.0, 22.0, 2.7), (-40.0, 21.8, 0.8)),    # ward corridor (y 21.5-22.5), looking west
 ]
 CCTV_FOCAL_MM = 12.0        # ~82 deg horizontal on the 20.955 mm aperture: a wide security lens
 CCTV_RESOLUTION = [640, 360]
