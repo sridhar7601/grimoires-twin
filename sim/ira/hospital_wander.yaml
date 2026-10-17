@@ -1,0 +1,45 @@
+isaacsim.replicator.agent:
+  version: 1.6.0
+  seed: 42
+  simulation_duration: 15.0
+  environment:
+    base_stage_asset_path: Isaac/Environments/Hospital/hospital.usd
+  sensor:
+    groups:
+      ceiling_cameras:
+        num: 3
+        maximum_coverage:
+          # d = h / sin(theta) must overlap distance_range: h 2.5-3.0 x theta 25-45 -> d 3.5-7.1
+          height_range: [2.5, 3.0]
+          look_down_angle_range: [25.0, 45.0]
+          focal_length_range: [10.0, 15.0]
+          distance_range: [3.5, 7.0]
+          grid_resolution: 2.0
+          target_coverage_ratio: 0.6
+  character:
+    groups:
+      walkers:
+        num: 10
+        asset_path: Isaac/People/Characters/
+        routines:
+        - wander:
+            weight: 1.0
+            repeat: 2
+            walk:
+              speed_range: [0.8, 1.5]
+              distance_range: [4.0, 10.0]
+              navigation_areas: []
+            idle:
+            - animation: idle
+              weight: 1.0
+              time_range: [1.0, 3.0]
+  replicator:
+    writers:
+      IRABasicWriter:
+        output_dir: /workspace/results/ira_hospital
+        semantic_filter_predicate: class:character|robot;id:*
+        rgb: true
+        camera_params: true
+        object_info_bounding_box_2d_tight: true
+        object_info_bounding_box_3d: true
+        start_frame: 20

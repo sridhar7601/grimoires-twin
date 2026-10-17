@@ -1,0 +1,8 @@
+{
+  "name": "hospital_main_entrance",
+  "origin": [
+    48.75,
+    6.25
+  ],
+  "note": "local grid metres on the hospital grid (origin world [-50, -5]); world = local+origin = (-1.25, 1.25), ~4 m inside main entrance E1 (local [48.75, 2.25]). Fire in the entrance lobby, the busiest exit."
+}

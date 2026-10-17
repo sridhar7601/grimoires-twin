@@ -1,0 +1,8 @@
+{
+  "name": "hospital_central",
+  "origin": [
+    34.75,
+    16.75
+  ],
+  "note": "local grid metres (origin world [-50, -5]); world = (-15.25, 11.75). central east-west corridor, mid-building: smoke splits the two wings"
+}

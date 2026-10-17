@@ -1,0 +1,10 @@
+{
+  "gates_open": [],
+  "exits_open": [
+    "E1",
+    "E2"
+  ],
+  "alarm_delay_s": 30.0,
+  "stagger_s": 25.0,
+  "route_bias": {}
+}

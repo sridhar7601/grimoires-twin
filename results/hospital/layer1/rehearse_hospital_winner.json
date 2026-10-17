@@ -1,0 +1,590 @@
+{
+ "venue": "hospital_ground_floor_v1",
+ "scenario": "fire_evacuation",
+ "seed": 42,
+ "plan": {
+  "gates_open": [],
+  "exits_open": [
+   "E1",
+   "E2",
+   "E3",
+   "E4"
+  ],
+  "alarm_delay_s": 5.0,
+  "stagger_s": 25.0,
+  "route_bias": {}
+ },
+ "plan_id": "G-E1234-a5-s25",
+ "fire": {
+  "name": "hospital_main_entrance",
+  "origin": [
+   48.75,
+   6.25
+  ]
+ },
+ "smoke_params": {
+  "spread_speed_ms": 0.6,
+  "ramp_s": 20.0,
+  "reach_m": 45.0,
+  "s_block": 0.7,
+  "k_slow": 0.6,
+  "origin_xy": [
+   48.75,
+   6.25
+  ],
+  "model": "front model: arrival by shortest walkable path / spread_speed, level ramps over ramp_s, ceiling 1 - d/reach_m"
+ },
+ "people": 300,
+ "open_gates": [],
+ "open_exits": [
+  "E1",
+  "E2",
+  "E3",
+  "E4"
+ ],
+ "t50_s": 31.3,
+ "t90_s": 57.3,
+ "t100_s": 97.1,
+ "trapped": 0,
+ "ever_without_route": 0,
+ "rerouted": 39,
+ "exposure_mean_s": 2.6,
+ "exposure_max_s": 54.5,
+ "exposure_threshold_s": 30.0,
+ "n_over_exposure_threshold": 6,
+ "n_in_dense_smoke": 22,
+ "dense_smoke_max_s": 41.7,
+ "dense_smoke_total_person_s": 326.6,
+ "routing": {
+  "alpha_avoid": 4.0,
+  "dense_cost_factor": 20.0,
+  "min_speed_ms": 0.3,
+  "note": "route cost x (1 + alpha*s); dense cells impassable for planning; someone already inside dense smoke walks out at min_speed along the cheapest path"
+ },
+ "door_flow_pms": 1.3,
+ "exit_capacity_ps": {
+  "E1": 4.16,
+  "E2": 4.16,
+  "E3": 4.16,
+  "E4": 4.16
+ },
+ "gate_throughput_total": {},
+ "exit_throughput_total": {
+  "E1": 40,
+  "E2": 29,
+  "E3": 105,
+  "E4": 126
+ },
+ "gate_peak_rate_ps": {},
+ "exit_peak_rate_ps": {
+  "E1": 2.4,
+  "E2": 2.2,
+  "E3": 3.2,
+  "E4": 4.2
+ },
+ "corridor_closed_at_s": {
+  "E1": 21.7,
+  "E2": null,
+  "E3": null,
+  "E4": null
+ },
+ "sim_span_s": 97.1,
+ "fps": 12.0,
+ "replan_s": 5.0,
+ "stopped": "all_out",
+ "walk_speed_mean_ms": 1.25,
+ "remaining_series_t_in_out": [
+  [
+   0.0,
+   300,
+   0
+  ],
+  [
+   1.0,
+   300,
+   0
+  ],
+  [
+   2.0,
+   300,
+   0
+  ],
+  [
+   3.0,
+   300,
+   0
+  ],
+  [
+   4.0,
+   300,
+   0
+  ],
+  [
+   5.0,
+   300,
+   0
+  ],
+  [
+   6.0,
+   300,
+   0
+  ],
+  [
+   7.0,
+   300,
+   0
+  ],
+  [
+   8.0,
+   299,
+   1
+  ],
+  [
+   9.0,
+   297,
+   3
+  ],
+  [
+   10.0,
+   295,
+   5
+  ],
+  [
+   11.0,
+   294,
+   6
+  ],
+  [
+   12.0,
+   288,
+   12
+  ],
+  [
+   13.0,
+   286,
+   14
+  ],
+  [
+   14.0,
+   281,
+   19
+  ],
+  [
+   15.0,
+   275,
+   25
+  ],
+  [
+   16.0,
+   272,
+   28
+  ],
+  [
+   17.0,
+   268,
+   32
+  ],
+  [
+   18.0,
+   264,
+   36
+  ],
+  [
+   19.0,
+   258,
+   42
+  ],
+  [
+   20.0,
+   249,
+   51
+  ],
+  [
+   21.0,
+   244,
+   56
+  ],
+  [
+   22.0,
+   238,
+   62
+  ],
+  [
+   23.0,
+   227,
+   73
+  ],
+  [
+   24.0,
+   216,
+   84
+  ],
+  [
+   25.0,
+   205,
+   95
+  ],
+  [
+   26.0,
+   195,
+   105
+  ],
+  [
+   27.0,
+   186,
+   114
+  ],
+  [
+   28.0,
+   178,
+   122
+  ],
+  [
+   29.0,
+   169,
+   131
+  ],
+  [
+   30.0,
+   160,
+   140
+  ],
+  [
+   31.0,
+   152,
+   148
+  ],
+  [
+   32.0,
+   142,
+   158
+  ],
+  [
+   33.0,
+   135,
+   165
+  ],
+  [
+   34.0,
+   131,
+   169
+  ],
+  [
+   35.0,
+   125,
+   175
+  ],
+  [
+   36.0,
+   119,
+   181
+  ],
+  [
+   37.0,
+   114,
+   186
+  ],
+  [
+   38.0,
+   109,
+   191
+  ],
+  [
+   39.0,
+   101,
+   199
+  ],
+  [
+   40.0,
+   96,
+   204
+  ],
+  [
+   41.0,
+   92,
+   208
+  ],
+  [
+   42.0,
+   88,
+   212
+  ],
+  [
+   43.0,
+   85,
+   215
+  ],
+  [
+   44.0,
+   78,
+   222
+  ],
+  [
+   45.0,
+   77,
+   223
+  ],
+  [
+   46.0,
+   74,
+   226
+  ],
+  [
+   47.0,
+   70,
+   230
+  ],
+  [
+   48.0,
+   64,
+   236
+  ],
+  [
+   49.0,
+   60,
+   240
+  ],
+  [
+   50.0,
+   60,
+   240
+  ],
+  [
+   51.0,
+   57,
+   243
+  ],
+  [
+   52.0,
+   50,
+   250
+  ],
+  [
+   53.0,
+   47,
+   253
+  ],
+  [
+   54.0,
+   41,
+   259
+  ],
+  [
+   55.0,
+   38,
+   262
+  ],
+  [
+   56.0,
+   35,
+   265
+  ],
+  [
+   57.0,
+   31,
+   269
+  ],
+  [
+   58.0,
+   27,
+   273
+  ],
+  [
+   59.0,
+   23,
+   277
+  ],
+  [
+   60.0,
+   21,
+   279
+  ],
+  [
+   61.0,
+   19,
+   281
+  ],
+  [
+   62.0,
+   17,
+   283
+  ],
+  [
+   63.0,
+   15,
+   285
+  ],
+  [
+   64.0,
+   13,
+   287
+  ],
+  [
+   65.0,
+   10,
+   290
+  ],
+  [
+   66.0,
+   9,
+   291
+  ],
+  [
+   67.0,
+   9,
+   291
+  ],
+  [
+   68.0,
+   7,
+   293
+  ],
+  [
+   69.0,
+   7,
+   293
+  ],
+  [
+   70.0,
+   7,
+   293
+  ],
+  [
+   71.0,
+   7,
+   293
+  ],
+  [
+   72.0,
+   6,
+   294
+  ],
+  [
+   73.0,
+   6,
+   294
+  ],
+  [
+   74.0,
+   6,
+   294
+  ],
+  [
+   75.0,
+   6,
+   294
+  ],
+  [
+   76.0,
+   5,
+   295
+  ],
+  [
+   77.0,
+   5,
+   295
+  ],
+  [
+   78.0,
+   4,
+   296
+  ],
+  [
+   79.0,
+   4,
+   296
+  ],
+  [
+   80.0,
+   4,
+   296
+  ],
+  [
+   81.0,
+   4,
+   296
+  ],
+  [
+   82.0,
+   4,
+   296
+  ],
+  [
+   83.0,
+   4,
+   296
+  ],
+  [
+   84.0,
+   4,
+   296
+  ],
+  [
+   85.0,
+   4,
+   296
+  ],
+  [
+   86.0,
+   4,
+   296
+  ],
+  [
+   87.0,
+   4,
+   296
+  ],
+  [
+   88.0,
+   4,
+   296
+  ],
+  [
+   89.0,
+   3,
+   297
+  ],
+  [
+   90.0,
+   2,
+   298
+  ],
+  [
+   91.0,
+   2,
+   298
+  ],
+  [
+   92.0,
+   2,
+   298
+  ],
+  [
+   93.0,
+   1,
+   299
+  ],
+  [
+   94.0,
+   1,
+   299
+  ],
+  [
+   95.0,
+   1,
+   299
+  ],
+  [
+   96.0,
+   1,
+   299
+  ],
+  [
+   97.0,
+   1,
+   299
+  ]
+ ],
+ "model": "dynamic smoke-aware egress on a 0.5 m grid with staggered departures; the route field is recomputed every replan_s, smoky routes cost more and dense smoke is avoided; speed falls with smoke level; positions baked as USD time samples. Routing, throughput, timing and exposure only -- people do not collide, so NO density figure is derived or claimed from this run. Smoke is a simplified front model, not fire physics.",
+ "tracks": "results/tracks_hospital_winner.json"
+}

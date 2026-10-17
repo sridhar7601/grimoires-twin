@@ -1,0 +1,22 @@
+# --- large / licensed assets: fetched, never committed -----------------------
+# NVIDIA Isaac Hospital environment (1 GB of textures + props). Fetch with
+# sim/fetch_hospital.py or copy from the Isaac assets root; see README.
+assets/hospital/Materials/
+assets/hospital/Props/
+assets/hospital/.thumbs/
+assets/hospital/LICENSE
+assets/hospital/hospital.usd
+# mall textures (CC0, 0.5 GB) — the mall USD itself is kept (8 MB)
+assets/textures/
+
+# --- run outputs that are regenerated ------------------------------------------
+results/*.usd
+results/ira_*/
+results/_discard*/
+results/hospital/ira_pull/
+renders/*.png
+renders/*.mp4
+
+# --- python -----------------------------------------------------------------------
+__pycache__/
+*.pyc

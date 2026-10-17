@@ -1,0 +1,46 @@
+# IRA smoke test A — copied from IRA's sample_configs/full_pipeline.yaml, made short.
+# Uses NVIDIA's own warehouse (it ships with a NavMesh), so a failure here means IRA
+# itself, not our venue. Proves: animated characters walk, cameras get placed,
+# Replicator writes RGB + ground-truth boxes.
+#   /isaac-sim/python.sh /isaac-sim/tools/actor_sdg/actor_sdg.py -c /workspace/sim/ira/ira_warehouse_test.yaml
+isaacsim.replicator.agent:
+  version: 1.6.0
+  seed: 42
+  simulation_duration: 15.0
+  environment:
+    base_stage_asset_path: Isaac/Environments/Simple_Warehouse/full_warehouse.usd
+  sensor:
+    groups:
+      ceiling_cameras:
+        num: 2
+        aim_at_targets:
+          height_range: [7.0, 10.0]
+          look_down_angle_range: [30.0, 45.0]
+          focal_length_range: [10.0, 15.0]
+          distance_range: [5.0, 10.0]
+  character:
+    groups:
+      walkers:
+        num: 8
+        asset_path: Isaac/People/Characters/
+        routines:
+        - wander:
+            weight: 1.0
+            repeat: 1
+            walk:
+              speed_range: [0.8, 1.5]
+              distance_range: [5.0, 10.0]
+              navigation_areas: []
+            idle:
+            - animation: idle
+              weight: 1.0
+              time_range: [2.0, 5.0]
+  replicator:
+    writers:
+      IRABasicWriter:
+        output_dir: /workspace/results/ira_warehouse
+        semantic_filter_predicate: class:character|robot;id:*
+        rgb: true
+        camera_params: true
+        object_info_bounding_box_2d_tight: true
+        start_frame: 30

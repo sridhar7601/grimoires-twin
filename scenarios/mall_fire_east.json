@@ -1,0 +1,5 @@
+{
+  "name": "mall_east_courtyard",
+  "origin": [37.0, 43.0],
+  "note": "local grid metres on the scale-1.0 mall grid (origin world [-44,-29]); world = local+origin = (-7, 14), ~5 m inside door E2 (local [42,43]). Fire by the east front entrance."
+}

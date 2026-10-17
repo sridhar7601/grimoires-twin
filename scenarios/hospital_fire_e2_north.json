@@ -1,0 +1,8 @@
+{
+  "name": "hospital_e2_north",
+  "origin": [
+    10.75,
+    33.75
+  ],
+  "note": "local grid metres (origin world [-50, -5]); world = (-39.25, 28.75). ~4 m inside E2 (west wing, north end): kills the base plan's second exit"
+}

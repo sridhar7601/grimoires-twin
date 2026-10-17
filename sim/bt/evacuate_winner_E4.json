@@ -1,0 +1,63 @@
+{
+    "schemaVersion": "2.0.0",
+    "nodeLibraries": [
+        {
+            "name": "omni.behavior.tree.core",
+            "version": "1.1"
+        },
+        {
+            "name": "omni.anim.behavior.tree",
+            "version": "0.3"
+        }
+    ],
+    "root": {
+        "type": "Sequence",
+        "source": "omni.behavior.tree.core",
+        "name": "Evacuate",
+        "children": [
+            {
+                "type": "Wait",
+                "source": "omni.behavior.tree.core",
+                "name": "AlarmWait",
+                "modifiers": [
+                    {
+                        "type": "RandomFloat",
+                        "source": "omni.behavior.tree.core",
+                        "name": "Stagger",
+                        "portOverrides": {
+                            "min": 5.0,
+                            "max": 30.0,
+                            "seed": 42
+                        }
+                    }
+                ],
+                "portOverrides": {
+                    "duration": {
+                        "type": "modifier",
+                        "modifier": "Stagger",
+                        "port": "value"
+                    }
+                }
+            },
+            {
+                "type": "MoveTo",
+                "source": "omni.anim.behavior.tree",
+                "name": "GoToExit",
+                "portOverrides": {
+                    "target": {
+                        "type": "SdfPath",
+                        "value": "/World/ExitTargets/E4"
+                    }
+                }
+            },
+            {
+                "type": "Wait",
+                "source": "omni.behavior.tree.core",
+                "name": "HoldAtExit",
+                "portOverrides": {
+                    "duration": 100000.0
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "hospital_e3_east",
+  "origin": [
+    66.25,
+    36.25
+  ],
+  "note": "local grid metres (origin world [-50, -5]); world = (16.25, 31.25). ~4 m inside E3 (east wing, east side)"
+}

@@ -1,0 +1,41 @@
+isaacsim.replicator.agent:
+  version: 1.6.0
+  seed: 42
+  simulation_duration: 20.0
+  environment:
+    base_stage_asset_path: /workspace/results/mall_navmesh.usd
+  sensor:
+    groups:
+      overhead:
+        num: 3
+        maximum_coverage:
+          target_coverage_ratio: 0.6
+          height_range: [8.0, 14.0]
+          look_down_angle_range: [45.0, 75.0]
+          focal_length_range: [8.0, 14.0]
+  character:
+    groups:
+      crowd:
+        num: 15
+        asset_path: Isaac/People/Characters/
+        routines:
+        - wander:
+            weight: 1.0
+            repeat: 3
+            walk:
+              speed_range: [0.8, 1.5]
+              distance_range: [8.0, 20.0]
+              navigation_areas: []
+            idle:
+            - animation: idle
+              weight: 1.0
+              time_range: [1.0, 3.0]
+  replicator:
+    writers:
+      IRABasicWriter:
+        output_dir: /workspace/results/ira_mall
+        semantic_filter_predicate: class:character|robot;id:*
+        rgb: true
+        camera_params: true
+        object_info_bounding_box_2d_tight: true
+        start_frame: 10
