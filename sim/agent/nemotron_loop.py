@@ -25,7 +25,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import tools  # noqa: E402
 
 API = "https://integrate.api.nvidia.com/v1"
-DEFAULT_MODEL = "nvidia/llama-3.3-nemotron-super-49b-v1.5"
+DEFAULT_MODEL = "nvidia/nemotron-3-super-120b-a12b"
 
 SYSTEM = """You are the planning agent of Grimoires, an evacuation-plan stress-tester for a hospital.
 You propose evacuation PLANS. A deterministic simulator rehearses each plan against five fire locations and
@@ -44,14 +44,15 @@ or, when you believe no tried-or-proposable plan will beat the best:
   {"reasoning": "...", "done": true}"""
 
 
-def call(model, messages, key, temperature=0.4, max_tokens=900):
+def call(model, messages, key, temperature=0.4, max_tokens=4096):
     body = json.dumps({"model": model, "messages": messages, "temperature": temperature, "max_tokens": max_tokens}).encode()
     req = urllib.request.Request(f"{API}/chat/completions", data=body,
                                  headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json", "Accept": "application/json"})
     for attempt in range(3):
         try:
             with urllib.request.urlopen(req, timeout=120) as r:
-                return json.load(r)["choices"][0]["message"]["content"] or ""
+                msg = json.load(r)["choices"][0]["message"]
+                return msg.get("content") or msg.get("reasoning_content") or ""
         except urllib.error.HTTPError as e:
             msg = e.read().decode(errors="ignore")[:300]
             if e.code in (429, 500, 502, 503) and attempt < 2:
@@ -81,7 +82,22 @@ def main():
     ap.add_argument("--list-models", action="store_true")
     ap.add_argument("--yes", action="store_true", help="skip the human approval prompt (recorded as NOT human-approved)")
     ap.add_argument("--twin", action="store_true", help="send the approved plan to the Isaac twin (GPU box)")
+    ap.add_argument("--approve", help="a saved session JSON: show its recommendation and ask a human to approve it")
     a = ap.parse_args()
+    if a.approve:
+        sess = json.load(open(a.approve)); b = sess["best"]
+        print(f"{sess['model']} recommended {b['plan_id']} robust {b['robust_score']} (worst {b['worst_fire']}, from {b['source']})")
+        if input("Approve this plan for the certificate? [y/N] ").strip().lower() == "y":
+            sess["approved"], sess["approved_by"] = True, "human at the terminal (--approve)"
+            json.dump(b["plan"], open(os.path.join(tools.ROOT, "scenarios", "hospital_agent_plan.json"), "w"), indent=2)
+            if a.twin:
+                sess["twin_job"] = tools.start_twin(b["plan"], name="agent_" + sess["finished"].replace("-", "_"))
+                print(f"twin queued: {sess['twin_job']['job']}")
+            json.dump(sess, open(a.approve, "w"), indent=1)
+            md = os.path.join(tools.ROOT, "docs", "results", "agent_session.md")
+            open(md, "a").write(f"\n**Approved later** by a human at the terminal ({datetime.datetime.now():%Y-%m-%d %H:%M}).\n")
+            print("approved; scenarios/hospital_agent_plan.json written")
+        return
     key = os.environ.get("NVIDIA_API_KEY")
     if not key:
         raise SystemExit("set NVIDIA_API_KEY (a build.nvidia.com key) in the environment first")
@@ -144,8 +160,11 @@ def main():
     if a.yes:
         approved = True
     else:
-        approved = input("Approve this plan for the certificate? [y/N] ").strip().lower() == "y"
-        who = "human at the terminal" if approved else "rejected by the human"
+        try:
+            approved = input("Approve this plan for the certificate? [y/N] ").strip().lower() == "y"
+            who = "human at the terminal" if approved else "rejected by the human"
+        except EOFError:                                     # no terminal attached: leave it for a human
+            approved, who = False, "PENDING - no terminal; approve with: python3 sim/agent/nemotron_loop.py --approve <session json>"
 
     stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     outdir = os.path.join(tools.ROOT, "results", "hospital", "agent"); os.makedirs(outdir, exist_ok=True)
