@@ -48,6 +48,20 @@ CAMERAS = {  # the placement proven on the hospital in Phase 0 (d = h / sin(thet
         "distance_range": [3.5, 7.0], "grid_resolution": 2.0, "target_coverage_ratio": 0.6}}}
 
 
+# CCTV demo: six fixed cameras authored in the stage (world metres, Z-up), ceiling height, looking down a little.
+# Positions were read off the walkable grid (hospital_plan.json); each one stands on a main-region cell.
+CCTV_CAMS = [  # (name, label, (x, y, z), (target x, target y, target z))
+    ("CAM01", "LOBBY / MAIN ENTRANCE E1", (8.5, -2.0, 2.7), (-1.25, 0.0, 0.8)),
+    ("CAM02", "CENTRAL CORRIDOR",         (-20.0, 10.5, 2.7), (5.0, 9.0, 0.8)),
+    ("CAM03", "WEST WING / EXIT E4",      (-36.0, 17.5, 2.7), (-38.25, 9.5, 0.8)),
+    ("CAM04", "NORTH-WEST WING / EXIT E2", (-37.0, 25.5, 2.7), (-40.75, 32.5, 0.8)),
+    ("CAM05", "EAST WING / EXIT E3",      (24.0, 23.5, 2.7), (21.5, 31.0, 0.8)),
+    ("CAM06", "OUTSIDE / MAIN ENTRANCE",  (-1.25, -7.0, 3.2), (-1.25, -1.0, 0.8)),
+]
+CCTV_FOCAL_MM = 12.0        # ~82 deg horizontal on the 20.955 mm aperture: a wide security lens
+CCTV_RESOLUTION = [640, 360]
+
+
 def zone_labels(venue, open_exits):
     """Nearest open exit for every main-region cell, by 4-connected BFS steps (walking distance)."""
     rows = venue["cells"]
@@ -95,7 +109,7 @@ def rectangles(label, gx, gy, min_cells=2):
     return out
 
 
-def author_stage(out_usda, venue_usd, venue, open_exits, rects, zone_h=3.0, cut=(), film_target=None, fire_world=None):
+def author_stage(out_usda, venue_usd, venue, open_exits, rects, zone_h=3.0, cut=(), film_target=None, fire_world=None, cctv=None):
     stage = Usd.Stage.CreateNew(out_usda)
     rel = os.path.relpath(os.path.abspath(venue_usd), os.path.dirname(os.path.abspath(out_usda)))
     stage.GetRootLayer().subLayerPaths.append(rel if rel.startswith(".") else "./" + rel)
@@ -152,6 +166,23 @@ def author_stage(out_usda, venue_usd, venue, open_exits, rects, zone_h=3.0, cut=
         cam.CreateHorizontalApertureAttr(20.955)
         cam.CreateVerticalApertureAttr(20.955 * 9.0 / 16.0)
         cam.CreateClippingRangeAttr((0.5, 1000.0))
+
+    if cctv:
+        # Fixed cameras. A USD camera looks down -Z with +Y up; rotateXYZ (90 - pitch, 0, yaw) makes it look
+        # horizontally along +Y (north) for yaw 0, tilted down by `pitch`; yaw is CCW from north.
+        import math as _m
+        UsdGeom.Scope.Define(stage, "/World/FilmCams")
+        for name, _label, (cx, cy, cz), (tx, ty, tz) in cctv:
+            dx, dy, dz = tx - cx, ty - cy, tz - cz
+            yaw = _m.degrees(_m.atan2(dy, dx)) - 90.0
+            pitch = _m.degrees(_m.atan2(-dz, _m.hypot(dx, dy)))
+            cam = UsdGeom.Camera.Define(stage, f"/World/FilmCams/{name}")
+            cam.AddTranslateOp().Set((cx, cy, cz))
+            cam.AddRotateXYZOp().Set((90.0 - pitch, 0.0, yaw))
+            cam.CreateFocalLengthAttr(CCTV_FOCAL_MM)
+            cam.CreateHorizontalApertureAttr(20.955)
+            cam.CreateVerticalApertureAttr(20.955 * 9.0 / 16.0)
+            cam.CreateClippingRangeAttr((0.2, 500.0))
 
     # NavMesh areas must be registered in the stage's navmesh settings as well as named on volumes.
     # values must be typed for the usda text format: float3 colour, double cost (plain tuples do not round-trip)
@@ -219,6 +250,8 @@ def main():
                     help="keep the venue's door leaves (default: switch them off = doors open, as Layer 1 assumes)")
     ap.add_argument("--dollhouse", action="store_true",
                     help="film run: roof/ceilings off, ONE 1280x720 camera ~38-40 m above the building centre looking almost straight down")
+    ap.add_argument("--cctv", action="store_true",
+                    help="film run: six fixed 640x360 security cameras inside the building (CCTV_CAMS), roof on, doors off")
     ap.add_argument("--film", action="store_true",
                     help="film run: two 1280x720 RGB cameras aimed at exit prims (main entrance + busiest other open exit); "
                          "combine with --duration 60 for a short cut")
@@ -251,12 +284,12 @@ def main():
     res_, (ox_, oy_) = venue["res"], venue["origin"]
     centre = (ox_ + (sum(i for i, _ in main_cells) / len(main_cells) + 0.5) * res_,
               oy_ + (sum(j for _, j in main_cells) / len(main_cells) + 0.5) * res_, 0.0)
-    stage_rel = f"assets/hospital/hospital_evac_{tag}{'_dollhouse' if a.dollhouse else ''}{fire_tag}.usda"
+    stage_rel = f"assets/hospital/hospital_evac_{tag}{'_dollhouse' if a.dollhouse else '_cctv' if a.cctv else ''}{fire_tag}.usda"
     fire = json.load(open(R(a.fire)))
     fire_world = (fire["origin"][0] + ox_, fire["origin"][1] + oy_)
     author_stage(R(stage_rel), R(a.venue_usd), venue, open_exits, rects, cut=cut,
                  film_target=(46.0, 10.0) if a.dollhouse else None,   # 46 m, 10 mm: ~96 x 54 m in 16:9 for a 75 x 47 m building
-                 fire_world=fire_world if a.flow else None)
+                 fire_world=fire_world if a.flow else None, cctv=CCTV_CAMS if a.cctv else None)
 
     # ---- departure groups: (group name, people, spawn zone, wait_min, wait_max, target exit)
     alarm, stagger = float(plan["alarm_delay_s"]), float(plan["stagger_s"])
@@ -301,16 +334,18 @@ def main():
         raise SystemExit("--measure-only and --film are different runs; pick one")
     if a.dollhouse and (a.measure_only or a.film):
         raise SystemExit("--dollhouse is its own film mode; do not combine with --film / --measure-only")
+    if a.cctv and (a.measure_only or a.film or a.dollhouse):
+        raise SystemExit("--cctv is its own film mode; do not combine with --film / --measure-only / --dollhouse")
     dur_tag = f"{int(a.duration)}s" if a.duration else ""
     suffix = ("_measure" if a.measure_only else "_film" + dur_tag if a.film
-              else "_dollhouse" + dur_tag if a.dollhouse else "") + fire_tag
+              else "_dollhouse" + dur_tag if a.dollhouse else "_cctv" + dur_tag if a.cctv else "") + fire_tag
     out_dir = f"results/ira_hospital_{tag}{suffix}"
     aim = {"height_range": [2.5, 3.0], "look_down_angle_range": [25.0, 45.0],
            "focal_length_range": [10.0, 15.0], "distance_range": [3.5, 7.0]}
     if a.measure_only:
         cameras = {"ceiling_cameras": dict(CAMERAS["ceiling_cameras"], num=1)}
-    elif a.dollhouse:
-        cameras = None   # camera authored in the stage (author_stage); writer renders it via sensor_prim_list
+    elif a.dollhouse or a.cctv:
+        cameras = None   # camera(s) authored in the stage (author_stage); writer renders them via sensor_prim_list
     elif False:  # previous IRA-placed overhead attempt, kept for reference: aim_at_targets fails at 38 m
         # 74 x 40 m footprint: 10 mm lens (~93 deg horizontal) at ~38-40 m covers it in 16:9.
         # d = h / sin(theta): h 38-40, theta 84-88 -> d 38.0-40.2.  yaw picks which side the camera sits on.
@@ -332,6 +367,8 @@ def main():
     writer = (dict(common, resolution=[320, 180], rgb=False, object_info_bounding_box_2d_tight=False) if a.measure_only   # 3D boxes: cheap cross-check of the dump
               else dict(common, resolution=[1920, 1080], rgb=True, object_info_bounding_box_2d_tight=False,
                         sensor_prim_list=["/World/FilmCams/Overhead"]) if a.dollhouse
+              else dict(common, resolution=CCTV_RESOLUTION, rgb=True, object_info_bounding_box_2d_tight=False,
+                        object_info_bounding_box_3d=False, sensor_prim_list=[f"/World/FilmCams/{n}" for n, *_ in CCTV_CAMS]) if a.cctv
               else dict(common, resolution=[1280, 720], rgb=True, object_info_bounding_box_2d_tight=not a.film))
     groups = {g: {"num": n, "asset_path": "Isaac/People/Characters/", "spawn_areas": [f"Zone_{zone}"],
                   "behavior_tree": C(trees[g])} for g, n, zone, _, _, _ in specs}
