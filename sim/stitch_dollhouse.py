@@ -30,12 +30,13 @@ def camera(stage_usda):
 
 
 class Side:
-    def __init__(self, root, tag, venue, plan, label, reach, start_frame, fps):
+    closures = {}
+    def __init__(self, root, tag, venue, plan, label, reach, start_frame, fps, variant="dollhouse"):
         self.label, self.plan = label, plan
-        run = os.path.join(root, "results", f"ira_hospital_{tag}_dollhouse")
+        run = os.path.join(root, "results", f"ira_hospital_{tag}_{variant}")
         cams = [d for d in os.listdir(run) if "Overhead" in d]
         self.frames = sorted(glob.glob(os.path.join(run, cams[0], "rgb", "*.png")))
-        self.cx, self.cy, self.ch, self.focal = camera(os.path.join(root, "assets", "hospital", f"hospital_evac_{tag}_dollhouse.usda"))
+        self.cx, self.cy, self.ch, self.focal = camera(os.path.join(root, "assets", "hospital", f"hospital_evac_{tag}_{variant}.usda"))
         self.start_frame, self.fps = start_frame, fps
         tr, grp = collections.defaultdict(list), {}
         for line in open(os.path.join(run, "agent_positions.jsonl")):
@@ -45,7 +46,7 @@ class Side:
         self.agents = []
         for a, pts in tr.items():
             pts.sort(); arr = np.array(pts)
-            e = grp[a].replace("evac_", "")
+            e = re.findall(r"E\d+", grp[a])[-1]   # evac_E1 -> E1, evac_E1_to_E2 -> E2
             tx, ty = self.targets[e][0], self.targets[e][1]
             hit = np.nonzero(np.hypot(arr[:, 1] - tx, arr[:, 2] - ty) <= reach)[0]
             self.agents.append((arr, e, float(arr[hit[0], 0]) if len(hit) else None))
@@ -66,9 +67,10 @@ class Side:
         for e, (x, y, _) in self.targets.items():                       # exits
             u, v = self.project(x, y, pw, ph)
             used = e in self.open
-            col = EXIT_BGR[e] if used else (150, 150, 150)
+            closed = used and t >= self.closures.get(e, float("inf"))
+            col = (0, 0, 230) if closed else (EXIT_BGR[e] if used else (150, 150, 150))
             cv2.circle(img, (u, v), 16, col, 3, cv2.LINE_AA)
-            txt = e if used else f"{e} not used"
+            txt = f"{e} CLOSED (smoke)" if closed else (e if used else f"{e} not used")
             cv2.putText(img, txt, (u + 18, v + 6), FONT, 0.6, (255, 255, 255), 4, cv2.LINE_AA)
             cv2.putText(img, txt, (u + 18, v + 6), FONT, 0.6, col, 2, cv2.LINE_AA)
         out = 0
@@ -99,11 +101,15 @@ def main():
     ap.add_argument("--h", type=int, default=720); ap.add_argument("--fps", type=float, default=30.0)
     ap.add_argument("--start-frame", type=int, default=20); ap.add_argument("--reach", type=float, default=1.5)
     ap.add_argument("--hold", type=float, default=3.0, help="extra seconds after the slower side is all out")
+    ap.add_argument("--variant", default="dollhouse", help="run/stage suffix, e.g. dollhouse or dollhouse_fire")
+    ap.add_argument("--closures-from", help="Layer-1 report: mark exits CLOSED at their smoke closure time")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     venue = json.load(open(a.venue))
-    L = Side(a.root, a.left, venue, json.load(open(a.left_plan)), a.left_label, a.reach, a.start_frame, a.fps)
-    R = Side(a.root, a.right, venue, json.load(open(a.right_plan)), a.right_label, a.reach, a.start_frame, a.fps)
+    Side.closures = {e: t for e, t in json.load(open(a.closures_from)).get("corridor_closed_at_s", {}).items()
+                     if t is not None} if a.closures_from else {}
+    L = Side(a.root, a.left, venue, json.load(open(a.left_plan)), a.left_label, a.reach, a.start_frame, a.fps, a.variant)
+    R = Side(a.root, a.right, venue, json.load(open(a.right_plan)), a.right_label, a.reach, a.start_frame, a.fps, a.variant)
     last_out = max(max(t for _, _, t in S.agents if t is not None) for S in (L, R))
     n = min(len(L.frames), len(R.frames), int((last_out + a.hold) * a.fps) - a.start_frame)
     s0 = L.render(0, a.h); PW, PH = s0.shape[1], s0.shape[0]; gap = 6

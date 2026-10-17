@@ -106,6 +106,8 @@ Copy `scenarios/mall_*.json` → `scenarios/hospital_base_plan.json`, `hospital_
 
 **Artifact:** two MP4s, side by side.
 
+**Backlog — do LAST (requested 2026-10-17):** a CCTV-style demo film: several cameras inside different rooms and corridors shown as a security-monitor grid, base vs Grimoires side by side. Presentation only — note the boundary with Bankai (cameras/perception) stated in ARCHITECTURE.md before building it.
+
 ---
 
 ## Phase 7 — the agent
@@ -114,6 +116,8 @@ Copy `scenarios/mall_*.json` → `scenarios/hospital_base_plan.json`, `hospital_
 - Nemotron (hosted) proposes the next variant from the ranking; NemoClaw / Hermes runs the loop with a human approving the final plan.
 
 **Artifact:** a recorded agent session producing the certificate end-to-end.
+
+**Progress (2026-10-17):** built, not yet run against Nemotron (needs a build.nvidia.com key). `sim/agent/tools.py` = the pipeline as functions (describe, rehearse, evaluate under all 5 fires, grid_search, certificate, start_twin / twin_status over SSH); verified against the robustness table (182.8 / 353.0). `sim/agent/grimoires_mcp.py` = the same as an MCP server (7 tools; `uv run --with "mcp<2"`), verified by calling `evaluate_plan` through MCP. `sim/agent/nemotron_loop.py` = Nemotron proposes a plan → scored under all 5 fires → Nemotron sees the result → next proposal; starts from the grid ranking, stops on `done`, ends with human approval, optional `--twin`, writes `docs/results/agent_session.md`. Hermes has no `mcp_servers` configured yet; the server docstring has the snippet.
 
 ---
 

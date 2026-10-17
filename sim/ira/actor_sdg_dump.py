@@ -122,6 +122,10 @@ class ActorSDGDump:
         self._settings.set("/app/scripting/ignoreWarningDialog", True)
         self._settings.set("/app/omni.graph.scriptnode/enable_opt_in", False)
         self._settings.set("/rtx/raytracing/fractionalCutoutOpacity", True)
+        # Omniverse Flow (fire/smoke) renders only with these on; a referenced preset's layer settings are not
+        # inherited by the stage. Harmless when the stage has no Flow prims.
+        for k in ("enabled", "rayTracedTranslucencyEnabled", "rayTracedReflectionsEnabled", "pathTracingEnabled"):
+            self._settings.set(f"/rtx/flow/{k}", True)
         self._settings.set("/log/level", "info")
         for ch in ("omni.replicator.core", "omni.behavior.composer.core", "isaacsim.anim.robot",
                    "isaacsim.sensors.rtx.placement", "isaacsim.replicator.agent.core"):

@@ -25,6 +25,7 @@ import collections
 import json
 import math
 import os
+import re
 import sys
 
 import cv2
@@ -115,7 +116,7 @@ class Panel:
         for a, pts in tr.items():
             pts.sort()
             arr = np.array(pts, float)
-            e = grp[a].replace("evac_", "") if grp[a].startswith("evac_") else None
+            e = (re.findall(r"E\d+", grp[a]) or [None])[-1]   # evac_E1 -> E1, evac_E1_to_E2 -> E2
             out = None
             if e in targets:
                 dist = np.hypot(arr[:, 1] - targets[e][0], arr[:, 2] - targets[e][1])

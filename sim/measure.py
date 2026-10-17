@@ -28,7 +28,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from make_exit_targets import inside_points  # noqa: E402
 from plan import plan_id  # noqa: E402
 
-GROUP_RE = re.compile(r"/evac_(E\d+)/")
+GROUP_RE = re.compile(r"/evac_(E\d+)(?:_to_(E\d+))?/")   # evac_E1 -> E1 ; evac_E1_to_E2 -> E2 (set off after E1 closed)
 
 
 def load_positions_jsonl(path):
@@ -59,7 +59,10 @@ def load_positions_object_detection(root, fps, start_frame):
 
 def agent_exit(prim_path, open_exits):
     m = GROUP_RE.search(prim_path)
-    return m.group(1) if m and m.group(1) in open_exits else None
+    if not m:
+        return None
+    target = m.group(2) or m.group(1)
+    return target if target in open_exits else None
 
 
 def first_arrival(track, target, reach):
@@ -80,6 +83,7 @@ def main():
     ap.add_argument("--fps", type=float, default=30.0, help="writer frame rate (object-detection source)")
     ap.add_argument("--start-frame", type=int, default=20, help="writer start_frame (object-detection source)")
     ap.add_argument("--reach", type=float, default=1.5, help="metres from the exit target that counts as out")
+    ap.add_argument("--closures-from", help="Layer-1 report: count arrivals at an exit after its smoke closure time")
     ap.add_argument("--report", required=True)
     a = ap.parse_args()
 
@@ -128,11 +132,20 @@ def main():
                                              y - targets[agent_exit(p, open_exits) or open_exits[0]][1]) for _, x, y in tr), 1)
                       for p, tr in tracks.items() if p in never}
 
+    after_closure = {}
+    if a.closures_from:
+        cl = {e: t for e, t in json.load(open(a.closures_from)).get("corridor_closed_at_s", {}).items() if t is not None}
+        for prim, tr in tracks.items():
+            for e, tc in cl.items():
+                ta = first_arrival(tr, targets[e], a.reach)
+                if ta is not None and ta > tc and prim in arrivals and abs(arrivals[prim] - ta) < 1e-6:
+                    after_closure[e] = after_closure.get(e, 0) + 1
     report = {
         "layer": 2, "venue": venue["name"], "plan": plan, "plan_id": plan_id(plan), "open_exits": open_exits,
         "source": source, "reach_m": a.reach, "people": n, "sim_span_s": round(t_end, 1),
         "t50_s": t50, "t90_s": t90, "t100_s": t100,
         "exit_throughput_total": dict(used), "arrived": len(arrivals), "never_arrived": len(never),
+        "arrived_after_closure": after_closure,
         "redirected": redirected, "never_arrived_agents": {p.split('/')[-1]: straggler_dist[p] for p in never},
         "remaining_series_t_in_out": curve,
         "exit_targets_world": {e: [round(v, 2) for v in p] for e, p in targets.items()},
