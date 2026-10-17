@@ -97,6 +97,8 @@ Copy `scenarios/mall_*.json` → `scenarios/hospital_base_plan.json`, `hospital_
 
 **Outcome (2026-10-17):** Python sweep done — 5 fires × 24 plans = 120 runs in 81.5 s. Base ranks 24/24 under every fire; most robust = `G-E123-a5-s25` (worst 182.8); the demo-fire winner `G-E1234-a5-s25` is 2nd (weak spot: a fire inside E4). `grimoires/results/robustness_table.md`. Warp port not attempted — at 20 s per fire there is no speed problem to solve yet.
 
+**Correction (later, 2026-10-17):** that ranking was one seed. Re-run over 5 seeds (600 rehearsals, `results/hospital/layer1/solve_hospital_multiseed.json`): base still last (331.7, 24/24); most robust tried = `G-E1234-a15-s10` (167.3); the twin-certified `G-E1234-a5-s25` ranks 3rd (186.4); `G-E123-a5-s25` 4th. Lesson baked into the agent: plans are scored over 3 seeds and an agent pick must win on 5 held-out seeds. `docs/results/robustness_table.md` now shows the 5-seed table; the single-seed one is kept as `robustness_table_seed42.md`.
+
 ---
 
 ## Phase 6 — the film and the narration

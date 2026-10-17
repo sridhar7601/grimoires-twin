@@ -26,7 +26,16 @@ VENUE = os.path.join(ROOT, "results", "hospital", "hospital_plan.json")
 BASE = os.path.join(ROOT, "scenarios", "hospital_base_plan.json")
 FIRES = {os.path.basename(p)[len("hospital_fire_"):-5]: p for p in sorted(glob.glob(os.path.join(ROOT, "scenarios", "hospital_fire_*.json")))}
 PEOPLE, SEED, FPS = 300, 42, 12.0
-LIMITS = {"alarm_delay_s": (0.0, 120.0), "stagger_s": (0.0, 120.0)}
+# Every plan is scored over several seeds (who sits where, walking speeds, departure times). A single seed
+# lets an optimiser chase noise: session 3 "beat" the grid at seed 42 with a plan that was worse on average.
+SEEDS = (42, 43, 44)
+# Plausibility floors (same as the grid's smallest values). Detection + announcement is never instant, and 300
+# people never start in the same second; the simulator has no crowd collisions, so a near-zero stagger would
+# exploit that gap rather than describe a real plan. A first, unbounded Nemotron session did exactly that
+# (alarm 0 s, stagger 0 s) - see docs/results/agent_session_unbounded.md.
+LIMITS = {"alarm_delay_s": (5.0, 120.0), "stagger_s": (10.0, 120.0)}
+LIMIT_WHY = ("alarm >= 5 s: detection + announcement is never instant; stagger >= 10 s: 300 people never all start in "
+             "the same second, and the simulator has no crowd collisions, so tighter staggers are not credible")
 
 BOX = ["ssh", "-i", os.path.expanduser("~/.ssh/launchpad"), "-p", "12313", "-o", "ConnectTimeout=8",
        "nvidia@global.prd.ga.launchpad.nvidia.com"]
@@ -60,7 +69,7 @@ def normalise(plan):
         except (TypeError, ValueError):
             raise ValueError(f"{k} must be a number of seconds in [{lo}, {hi}]")
         if not lo <= val <= hi:
-            raise ValueError(f"{k}={val} outside [{lo}, {hi}]")
+            raise ValueError(f"{k}={val} outside [{lo}, {hi}] ({LIMIT_WHY})")
         p[k] = round(val, 1)
     return p
 
@@ -84,39 +93,51 @@ def describe():
         "base_plan": normalise(json.load(open(BASE))),
         "knobs": {"exits_open": "any non-empty subset of the exits", "alarm_delay_s": list(LIMITS["alarm_delay_s"]),
                   "stagger_s": list(LIMITS["stagger_s"]) + ["spread of departure times after the alarm"]},
+        "knob_floors_why": LIMIT_WHY,
         "score": f"{WEIGHTS['w_t90']}*t90 + {WEIGHTS['w_exp']}*exposure_mean + {WEIGHTS['w_trap']}*trapped + "
                  f"{WEIGHTS['w_dense']}*through_dense_smoke; lower is better; a plan's robust score is its WORST fire",
         "honesty": "rehearses/ranks, never predicts; simplified grid smoke; people do not collide; no density figures",
     }
 
 
-def rehearse(plan, fire="entrance"):
-    """One Layer-1 rehearsal of `plan` against one fire. ~1 s."""
+def rehearse(plan, fire="entrance", seed=None):
+    """One Layer-1 rehearsal of `plan` against one fire, one seed. ~1 s."""
     p = normalise(plan)
     f = json.load(open(FIRES[fire]))
-    r = run(_v(), p, f, seed=SEED, fps=FPS, people=PEOPLE)
-    return dict({"plan_id": plan_id(p), "fire": fire}, **_summary(r))
+    r = run(_v(), p, f, seed=SEED if seed is None else int(seed), fps=FPS, people=PEOPLE)
+    return dict({"plan_id": plan_id(p), "fire": fire, "seed": SEED if seed is None else int(seed)}, **_summary(r))
 
 
-def evaluate(plan, fires=None):
-    """Rehearse `plan` against every fire (default: all five); robust score = worst fire. ~4 s."""
+def evaluate(plan, fires=None, seeds=None):
+    """Rehearse `plan` against every fire (default: all five) and every seed (default SEEDS). Per fire the score is
+    the mean over seeds; the robust score is the worst fire's mean. ~10 s for 5 fires x 3 seeds."""
     p = normalise(plan)
-    names = fires or list(FIRES)
-    per = {n: rehearse(p, n) for n in names}
+    names, seeds = fires or list(FIRES), list(seeds or SEEDS)
+    per = {}
+    for n in names:
+        rs = [rehearse(p, n, sd) for sd in seeds]
+        t90s = [r["t90_s"] for r in rs]
+        per[n] = {"score": round(sum(r["score"] for r in rs) / len(rs), 1),
+                  "score_by_seed": [r["score"] for r in rs],
+                  "t90_s": round(sum(t90s) / len(t90s), 1) if None not in t90s else None,
+                  "over_30s_smoke": round(sum(r["over_30s_smoke"] for r in rs) / len(rs), 1),
+                  "trapped": sum(r["trapped"] for r in rs)}
     worst = max(per, key=lambda n: per[n]["score"])
-    return {"plan": p, "plan_id": plan_id(p), "robust_score": per[worst]["score"], "worst_fire": worst,
+    return {"plan": p, "plan_id": plan_id(p), "seeds": seeds, "robust_score": per[worst]["score"], "worst_fire": worst,
+            "worst_single_run": max(s for n in names for s in per[n]["score_by_seed"]),
             "t90_by_fire": {n: per[n]["t90_s"] for n in names},
             "over_30s_smoke_by_fire": {n: per[n]["over_30s_smoke"] for n in names},
             "trapped_total": sum(per[n]["trapped"] for n in names), "per_fire": per}
 
 
-def grid_search(fires=None, top=5):
-    """The fixed 24-variant sweep (exits ⊇ base × alarm {30,15,5} × stagger {25,10}), ranked by worst fire. ~80 s for 5 fires."""
+def grid_search(fires=None, top=5, seeds=None):
+    """The fixed 24-variant sweep (exits ⊇ base × alarm {30,15,5} × stagger {25,10}), ranked by worst fire,
+    each plan scored like evaluate() (mean over seeds). ~4 min for 5 fires x 3 seeds."""
     from plan import enumerate_variants
     base = json.load(open(BASE))
     rows = []
     for p in enumerate_variants(base, _v()):
-        e = evaluate(p, fires)
+        e = evaluate(p, fires, seeds)
         rows.append({"plan_id": e["plan_id"], "plan": e["plan"], "robust_score": e["robust_score"],
                      "worst_fire": e["worst_fire"], "t90_by_fire": e["t90_by_fire"]})
     rows.sort(key=lambda r: r["robust_score"])

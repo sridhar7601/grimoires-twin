@@ -1,0 +1,294 @@
+{
+ "model": "nvidia/nemotron-3-super-120b-a12b",
+ "rounds": 10,
+ "grid_best": {
+  "plan_id": "G-E1234-a15-s10",
+  "robust_score": 175.7,
+  "worst_fire": "e4_west",
+  "t90_by_fire": {
+   "central": 46.5,
+   "e2_north": 47.5,
+   "e3_east": 53.0,
+   "e4_west": 58.0,
+   "entrance": 54.9
+  }
+ },
+ "best": {
+  "plan_id": "G-E1234-a12-s15",
+  "robust_score": 168.9,
+  "worst_fire": "e4_west",
+  "t90_by_fire": {
+   "central": 45.5,
+   "e2_north": 46.5,
+   "e3_east": 51.7,
+   "e4_west": 56.3,
+   "entrance": 56.0
+  },
+  "over_30s_smoke_by_fire": {
+   "central": 6.3,
+   "e2_north": 10.0,
+   "e3_east": 5.7,
+   "e4_west": 6.0,
+   "entrance": 5.7
+  },
+  "trapped_total": 0,
+  "plan": {
+   "gates_open": [],
+   "route_bias": {},
+   "exits_open": [
+    "E1",
+    "E2",
+    "E3",
+    "E4"
+   ],
+   "alarm_delay_s": 12.0,
+   "stagger_s": 15.0
+  },
+  "source": "nemotron round 9"
+ },
+ "approved": false,
+ "approved_by": "PENDING - no terminal; approve with: python3 sim/agent/nemotron_loop.py --approve <session json>",
+ "log": [
+  {
+   "round": 1,
+   "reply": "{\n  \"reasoning\": \"Earlier alarm (5\u202fs) starts evacuation sooner, likely reducing t90 and trapped people; a moderate stagger (20\u202fs) spreads departures to lessen simultaneous surge, lowering exposure and dense\u2011smoke passage compared with very tight or very loose staggers.\",\n  \"plan\": {\n    \"exits_open\": [\"E1\", \"E2\", \"E3\", \"E4\"],\n    \"alarm_delay_s\": 5,\n    \"stagger_s\": 20\n  }\n}",
+   "plan_id": "G-E1234-a5-s20",
+   "reasoning": "Earlier alarm (5\u202fs) starts evacuation sooner, likely reducing t90 and trapped people; a moderate stagger (20\u202fs) spreads departures to lessen simultaneous surge, lowering exposure and dense\u2011smoke passage compared with very tight or very loose staggers.",
+   "result": {
+    "plan_id": "G-E1234-a5-s20",
+    "robust_score": 188.1,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 40.9,
+     "e2_north": 41.3,
+     "e3_east": 44.6,
+     "e4_west": 52.7,
+     "entrance": 55.1
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 3.7,
+     "e2_north": 4.3,
+     "e3_east": 5.0,
+     "e4_west": 4.7,
+     "entrance": 6.3
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 2,
+   "reply": "{\n  \"reasoning\": \"Keeping the alarm at 15\u202fs maintains a reasonable response time while increasing the stagger to 20\u202fs spreads departures more, reducing simultaneous surge and dense\u2011smoke exposure that drove the worst case in the current best plan.\",\n  \"plan\": {\n    \"exits_open\": [\"E1\", \"E2\", \"E3\", \"E4\"],\n    \"alarm_delay_s\": 15,\n    \"stagger_s\": 20\n  }\n}",
+   "plan_id": "G-E1234-a15-s20",
+   "reasoning": "Keeping the alarm at 15\u202fs maintains a reasonable response time while increasing the stagger to 20\u202fs spreads departures more, reducing simultaneous surge and dense\u2011smoke exposure that drove the worst case in the current best plan.",
+   "result": {
+    "plan_id": "G-E1234-a15-s20",
+    "robust_score": 213.8,
+    "worst_fire": "e2_north",
+    "t90_by_fire": {
+     "central": 52.4,
+     "e2_north": 53.6,
+     "e3_east": 57.6,
+     "e4_west": 62.8,
+     "entrance": 61.1
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 12.7,
+     "e2_north": 16.7,
+     "e3_east": 6.3,
+     "e4_west": 5.3,
+     "entrance": 9.3
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 3,
+   "reply": "{\n  \"reasoning\": \"Closing E4 removes the exit most vulnerable to the e4_west fire, while an early alarm (5\u202fs) starts evacuation sooner and a moderate stagger (25\u202fs) spreads departures to reduce simultaneous surge and dense\u2011smoke exposure.\",\n  \"plan\": {\n    \"exits_open\": [\"E1\", \"E2\", \"E3\"],\n    \"alarm_delay_s\": 5,\n    \"stagger_s\": 25\n  }\n}",
+   "plan_id": "G-E123-a5-s25",
+   "repeat": true
+  },
+  {
+   "round": 4,
+   "reply": "{\n  \"reasoning\": \"A moderate alarm delay (~12\u202fs) balances early start with avoiding congestion, while a low stagger (10\u202fs) keeps departure spread sufficient to reduce dense\u2011smoke exposure without causing excessive simultaneous flow.\",\n  \"plan\": {\n    \"exits_open\": [\"E1\", \"E2\", \"E3\", \"E4\"],\n    \"alarm_delay_s\": 12,\n    \"stagger_s\": 10\n  }\n}",
+   "plan_id": "G-E1234-a12-s10",
+   "reasoning": "A moderate alarm delay (~12\u202fs) balances early start with avoiding congestion, while a low stagger (10\u202fs) keeps departure spread sufficient to reduce dense\u2011smoke exposure without causing excessive simultaneous flow.",
+   "result": {
+    "plan_id": "G-E1234-a12-s10",
+    "robust_score": 186.9,
+    "worst_fire": "e4_west",
+    "t90_by_fire": {
+     "central": 43.1,
+     "e2_north": 43.5,
+     "e3_east": 48.2,
+     "e4_west": 54.2,
+     "entrance": 55.5
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 4.3,
+     "e2_north": 6.3,
+     "e3_east": 2.3,
+     "e4_west": 6.0,
+     "entrance": 6.3
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 5,
+   "reply": "{\n  \"reasoning\": \"An alarm around 8\u202fs starts evacuation early enough to cut t90 for the e4_west fire, while a stagger of ~18\u202fs spreads departures to lower simultaneous surge and dense\u2011smoke exposure, aiming for a lower robust score than the current best.\",\n  \"plan\": {\n    \"exits_open\": [\"E1\", \"E2\", \"E3\", \"E4\"],\n    \"alarm_delay_s\": 8,\n    \"stagger_s\": 18\n  }\n}",
+   "plan_id": "G-E1234-a8-s18",
+   "reasoning": "An alarm around 8\u202fs starts evacuation early enough to cut t90 for the e4_west fire, while a stagger of ~18\u202fs spreads departures to lower simultaneous surge and dense\u2011smoke exposure, aiming for a lower robust score than the current best.",
+   "result": {
+    "plan_id": "G-E1234-a8-s18",
+    "robust_score": 182.3,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 42.8,
+     "e2_north": 43.6,
+     "e3_east": 48.1,
+     "e4_west": 53.8,
+     "entrance": 55.9
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 5.0,
+     "e2_north": 7.0,
+     "e3_east": 4.0,
+     "e4_west": 4.7,
+     "entrance": 9.0
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 6,
+   "reply": "{\n  \"reasoning\": \"The current best uses all four exits with a moderate alarm (15\u202fs) and minimal stagger (10\u202fs). Trying a later alarm (20\u202fs) may reduce simultaneous movement and dense\u2011smoke exposure while still allowing enough time to exit, potentially lowering the worst\u2011case robust score.\",\n  \"plan\": {\n    \"exits_open\": [\"E1\", \"E2\", \"E3\", \"E4\"],\n    \"alarm_delay_s\": 20,\n    \"stagger_s\": 10\n  }\n}",
+   "plan_id": "G-E1234-a20-s10",
+   "reasoning": "The current best uses all four exits with a moderate alarm (15\u202fs) and minimal stagger (10\u202fs). Trying a later alarm (20\u202fs) may reduce simultaneous movement and dense\u2011smoke exposure while still allowing enough time to exit, potentially lowering the worst\u2011case robust score.",
+   "result": {
+    "plan_id": "G-E1234-a20-s10",
+    "robust_score": 213.3,
+    "worst_fire": "e2_north",
+    "t90_by_fire": {
+     "central": 51.9,
+     "e2_north": 53.0,
+     "e3_east": 59.1,
+     "e4_west": 64.0,
+     "entrance": 59.2
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 12.0,
+     "e2_north": 15.3,
+     "e3_east": 8.0,
+     "e4_west": 4.3,
+     "entrance": 9.0
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 7,
+   "reply": "{\n  \"reasoning\": \"A slightly earlier alarm (13\u202fs) starts evacuation a bit sooner than the current best, while a modest increase in stagger (12\u202fs) spreads departures enough to reduce simultaneous surge and dense\u2011smoke exposure, aiming to lower the worst\u2011case t90 and exposure for the e4_west fire.\",\n  \"plan\": {\n    \"exits_open\": [\"E1\", \"E2\", \"E3\", \"E4\"],\n    \"alarm_delay_s\": 13,\n    \"stagger_s\": 10\n  }\n}",
+   "plan_id": "G-E1234-a13-s10",
+   "reasoning": "A slightly earlier alarm (13\u202fs) starts evacuation a bit sooner than the current best, while a modest increase in stagger (12\u202fs) spreads departures enough to reduce simultaneous surge and dense\u2011smoke exposure, aiming to lower the worst\u2011case t90 and exposure for the e4_west fire.",
+   "result": {
+    "plan_id": "G-E1234-a13-s10",
+    "robust_score": 189.4,
+    "worst_fire": "e4_west",
+    "t90_by_fire": {
+     "central": 44.3,
+     "e2_north": 44.9,
+     "e3_east": 50.1,
+     "e4_west": 55.0,
+     "entrance": 55.0
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 4.7,
+     "e2_north": 7.7,
+     "e3_east": 5.0,
+     "e4_west": 5.7,
+     "entrance": 6.0
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 8,
+   "reply": "{\n  \"reasoning\": \"Closing E4 removes the exit most compromised in the e4_west fire, reducing people attempting to use a smoky route; keeping alarm at 15\u202fs and increasing stagger to 20\u202fs spreads departures to lower simultaneous surge and dense\u2011smoke exposure for the remaining exits.\",\n  \"plan\": {\n    \"exits_open\": [\"E1\", \"E2\", \"E3\"],\n    \"alarm_delay_s\": 15,\n    \"stagger_s\": 20\n  }\n}",
+   "plan_id": "G-E123-a15-s20",
+   "reasoning": "Closing E4 removes the exit most compromised in the e4_west fire, reducing people attempting to use a smoky route; keeping alarm at 15\u202fs and increasing stagger to 20\u202fs spreads departures to lower simultaneous surge and dense\u2011smoke exposure for the remaining exits.",
+   "result": {
+    "plan_id": "G-E123-a15-s20",
+    "robust_score": 239.4,
+    "worst_fire": "e2_north",
+    "t90_by_fire": {
+     "central": 58.2,
+     "e2_north": 74.1,
+     "e3_east": 66.0,
+     "e4_west": 65.5,
+     "entrance": 72.4
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 13.3,
+     "e2_north": 18.3,
+     "e3_east": 6.3,
+     "e4_west": 14.7,
+     "entrance": 9.3
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 9,
+   "reply": "{\n  \"reasoning\": \"A slightly earlier alarm (12\u202fs) starts evacuation sooner than the current best, while a moderate increase in stagger (15\u202fs) spreads departures to reduce simultaneous surge and dense\u2011smoke exposure, aiming to lower the worst\u2011case t90 and exposure for the e4_west fire.\",\n  \"plan\": {\n    \"exits_open\": [\"E1\", \"E2\", \"E3\", \"E4\"],\n    \"alarm_delay_s\": 12,\n    \"stagger_s\": 15\n  }\n}",
+   "plan_id": "G-E1234-a12-s15",
+   "reasoning": "A slightly earlier alarm (12\u202fs) starts evacuation sooner than the current best, while a moderate increase in stagger (15\u202fs) spreads departures to reduce simultaneous surge and dense\u2011smoke exposure, aiming to lower the worst\u2011case t90 and exposure for the e4_west fire.",
+   "result": {
+    "plan_id": "G-E1234-a12-s15",
+    "robust_score": 168.9,
+    "worst_fire": "e4_west",
+    "t90_by_fire": {
+     "central": 45.5,
+     "e2_north": 46.5,
+     "e3_east": 51.7,
+     "e4_west": 56.3,
+     "entrance": 56.0
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 6.3,
+     "e2_north": 10.0,
+     "e3_east": 5.7,
+     "e4_west": 6.0,
+     "entrance": 5.7
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 10,
+   "reply": "{\n  \"reasoning\": \"Increasing the stagger to 20\u202fs spreads departures further, lowering simultaneous surge and dense\u2011smoke exposure for the e4_west fire, while a 12\u202fs alarm starts evacuation early enough to keep t90 low.\",\n  \"plan\": {\n    \"exits_open\": [\"E1\", \"E2\", \"E3\", \"E4\"],\n    \"alarm_delay_s\": 12,\n    \"stagger_s\": 20\n  }\n}",
+   "plan_id": "G-E1234-a12-s20",
+   "reasoning": "Increasing the stagger to 20\u202fs spreads departures further, lowering simultaneous surge and dense\u2011smoke exposure for the e4_west fire, while a 12\u202fs alarm starts evacuation early enough to keep t90 low.",
+   "result": {
+    "plan_id": "G-E1234-a12-s20",
+    "robust_score": 181.6,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 48.7,
+     "e2_north": 49.6,
+     "e3_east": 54.3,
+     "e4_west": 58.6,
+     "entrance": 58.5
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 9.3,
+     "e2_north": 12.3,
+     "e3_east": 5.0,
+     "e4_west": 5.7,
+     "entrance": 6.3
+    },
+    "trapped_total": 0
+   }
+  }
+ ],
+ "finished": "20261017-201101"
+}

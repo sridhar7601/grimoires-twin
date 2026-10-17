@@ -1,0 +1,313 @@
+{
+ "model": "nvidia/nemotron-3-super-120b-a12b",
+ "rounds": 10,
+ "grid_best": {
+  "plan_id": "G-E123-a5-s25",
+  "robust_score": 182.8,
+  "worst_fire": "hospital_e2_north",
+  "t90_by_fire": {
+   "hospital_main_entrance": 65.5,
+   "hospital_e2_north": 66.6,
+   "hospital_e3_east": 55.1,
+   "hospital_e4_west": 55.6,
+   "hospital_central": 49.8
+  }
+ },
+ "best": {
+  "plan_id": "G-E123-a5-s18",
+  "robust_score": 172.3,
+  "worst_fire": "entrance",
+  "t90_by_fire": {
+   "central": 46.1,
+   "e2_north": 62.3,
+   "e3_east": 50.1,
+   "e4_west": 49.1,
+   "entrance": 65.8
+  },
+  "over_30s_smoke_by_fire": {
+   "central": 1,
+   "e2_north": 7,
+   "e3_east": 3,
+   "e4_west": 4,
+   "entrance": 8
+  },
+  "trapped_total": 0,
+  "plan": {
+   "gates_open": [],
+   "route_bias": {},
+   "exits_open": [
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "alarm_delay_s": 5.0,
+   "stagger_s": 18.0
+  },
+  "source": "nemotron round 7"
+ },
+ "approved": false,
+ "approved_by": "PENDING - no terminal; approve with: python3 sim/agent/nemotron_loop.py --approve <session json>",
+ "log": [
+  {
+   "round": 1,
+   "reply": "{\n  \"reasoning\": \"Keep the three-exit set (E1,E2,E3) that performed best, maintain the earliest credible alarm (5\u202fs) to start evacuation promptly, and increase the stagger to 35\u202fs to reduce peak density and dense\u2011smoke penalties, aiming to lower the worst\u2011case score (especially for the e2_north fire).\",\n  \"plan\": {\n    \"exits_open\": [\"E1\", \"E2\", \"E3\"],\n    \"alarm_delay_s\": 5.0,\n    \"stagger_s\": 35.0\n  }\n}",
+   "plan_id": "G-E123-a5-s35",
+   "reasoning": "Keep the three-exit set (E1,E2,E3) that performed best, maintain the earliest credible alarm (5\u202fs) to start evacuation promptly, and increase the stagger to 35\u202fs to reduce peak density and dense\u2011smoke penalties, aiming to lower the worst\u2011case score (especially for the e2_north fire).",
+   "result": {
+    "plan_id": "G-E123-a5-s35",
+    "robust_score": 238.4,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 57.8,
+     "e2_north": 70.8,
+     "e3_east": 61.0,
+     "e4_west": 67.7,
+     "entrance": 76.1
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 11,
+     "e2_north": 14,
+     "e3_east": 7,
+     "e4_west": 21,
+     "entrance": 12
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 2,
+   "reply": "{\n  \"reasoning\": \"The worst fire for the best plan is e2_north, which disables E2; dropping E2 and using E1, E3, E4 provides redundancy. Keep the earliest credible alarm (5\u202fs) to start evacuation promptly and use a moderate stagger (20\u202fs) to avoid excessive density while still spreading departures.\",\n  \"plan\": {\n    \"exits_open\": [\"E1\", \"E3\", \"E4\"],\n    \"alarm_delay_s\": 5.0,\n    \"stagger_s\": 20.0\n  }\n}",
+   "plan_id": "G-E134-a5-s20",
+   "reasoning": "The worst fire for the best plan is e2_north, which disables E2; dropping E2 and using E1, E3, E4 provides redundancy. Keep the earliest credible alarm (5\u202fs) to start evacuation promptly and use a moderate stagger (20\u202fs) to avoid excessive density while still spreading departures.",
+   "result": {
+    "plan_id": "G-E134-a5-s20",
+    "robust_score": 364.2,
+    "worst_fire": "e4_west",
+    "t90_by_fire": {
+     "central": 43.4,
+     "e2_north": 43.7,
+     "e3_east": 46.2,
+     "e4_west": 61.8,
+     "entrance": 54.7
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 1,
+     "e2_north": 12,
+     "e3_east": 4,
+     "e4_west": 14,
+     "entrance": 5
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 3,
+   "reply": "{\n  \"reasoning\": \"Select exits E1 (south) and E3 (east) to avoid the west wing where the two most damaging fires (e2_north and e4_west) occur, keep the earliest credible alarm (5\u202fs) to start evacuation promptly, and use a moderate stagger (20\u202fs) to limit peak density without excessively increasing exposure times.\",\n  \"plan\": {\n    \"exits_open\": [\"E1\", \"E3\"],\n    \"alarm_delay_s\": 5.0,\n    \"stagger_s\": 20.0\n  }\n}",
+   "plan_id": "G-E13-a5-s20",
+   "reasoning": "Select exits E1 (south) and E3 (east) to avoid the west wing where the two most damaging fires (e2_north and e4_west) occur, keep the earliest credible alarm (5\u202fs) to start evacuation promptly, and use a moderate stagger (20\u202fs) to limit peak density without excessively increasing exposure times.",
+   "result": {
+    "plan_id": "G-E13-a5-s20",
+    "robust_score": 316.4,
+    "worst_fire": "e4_west",
+    "t90_by_fire": {
+     "central": 71.9,
+     "e2_north": 69.0,
+     "e3_east": 74.8,
+     "e4_west": 88.1,
+     "entrance": 114.6
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 1,
+     "e2_north": 14,
+     "e3_east": 4,
+     "e4_west": 38,
+     "entrance": 12
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 4,
+   "reply": "{\n  \"reasoning\": \"The best plan used the earliest alarm (5\u202fs) and a moderate stagger (25\u202fs) with exits E1,E2,E3. To see if a slightly later alarm reduces the heavy dense-smoke penalty without worsening t90 and exposure too much, we increase alarm_delay_s to 10\u202fs while keeping the same exit set and stagger.\",\n  \"plan\": {\n    \"exits_open\": [\"E1\", \"E2\", \"E3\"],\n    \"alarm_delay_s\": 10.0,\n    \"stagger_s\": 25.0\n  }\n}",
+   "plan_id": "G-E123-a10-s25",
+   "reasoning": "The best plan used the earliest alarm (5\u202fs) and a moderate stagger (25\u202fs) with exits E1,E2,E3. To see if a slightly later alarm reduces the heavy dense-smoke penalty without worsening t90 and exposure too much, we increase alarm_delay_s to 10\u202fs while keeping the same exit set and stagger.",
+   "result": {
+    "plan_id": "G-E123-a10-s25",
+    "robust_score": 234.3,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 55.1,
+     "e2_north": 72.1,
+     "e3_east": 60.8,
+     "e4_west": 63.4,
+     "entrance": 72.3
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 8,
+     "e2_north": 12,
+     "e3_east": 6,
+     "e4_west": 19,
+     "entrance": 13
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 5,
+   "reply": "{\n  \"reasoning\": \"The best plan used exits E1,E2,E3 with alarm 5\u202fs and stagger 25\u202fs. Reducing the stagger to 20\u202fs may lower t90 and exposure without excessively increasing dense\u2011smoke penalties, aiming to beat the robust score of 182.8.\",\n  \"plan\": {\n    \"exits_open\": [\"E1\", \"E2\", \"E3\"],\n    \"alarm_delay_s\": 5.0,\n    \"stagger_s\": 20.0\n  }\n}",
+   "plan_id": "G-E123-a5-s20",
+   "reasoning": "The best plan used exits E1,E2,E3 with alarm 5\u202fs and stagger 25\u202fs. Reducing the stagger to 20\u202fs may lower t90 and exposure without excessively increasing dense\u2011smoke penalties, aiming to beat the robust score of 182.8.",
+   "result": {
+    "plan_id": "G-E123-a5-s20",
+    "robust_score": 177.4,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 47.0,
+     "e2_north": 63.2,
+     "e3_east": 51.5,
+     "e4_west": 50.8,
+     "entrance": 65.9
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 1,
+     "e2_north": 7,
+     "e3_east": 4,
+     "e4_west": 9,
+     "entrance": 5
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 6,
+   "reply": "{\n  \"reasoning\": \"The best score so far came from exits E1,E2,E3 with alarm 5\u202fs and stagger 20\u202fs. Reducing the stagger to 15\u202fs may further lower t90 and exposure while still keeping departures spread enough to avoid excessive dense-smoke penalties, based on the observed improvement from s25 to s20 and the degradation at s10.\",\n  \"plan\": {\n    \"exits_open\": [\"E1\", \"E2\", \"E3\"],\n    \"alarm_delay_s\": 5.0,\n    \"stagger_s\": 15.0\n  }\n}",
+   "plan_id": "G-E123-a5-s15",
+   "reasoning": "The best score so far came from exits E1,E2,E3 with alarm 5\u202fs and stagger 20\u202fs. Reducing the stagger to 15\u202fs may further lower t90 and exposure while still keeping departures spread enough to avoid excessive dense-smoke penalties, based on the observed improvement from s25 to s20 and the degradation at s10.",
+   "result": {
+    "plan_id": "G-E123-a5-s15",
+    "robust_score": 191.2,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 44.6,
+     "e2_north": 60.4,
+     "e3_east": 48.1,
+     "e4_west": 46.6,
+     "entrance": 64.7
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 0,
+     "e2_north": 7,
+     "e3_east": 6,
+     "e4_west": 3,
+     "entrance": 7
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 7,
+   "reply": "{\n  \"reasoning\": \"The best score so far came from exits E1,E2,E3 with alarm 5s and stagger 20s. Fine-tuning the stagger downward to 18s may reduce t90 and exposure further without increasing dense-smoke penalties excessively, based on the convex-ish trend observed between 15s, 20s, and 25s.\",\n  \"plan\": {\n    \"exits_open\": [\"E1\", \"E2\", \"E3\"],\n    \"alarm_delay_s\": 5.0,\n    \"stagger_s\": 18.0\n  }\n}",
+   "plan_id": "G-E123-a5-s18",
+   "reasoning": "The best score so far came from exits E1,E2,E3 with alarm 5s and stagger 20s. Fine-tuning the stagger downward to 18s may reduce t90 and exposure further without increasing dense-smoke penalties excessively, based on the convex-ish trend observed between 15s, 20s, and 25s.",
+   "result": {
+    "plan_id": "G-E123-a5-s18",
+    "robust_score": 172.3,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 46.1,
+     "e2_north": 62.3,
+     "e3_east": 50.1,
+     "e4_west": 49.1,
+     "entrance": 65.8
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 1,
+     "e2_north": 7,
+     "e3_east": 3,
+     "e4_west": 4,
+     "entrance": 8
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 8,
+   "reply": "{\n  \"reasoning\": \"The best score improved as stagger decreased from 25\u219220\u219218\u202fs, suggesting the optimum may lie slightly below 18\u202fs before worsening at 15\u202fs. We keep the effective three-exit set (E1,E2,E3) and earliest credible alarm (5\u202fs) and reduce stagger to 16\u202fs to see if the robust score drops further.\",\n  \"plan\": {\n    \"exits_open\": [\"E1\", \"E2\", \"E3\"],\n    \"alarm_delay_s\": 5.0,\n    \"stagger_s\": 16.0\n  }\n}",
+   "plan_id": "G-E123-a5-s16",
+   "reasoning": "The best score improved as stagger decreased from 25\u219220\u219218\u202fs, suggesting the optimum may lie slightly below 18\u202fs before worsening at 15\u202fs. We keep the effective three-exit set (E1,E2,E3) and earliest credible alarm (5\u202fs) and reduce stagger to 16\u202fs to see if the robust score drops further.",
+   "result": {
+    "plan_id": "G-E123-a5-s16",
+    "robust_score": 183.2,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 45.4,
+     "e2_north": 61.2,
+     "e3_east": 48.9,
+     "e4_west": 47.7,
+     "entrance": 66.7
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 0,
+     "e2_north": 8,
+     "e3_east": 6,
+     "e4_west": 3,
+     "entrance": 7
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 9,
+   "reply": "{\n  \"reasoning\": \"The best score so far came from exits E1,E2,E3 with alarm 5\u202fs and stagger 18\u202fs. A slight increase in stagger to 19\u202fs may reduce dense\u2011smoke penalties without significantly worsening t90, based on the observed convex-ish trend between 15\u202fs, 18\u202fs, and 20\u202fs.\",\n  \"plan\": {\n    \"exits_open\": [\"E1\", \"E2\", \"E3\"],\n    \"alarm_delay_s\": 5.0,\n    \"stagger_s\": 19.0\n  }\n}",
+   "plan_id": "G-E123-a5-s19",
+   "reasoning": "The best score so far came from exits E1,E2,E3 with alarm 5\u202fs and stagger 18\u202fs. A slight increase in stagger to 19\u202fs may reduce dense\u2011smoke penalties without significantly worsening t90, based on the observed convex-ish trend between 15\u202fs, 18\u202fs, and 20\u202fs.",
+   "result": {
+    "plan_id": "G-E123-a5-s19",
+    "robust_score": 182.6,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 46.4,
+     "e2_north": 62.9,
+     "e3_east": 50.7,
+     "e4_west": 49.9,
+     "entrance": 66.0
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 1,
+     "e2_north": 8,
+     "e3_east": 3,
+     "e4_west": 7,
+     "entrance": 6
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 10,
+   "reply": "{\n  \"reasoning\": \"The best score so far came from exits E1,E2,E3 with alarm 5\u202fs and stagger 18\u202fs. Increasing the alarm delay slightly to 8\u202fs may reduce the dense-smoke penalty (people start later, potentially less overlap with smoke) while keeping t90 and exposure similar, based on the observed trade-off between alarm timing and smoke exposure.\",\n  \"plan\": {\n    \"exits_open\": [\"E1\", \"E2\", \"E3\"],\n    \"alarm_delay_s\": 8.0,\n    \"stagger_s\": 18.0\n  }\n}",
+   "plan_id": "G-E123-a8-s18",
+   "reasoning": "The best score so far came from exits E1,E2,E3 with alarm 5\u202fs and stagger 18\u202fs. Increasing the alarm delay slightly to 8\u202fs may reduce the dense-smoke penalty (people start later, potentially less overlap with smoke) while keeping t90 and exposure similar, based on the observed trade-off between alarm timing and smoke exposure.",
+   "result": {
+    "plan_id": "G-E123-a8-s18",
+    "robust_score": 175.9,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 49.1,
+     "e2_north": 66.3,
+     "e3_east": 54.1,
+     "e4_west": 53.6,
+     "entrance": 64.5
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 1,
+     "e2_north": 7,
+     "e3_east": 2,
+     "e4_west": 11,
+     "entrance": 7
+    },
+    "trapped_total": 0
+   }
+  }
+ ],
+ "finished": "20261017-195418"
+}

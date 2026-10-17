@@ -1,0 +1,1060 @@
+{
+ "robust_all_fires": {
+  "variants": 24,
+  "top": [
+   {
+    "plan_id": "G-E1234-a15-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3",
+      "E4"
+     ],
+     "alarm_delay_s": 15.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 167.3,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 46.6,
+     "e2_north": 47.4,
+     "e3_east": 53.6,
+     "e4_west": 58.0,
+     "entrance": 55.1
+    }
+   },
+   {
+    "plan_id": "G-E123-a15-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3"
+     ],
+     "alarm_delay_s": 15.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 182.5,
+    "worst_fire": "e2_north",
+    "t90_by_fire": {
+     "central": 52.9,
+     "e2_north": 71.3,
+     "e3_east": 62.1,
+     "e4_west": 60.6,
+     "entrance": 63.9
+    }
+   },
+   {
+    "plan_id": "G-E1234-a5-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3",
+      "E4"
+     ],
+     "alarm_delay_s": 5.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 186.4,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 44.7,
+     "e2_north": 45.4,
+     "e3_east": 50.5,
+     "e4_west": 54.9,
+     "entrance": 57.0
+    }
+   },
+   {
+    "plan_id": "G-E123-a5-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3"
+     ],
+     "alarm_delay_s": 5.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 198.2,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 50.2,
+     "e2_north": 66.0,
+     "e3_east": 56.7,
+     "e4_west": 54.9,
+     "entrance": 65.4
+    }
+   },
+   {
+    "plan_id": "G-E124-a15-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E4"
+     ],
+     "alarm_delay_s": 15.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 212.7,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 60.8,
+     "e2_north": 60.6,
+     "e3_east": 58.6,
+     "e4_west": 72.3,
+     "entrance": 96.1
+    }
+   },
+   {
+    "plan_id": "G-E12-a15-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2"
+     ],
+     "alarm_delay_s": 15.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 227.0,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 67.2,
+     "e2_north": 86.5,
+     "e3_east": 67.2,
+     "e4_west": 74.3,
+     "entrance": 110.6
+    }
+   },
+   {
+    "plan_id": "G-E1234-a5-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3",
+      "E4"
+     ],
+     "alarm_delay_s": 5.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 227.8,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 35.5,
+     "e2_north": 35.9,
+     "e3_east": 37.2,
+     "e4_west": 42.9,
+     "entrance": 55.1
+    }
+   },
+   {
+    "plan_id": "G-E1234-a15-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3",
+      "E4"
+     ],
+     "alarm_delay_s": 15.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 228.0,
+    "worst_fire": "e2_north",
+    "t90_by_fire": {
+     "central": 58.4,
+     "e2_north": 57.9,
+     "e3_east": 60.7,
+     "e4_west": 65.4,
+     "entrance": 66.2
+    }
+   },
+   {
+    "plan_id": "G-E124-a15-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E4"
+     ],
+     "alarm_delay_s": 15.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 243.8,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 68.9,
+     "e2_north": 67.5,
+     "e3_east": 66.6,
+     "e4_west": 79.5,
+     "entrance": 108.0
+    }
+   },
+   {
+    "plan_id": "G-E123-a5-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3"
+     ],
+     "alarm_delay_s": 5.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 245.7,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 42.8,
+     "e2_north": 59.3,
+     "e3_east": 45.7,
+     "e4_west": 44.6,
+     "entrance": 64.8
+    }
+   },
+   {
+    "plan_id": "G-E124-a5-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E4"
+     ],
+     "alarm_delay_s": 5.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 249.6,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 57.1,
+     "e2_north": 56.3,
+     "e3_east": 54.7,
+     "e4_west": 66.2,
+     "entrance": 97.9
+    }
+   },
+   {
+    "plan_id": "G-E123-a15-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3"
+     ],
+     "alarm_delay_s": 15.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 251.0,
+    "worst_fire": "e2_north",
+    "t90_by_fire": {
+     "central": 66.4,
+     "e2_north": 76.8,
+     "e3_east": 68.8,
+     "e4_west": 69.6,
+     "entrance": 75.6
+    }
+   },
+   {
+    "plan_id": "G-E12-a15-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2"
+     ],
+     "alarm_delay_s": 15.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 265.9,
+    "worst_fire": "e2_north",
+    "t90_by_fire": {
+     "central": 73.9,
+     "e2_north": 91.7,
+     "e3_east": 73.2,
+     "e4_west": 82.1,
+     "entrance": 122.1
+    }
+   },
+   {
+    "plan_id": "G-E12-a5-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2"
+     ],
+     "alarm_delay_s": 5.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 266.3,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 63.4,
+     "e2_north": 80.7,
+     "e3_east": 63.2,
+     "e4_west": 68.9,
+     "entrance": 111.7
+    }
+   },
+   {
+    "plan_id": "G-E1234-a30-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3",
+      "E4"
+     ],
+     "alarm_delay_s": 30.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 281.6,
+    "worst_fire": "e2_north",
+    "t90_by_fire": {
+     "central": 68.1,
+     "e2_north": 64.5,
+     "e3_east": 68.7,
+     "e4_west": 74.3,
+     "entrance": 73.4
+    }
+   },
+   {
+    "plan_id": "G-E124-a30-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E4"
+     ],
+     "alarm_delay_s": 30.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 293.8,
+    "worst_fire": "e2_north",
+    "t90_by_fire": {
+     "central": 78.1,
+     "e2_north": 76.7,
+     "e3_east": 86.2,
+     "e4_west": 89.2,
+     "entrance": 114.0
+    }
+   },
+   {
+    "plan_id": "G-E1234-a30-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3",
+      "E4"
+     ],
+     "alarm_delay_s": 30.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 302.2,
+    "worst_fire": "e2_north",
+    "t90_by_fire": {
+     "central": 79.5,
+     "e2_north": 76.6,
+     "e3_east": 76.3,
+     "e4_west": 81.5,
+     "entrance": 84.8
+    }
+   },
+   {
+    "plan_id": "G-E124-a5-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E4"
+     ],
+     "alarm_delay_s": 5.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 302.9,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 49.4,
+     "e2_north": 48.8,
+     "e3_east": 48.6,
+     "e4_west": 54.3,
+     "entrance": 91.6
+    }
+   },
+   {
+    "plan_id": "G-E123-a30-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3"
+     ],
+     "alarm_delay_s": 30.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 303.0,
+    "worst_fire": "e2_north",
+    "t90_by_fire": {
+     "central": 78.1,
+     "e2_north": 85.0,
+     "e3_east": 77.2,
+     "e4_west": 78.3,
+     "entrance": 80.1
+    }
+   },
+   {
+    "plan_id": "G-E124-a30-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E4"
+     ],
+     "alarm_delay_s": 30.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 312.7,
+    "worst_fire": "e2_north",
+    "t90_by_fire": {
+     "central": 86.3,
+     "e2_north": 87.1,
+     "e3_east": 95.3,
+     "e4_west": 95.1,
+     "entrance": 124.0
+    }
+   },
+   {
+    "plan_id": "G-E12-a30-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2"
+     ],
+     "alarm_delay_s": 30.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 318.0,
+    "worst_fire": "e2_north",
+    "t90_by_fire": {
+     "central": 82.3,
+     "e2_north": 100.0,
+     "e3_east": 86.2,
+     "e4_west": 91.7,
+     "entrance": 128.5
+    }
+   },
+   {
+    "plan_id": "G-E123-a30-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3"
+     ],
+     "alarm_delay_s": 30.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 319.0,
+    "worst_fire": "e2_north",
+    "t90_by_fire": {
+     "central": 87.3,
+     "e2_north": 93.2,
+     "e3_east": 83.5,
+     "e4_west": 89.5,
+     "entrance": 91.1
+    }
+   },
+   {
+    "plan_id": "G-E12-a5-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2"
+     ],
+     "alarm_delay_s": 5.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 325.4,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 57.2,
+     "e2_north": 71.9,
+     "e3_east": 57.2,
+     "e4_west": 58.4,
+     "entrance": 106.0
+    }
+   },
+   {
+    "plan_id": "G-E12-a30-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2"
+     ],
+     "alarm_delay_s": 30.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 331.7,
+    "worst_fire": "e2_north",
+    "t90_by_fire": {
+     "central": 91.0,
+     "e2_north": 105.9,
+     "e3_east": 95.3,
+     "e4_west": 97.8,
+     "entrance": 138.3
+    }
+   }
+  ],
+  "base": {
+   "plan_id": "G-E12-a30-s25",
+   "plan": {
+    "gates_open": [],
+    "route_bias": {},
+    "exits_open": [
+     "E1",
+     "E2"
+    ],
+    "alarm_delay_s": 30.0,
+    "stagger_s": 25.0
+   },
+   "robust_score": 331.7,
+   "worst_fire": "e2_north",
+   "t90_by_fire": {
+    "central": 91.0,
+    "e2_north": 105.9,
+    "e3_east": 95.3,
+    "e4_west": 97.8,
+    "entrance": 138.3
+   }
+  }
+ },
+ "entrance_only": {
+  "variants": 24,
+  "top": [
+   {
+    "plan_id": "G-E1234-a15-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3",
+      "E4"
+     ],
+     "alarm_delay_s": 15.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 167.3,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 55.1
+    }
+   },
+   {
+    "plan_id": "G-E123-a15-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3"
+     ],
+     "alarm_delay_s": 15.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 176.3,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 63.9
+    }
+   },
+   {
+    "plan_id": "G-E1234-a5-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3",
+      "E4"
+     ],
+     "alarm_delay_s": 5.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 186.4,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 57.0
+    }
+   },
+   {
+    "plan_id": "G-E123-a5-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3"
+     ],
+     "alarm_delay_s": 5.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 198.2,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 65.4
+    }
+   },
+   {
+    "plan_id": "G-E1234-a15-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3",
+      "E4"
+     ],
+     "alarm_delay_s": 15.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 199.0,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 66.2
+    }
+   },
+   {
+    "plan_id": "G-E123-a15-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3"
+     ],
+     "alarm_delay_s": 15.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 208.7,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 75.6
+    }
+   },
+   {
+    "plan_id": "G-E124-a15-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E4"
+     ],
+     "alarm_delay_s": 15.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 212.7,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 96.1
+    }
+   },
+   {
+    "plan_id": "G-E1234-a30-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3",
+      "E4"
+     ],
+     "alarm_delay_s": 30.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 224.7,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 73.4
+    }
+   },
+   {
+    "plan_id": "G-E12-a15-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2"
+     ],
+     "alarm_delay_s": 15.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 227.0,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 110.6
+    }
+   },
+   {
+    "plan_id": "G-E1234-a5-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3",
+      "E4"
+     ],
+     "alarm_delay_s": 5.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 227.8,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 55.1
+    }
+   },
+   {
+    "plan_id": "G-E123-a30-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3"
+     ],
+     "alarm_delay_s": 30.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 231.6,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 80.1
+    }
+   },
+   {
+    "plan_id": "G-E124-a15-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E4"
+     ],
+     "alarm_delay_s": 15.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 243.8,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 108.0
+    }
+   },
+   {
+    "plan_id": "G-E123-a5-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3"
+     ],
+     "alarm_delay_s": 5.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 245.7,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 64.8
+    }
+   },
+   {
+    "plan_id": "G-E1234-a30-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3",
+      "E4"
+     ],
+     "alarm_delay_s": 30.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 247.3,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 84.8
+    }
+   },
+   {
+    "plan_id": "G-E124-a5-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E4"
+     ],
+     "alarm_delay_s": 5.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 249.6,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 97.9
+    }
+   },
+   {
+    "plan_id": "G-E123-a30-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E3"
+     ],
+     "alarm_delay_s": 30.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 253.6,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 91.1
+    }
+   },
+   {
+    "plan_id": "G-E12-a15-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2"
+     ],
+     "alarm_delay_s": 15.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 257.8,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 122.1
+    }
+   },
+   {
+    "plan_id": "G-E12-a5-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2"
+     ],
+     "alarm_delay_s": 5.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 266.3,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 111.7
+    }
+   },
+   {
+    "plan_id": "G-E124-a30-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E4"
+     ],
+     "alarm_delay_s": 30.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 271.0,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 114.0
+    }
+   },
+   {
+    "plan_id": "G-E12-a30-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2"
+     ],
+     "alarm_delay_s": 30.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 285.3,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 128.5
+    }
+   },
+   {
+    "plan_id": "G-E124-a30-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E4"
+     ],
+     "alarm_delay_s": 30.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 291.2,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 124.0
+    }
+   },
+   {
+    "plan_id": "G-E124-a5-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2",
+      "E4"
+     ],
+     "alarm_delay_s": 5.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 302.9,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 91.6
+    }
+   },
+   {
+    "plan_id": "G-E12-a30-s25",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2"
+     ],
+     "alarm_delay_s": 30.0,
+     "stagger_s": 25.0
+    },
+    "robust_score": 305.4,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 138.3
+    }
+   },
+   {
+    "plan_id": "G-E12-a5-s10",
+    "plan": {
+     "gates_open": [],
+     "route_bias": {},
+     "exits_open": [
+      "E1",
+      "E2"
+     ],
+     "alarm_delay_s": 5.0,
+     "stagger_s": 10.0
+    },
+    "robust_score": 325.4,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "entrance": 106.0
+    }
+   }
+  ],
+  "base": {
+   "plan_id": "G-E12-a30-s25",
+   "plan": {
+    "gates_open": [],
+    "route_bias": {},
+    "exits_open": [
+     "E1",
+     "E2"
+    ],
+    "alarm_delay_s": 30.0,
+    "stagger_s": 25.0
+   },
+   "robust_score": 305.4,
+   "worst_fire": "entrance",
+   "t90_by_fire": {
+    "entrance": 138.3
+   }
+  }
+ }
+}

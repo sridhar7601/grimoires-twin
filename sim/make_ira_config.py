@@ -36,8 +36,11 @@ DOLLHOUSE_CUT = re.compile(r"(roof|ceil|Geo_M_Light2|Light_test)", re.I)  # roof
 DOLLHOUSE_DOME_EXPOSURE = -3.0
 # Omniverse Flow fire: the extension's own preset, authored in cm and Y-up. Referenced into this metre,
 # Z-up stage it is NOT rescaled, so sizes and accelerations are set here (x0.01 for cm -> m).
-FLOW_FIRE = {"radius": 0.75, "height": 0.6, "cell": 0.08, "gravity": -1.0, "buoyancy_per_temp": 0.06,
-             "smoke_per_burn": 6.0, "smoke_fade": 0.15}   # the venue's only real light is an untextured 10000-nit dome: with the roof off it floods the floor
+# Tuned 2026-10-17 in sim/dev/flow_test*.py: forces x0.1 (x0.01 is lifeless, x1 blows up at 10 cm voxels) and ray-march
+# opacity x100 (the preset's 0.05 is per cm). The emitter also emits smoke directly so the plume is dark and readable.
+FLOW_FIRE = {"radius": 2.0, "height": 0.6, "cell": 0.1, "gravity": -10.0, "buoyancy_per_temp": 0.6,
+             "smoke_per_burn": 10.0, "smoke_fade": 0.05, "emit_smoke": 1.0, "couple_smoke": 2.0,
+             "march_attenuation": 5.0, "shadow_attenuation": 4.5}   # the venue's only real light is an untextured 10000-nit dome: with the roof off it floods the floor
 
 CAMERAS = {  # the placement proven on the hospital in Phase 0 (d = h / sin(theta) must overlap distance_range)
     "ceiling_cameras": {"num": 3, "maximum_coverage": {
@@ -122,6 +125,10 @@ def author_stage(out_usda, venue_usd, venue, open_exits, rects, zone_h=3.0, cut=
         em = stage.OverridePrim("/World/Fire/flowEmitterSphere")
         em.CreateAttribute("position", V).Set((fire_world[0], fire_world[1], FLOW_FIRE["height"]))
         em.CreateAttribute("radius", F).Set(FLOW_FIRE["radius"])
+        em.CreateAttribute("smoke", F).Set(FLOW_FIRE["emit_smoke"])
+        em.CreateAttribute("coupleRateSmoke", F).Set(FLOW_FIRE["couple_smoke"])
+        stage.OverridePrim("/World/Fire/flowRender/rayMarch").CreateAttribute("attenuation", F).Set(FLOW_FIRE["march_attenuation"])
+        stage.OverridePrim("/World/Fire/flowOffscreen/shadow").CreateAttribute("attenuation", F).Set(FLOW_FIRE["shadow_attenuation"])
         stage.OverridePrim("/World/Fire/flowSimulate").CreateAttribute("densityCellSize", F).Set(FLOW_FIRE["cell"])
         adv = stage.OverridePrim("/World/Fire/flowSimulate/advection")
         adv.CreateAttribute("gravity", V).Set((0.0, 0.0, FLOW_FIRE["gravity"]))          # Y-up preset -> Z-up stage
@@ -204,6 +211,7 @@ def main():
                          "position dump); the film gets its own full-camera run")
     ap.add_argument("--fire", default="scenarios/hospital_fire_entrance.json", help="fire scenario (grid-local origin)")
     ap.add_argument("--flow", action="store_true", help="Omniverse Flow fire + smoke at the fire origin (the visual of the same fire)")
+    ap.add_argument("--fire-tag", default="_fire", help="name suffix for fire runs (stage, trees, config, output)")
     ap.add_argument("--smoke-closure", action="store_true",
                     help="honour Layer-1 exit closures (corridor_closed_at_s in --layer1-report): people who set off after an "
                          "exit closes go to the nearest other open exit instead")
@@ -236,7 +244,7 @@ def main():
     nums = {e: int(a.people * share[e] / total) for e in open_exits}
     nums[max(open_exits, key=lambda e: share[e])] += a.people - sum(nums.values())
 
-    fire_tag = "_fire" if (a.flow or a.smoke_closure) else ""          # keeps fire runs apart from the certified ones
+    fire_tag = a.fire_tag if (a.flow or a.smoke_closure) else ""        # keeps fire runs apart from the certified ones
     suffix_bt = "_smoke" if a.smoke_closure else ""
     cut = ([] if a.keep_doors else [DOOR_LEAVES]) + ([DOLLHOUSE_CUT] if a.dollhouse else [])
     main_cells = [(i, j) for j, r in enumerate(venue["cells"]) for i, ch in enumerate(r) if ch == "m"]

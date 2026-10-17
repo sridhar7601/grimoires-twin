@@ -20,6 +20,8 @@ Score = `1.0·t90 + 0.5·exposure_mean + 1000.0·trapped + 5.0·n_dense` (worst 
 
 **Headline:** the fire closes the main entrance at 21.7 s; the base plan then funnels 277 of 300 people through one door. Opening the two wing exits and alarming at 5 s clears 90 % in **57.3 s instead of 135.9 s (−58 %)** and cuts people over the smoke threshold **54 → 6 (−89 %)**. Same fire, same people, same seed.
 
+> **Seed note (added after a 5-seed check).** These numbers are one seed (42). Over 5 seeds this plan ranks 3rd on the entrance fire (score 186.4); the best plan tried is `G-E1234-a15-s10` (167.3). Both open all four exits; the base plan scores 305.4. See `robustness_table.md`.
+
 ## Ranked plans (top 5 of 24)
 
 | rank | plan | score | t90 s |
