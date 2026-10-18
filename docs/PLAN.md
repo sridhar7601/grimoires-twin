@@ -114,6 +114,8 @@ Copy `scenarios/mall_*.json` → `scenarios/hospital_base_plan.json`, `hospital_
 
 **Backlog — do LAST (requested 2026-10-17):** a CCTV-style demo film: several cameras inside different rooms and corridors shown as a security-monitor grid, base vs Grimoires side by side. Presentation only — note the boundary with Bankai (cameras/perception) stated in ARCHITECTURE.md before building it.
 
+**Outcome (2026-10-18):** ✅ `renders/hospital_cctv.mp4` — `make_ira_config.py --cctv` authors four fixed cameras in the stage (`CCTV_CAMS`: lobby looking at the entrance and the Flow fire, central corridor, west corridor at E4, north-west corridor at E2; 640×360, 12 mm, ceiling height), rendered via `sensor_prim_list`; `sim/stitch_cctv.py` builds the 2×2 monitor wall per plan, base vs Grimoires side by side, with camera id, REC, clock and a red banner on feeds watching an exit once smoke closed it. Two lessons: (1) camera positions read off the grid must be checked on the first rendered frames — the first attempt had three of six feeds looking at walls; (2) **each extra camera costs ~0.9 s per rendered frame** (six cameras: 5.5 s/frame), so the cut uses four cameras and 60 s / 120 s runs (winner all out by 60 s, base t90 at 120 s). Agent-plan twin run queued behind it: `G-E1234-a15-s10` t90 43.0 s, 40/40 out (see `agent_session.md`).
+
 ---
 
 ## Phase 7 — the agent

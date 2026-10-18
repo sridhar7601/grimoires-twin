@@ -17,3 +17,4 @@ Starting point: the 24-variant grid, best `G-E1234-a15-s10` robust **175.7**.
 
 **Recommended:** `G-E1234-a15-s10` robust **175.7** (from grid). **Approved:** no — PENDING - no terminal; approve with: python3 sim/agent/nemotron_loop.py --approve <session json>.
 
+**Twin check of the recommended plan (2026-10-18, Isaac Sim, 40 characters, doors open, Flow fire, E1 closed by smoke at 21.7 s):** `G-E1234-a15-s10` — t50 / t90 / t100 = 29.0 / 43.0 / 58.8 s, 40 of 40 out, exits E1 11 · E2 3 · E3 13 · E4 13, door crowding 1.0 p/m² (green). The certified grid winner `G-E1234-a5-s25` under the same twin setup: 23.7 / 45.1 / 59.6 s. Layer 1 on the entrance fire: 54.9 s vs 57.3 s. Both layers agree the agent's pick is as good as or slightly better than the certified plan on this fire, and it is the most robust across the five fires. Source: `results/hospital/layer2/layer2_agent_fire.json`, `results/hospital/layer1/rehearse_hospital_agent.json`.

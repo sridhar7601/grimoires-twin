@@ -18,6 +18,7 @@ comes from files in `results/` and is reproduced by the commands in this README.
 | **Layer 2** — Isaac Sim twin, 40 characters (doors open): t90 | **62.6 s** | **30.0 s** — 40/40 out in both |
 | Layer 2 with Omniverse Flow fire, entrance closed at 21.7 s: t90 | 120.2 s (38/40 out) | 45.1 s (40/40 out) |
 | door-crowding flag, worst door (demand, Layer 1) | 1.3 p/m² (8 people) | 2.4 p/m² (15 people) — both green |
+| Nemotron's pick `E1–E4, alarm 15 s, stagger 10 s`, same twin setup with fire: t90 | — | 43.0 s (40/40 out); most robust across five fires |
 
 The base plan sends everyone to the front doors; the fire kills the main entrance at 22 s and
 277 of 300 people queue through one door. Opening the two wing exits and alarming earlier
@@ -34,7 +35,8 @@ red at 4 p/m²) stays green for both plans and goes red for the "everyone at onc
 Videos (in `renders/`, not in git): `hospital_map_layer1.mp4` (top-down, 300 people, smoke),
 `hospital_map_layer2_twin.mp4` (top-down, the twin's 40 characters), `hospital_dollhouse_overlay.mp4`
 (real Isaac render, roof off, rings on every character from the recorded positions),
-`hospital_dollhouse_fire.mp4` (same, with the Flow fire burning at the entrance).
+`hospital_dollhouse_fire.mp4` (same, with the Flow fire burning at the entrance),
+`hospital_cctv.mp4` (four security cameras inside the building, both plans side by side, 2× speed).
 
 Honest framing, kept exact: *rehearses / finds / ranks* — never *predicts*; *exit saturated / door crowding (demand)*
 — never *crush*; the only density-shaped number is the door-crowding flag, labelled as risk, never prediction; simplified grid smoke model; the twin has
