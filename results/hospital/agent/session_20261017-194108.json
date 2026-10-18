@@ -1,0 +1,262 @@
+{
+ "model": "nvidia/nemotron-3-super-120b-a12b",
+ "rounds": 8,
+ "grid_best": {
+  "plan_id": "G-E123-a5-s25",
+  "robust_score": 182.8,
+  "worst_fire": "hospital_e2_north",
+  "t90_by_fire": {
+   "hospital_main_entrance": 65.5,
+   "hospital_e2_north": 66.6,
+   "hospital_e3_east": 55.1,
+   "hospital_e4_west": 55.6,
+   "hospital_central": 49.8
+  }
+ },
+ "best": {
+  "plan_id": "G-E1234-a0-s0",
+  "robust_score": 110.3,
+  "worst_fire": "entrance",
+  "t90_by_fire": {
+   "central": 24.2,
+   "e2_north": 24.2,
+   "e3_east": 24.2,
+   "e4_west": 24.2,
+   "entrance": 24.4
+  },
+  "over_30s_smoke_by_fire": {
+   "central": 0,
+   "e2_north": 0,
+   "e3_east": 0,
+   "e4_west": 0,
+   "entrance": 8
+  },
+  "trapped_total": 0,
+  "plan": {
+   "gates_open": [],
+   "route_bias": {},
+   "exits_open": [
+    "E1",
+    "E2",
+    "E3",
+    "E4"
+   ],
+   "alarm_delay_s": 0.0,
+   "stagger_s": 0.0
+  },
+  "source": "nemotron round 7"
+ },
+ "approved": false,
+ "approved_by": "PENDING - no terminal; approve with: python3 sim/agent/nemotron_loop.py --approve <session json>",
+ "log": [
+  {
+   "round": 1,
+   "reply": "{\n  \"reasoning\": \"The worst fire for the current best plan is near E2; closing that exit removes exposure to its smoke while still providing three exits for redundancy. Keeping a short alarm delay (5\u202fs) starts evacuation early, and a moderate stagger (25\u202fs) avoids bottlenecks at the remaining exits.\",\n  \"plan\": {\n    \"exits_open\": [\n      \"E1\",\n      \"E3\",\n      \"E4\"\n    ],\n    \"alarm_delay_s\": 5.0,\n    \"stagger_s\": 25.0\n  }\n}",
+   "plan_id": "G-E134-a5-s25",
+   "reasoning": "The worst fire for the current best plan is near E2; closing that exit removes exposure to its smoke while still providing three exits for redundancy. Keeping a short alarm delay (5\u202fs) starts evacuation early, and a moderate stagger (25\u202fs) avoids bottlenecks at the remaining exits.",
+   "result": {
+    "plan_id": "G-E134-a5-s25",
+    "robust_score": 401.1,
+    "worst_fire": "e4_west",
+    "t90_by_fire": {
+     "central": 46.5,
+     "e2_north": 47.4,
+     "e3_east": 49.9,
+     "e4_west": 63.5,
+     "entrance": 57.3
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 4,
+     "e2_north": 15,
+     "e3_east": 6,
+     "e4_west": 18,
+     "entrance": 6
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 2,
+   "reply": "{\n  \"reasoning\": \"Adding E3 gives a third exit that is away from both E2 and E4 fires, providing redundancy when either wing exit is compromised. A modest alarm delay (12\u202fs) lets occupants finish initial activities before moving, reducing early entry into smoke, while a moderate stagger (15\u202fs) limits bottlenecks at the exits.\",\n  \"plan\": {\n    \"exits_open\": [\n      \"E1\",\n      \"E2\",\n      \"E3\"\n    ],\n    \"alarm_delay_s\": 12.0,\n    \"stagger_s\": 15.0\n  }\n}",
+   "plan_id": "G-E123-a12-s15",
+   "reasoning": "Adding E3 gives a third exit that is away from both E2 and E4 fires, providing redundancy when either wing exit is compromised. A modest alarm delay (12\u202fs) lets occupants finish initial activities before moving, reducing early entry into smoke, while a moderate stagger (15\u202fs) limits bottlenecks at the exits.",
+   "result": {
+    "plan_id": "G-E123-a12-s15",
+    "robust_score": 195.9,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 51.6,
+     "e2_north": 69.3,
+     "e3_east": 57.8,
+     "e4_west": 58.1,
+     "entrance": 64.4
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 3,
+     "e2_north": 9,
+     "e3_east": 6,
+     "e4_west": 14,
+     "entrance": 7
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 3,
+   "reply": "{\n  \"reasoning\": \"Zero alarm starts evacuation immediately, before smoke from the e2_north fire can heavily impair exit E2; a modest stagger of 15\u202fs avoids bottlenecks at the remaining exits while retaining three\u2011way redundancy.\",\n  \"plan\": {\n    \"exits_open\": [\n      \"E1\",\n      \"E2\",\n      \"E3\"\n    ],\n    \"alarm_delay_s\": 0.0,\n    \"stagger_s\": 15.0\n  }\n}",
+   "plan_id": "G-E123-a0-s15",
+   "reasoning": "Zero alarm starts evacuation immediately, before smoke from the e2_north fire can heavily impair exit E2; a modest stagger of 15\u202fs avoids bottlenecks at the remaining exits while retaining three\u2011way redundancy.",
+   "result": {
+    "plan_id": "G-E123-a0-s15",
+    "robust_score": 238.9,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 39.6,
+     "e2_north": 60.5,
+     "e3_east": 41.0,
+     "e4_west": 40.3,
+     "entrance": 66.8
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 0,
+     "e2_north": 7,
+     "e3_east": 0,
+     "e4_west": 1,
+     "entrance": 13
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 4,
+   "reply": "{\n  \"reasoning\": \"Closing E2 and E4 removes exits that are directly vulnerable to the e2_north and e4_west fires, leaving E1 and E3 as opposite\u2011corner exits that provide redundancy when any single fire blocks one wing. Keeping a short alarm delay (5\u202fs) starts evacuation early, and a moderate stagger (25\u202fs) avoids bottlenecks at the two remaining exits.\",\n  \"plan\": {\n    \"exits_open\": [\n      \"E1\",\n      \"E3\"\n    ],\n    \"alarm_delay_s\": 5.0,\n    \"stagger_s\": 25.0\n  }\n}",
+   "plan_id": "G-E13-a5-s25",
+   "reasoning": "Closing E2 and E4 removes exits that are directly vulnerable to the e2_north and e4_west fires, leaving E1 and E3 as opposite\u2011corner exits that provide redundancy when any single fire blocks one wing. Keeping a short alarm delay (5\u202fs) starts evacuation early, and a moderate stagger (25\u202fs) avoids bottlenecks at the two remaining exits.",
+   "result": {
+    "plan_id": "G-E13-a5-s25",
+    "robust_score": 362.9,
+    "worst_fire": "e4_west",
+    "t90_by_fire": {
+     "central": 76.8,
+     "e2_north": 71.6,
+     "e3_east": 77.8,
+     "e4_west": 98.7,
+     "entrance": 115.9
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 4,
+     "e2_north": 18,
+     "e3_east": 6,
+     "e4_west": 51,
+     "entrance": 15
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 5,
+   "reply": "{\n  \"reasoning\": \"An immediate alarm (0\u202fs) and a very tight stagger (5\u202fs) gets occupants moving and out before smoke from any fire can accumulate heavily, while keeping all four exits open provides maximum redundancy so that no single fire can block a major escape route.\",\n  \"plan\": {\n    \"exits_open\": [\n      \"E1\",\n      \"E2\",\n      \"E3\",\n      \"E4\"\n    ],\n    \"alarm_delay_s\": 0.0,\n    \"stagger_s\": 5.0\n  }\n}",
+   "plan_id": "G-E1234-a0-s5",
+   "reasoning": "An immediate alarm (0\u202fs) and a very tight stagger (5\u202fs) gets occupants moving and out before smoke from any fire can accumulate heavily, while keeping all four exits open provides maximum redundancy so that no single fire can block a major escape route.",
+   "result": {
+    "plan_id": "G-E1234-a0-s5",
+    "robust_score": 150.0,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 26.9,
+     "e2_north": 26.9,
+     "e3_east": 27.2,
+     "e4_west": 27.0,
+     "entrance": 28.7
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 0,
+     "e2_north": 0,
+     "e3_east": 2,
+     "e4_west": 1,
+     "entrance": 8
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 6,
+   "reply": "{\n  \"reasoning\": \"Closing the entrance (E1) removes the worst\u2011case fire location from affecting evacuation, while keeping the three other exits provides redundancy. Zero alarm starts evacuation immediately, and a small stagger of 5\u202fs avoids bottlenecks at the remaining exits.\",\n  \"plan\": {\n    \"exits_open\": [\n      \"E2\",\n      \"E3\",\n      \"E4\"\n    ],\n    \"alarm_delay_s\": 0.0,\n    \"stagger_s\": 5.0\n  }\n}",
+   "plan_id": "G-E234-a0-s5",
+   "reasoning": "Closing the entrance (E1) removes the worst\u2011case fire location from affecting evacuation, while keeping the three other exits provides redundancy. Zero alarm starts evacuation immediately, and a small stagger of 5\u202fs avoids bottlenecks at the remaining exits.",
+   "result": {
+    "plan_id": "G-E234-a0-s5",
+    "robust_score": 261.8,
+    "worst_fire": "e4_west",
+    "t90_by_fire": {
+     "central": 38.4,
+     "e2_north": 37.2,
+     "e3_east": 85.8,
+     "e4_west": 95.2,
+     "entrance": 37.2
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 3,
+     "e2_north": 0,
+     "e3_east": 6,
+     "e4_west": 5,
+     "entrance": 0
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 7,
+   "reply": "{\n  \"reasoning\": \"The entrance fire (E1) drove the worst case in the current best plan. Keeping all exits open provides redundancy, zero alarm starts evacuation immediately, and reducing stagger to zero minimizes the time people spend in the lobby smoke while still avoiding collisions (per the simulator's assumptions).\",\n  \"plan\": {\n    \"exits_open\": [\n      \"E1\",\n      \"E2\",\n      \"E3\",\n      \"E4\"\n    ],\n    \"alarm_delay_s\": 0.0,\n    \"stagger_s\": 0.0\n  }\n}",
+   "plan_id": "G-E1234-a0-s0",
+   "reasoning": "The entrance fire (E1) drove the worst case in the current best plan. Keeping all exits open provides redundancy, zero alarm starts evacuation immediately, and reducing stagger to zero minimizes the time people spend in the lobby smoke while still avoiding collisions (per the simulator's assumptions).",
+   "result": {
+    "plan_id": "G-E1234-a0-s0",
+    "robust_score": 110.3,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 24.2,
+     "e2_north": 24.2,
+     "e3_east": 24.2,
+     "e4_west": 24.2,
+     "entrance": 24.4
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 0,
+     "e2_north": 0,
+     "e3_east": 0,
+     "e4_west": 0,
+     "entrance": 8
+    },
+    "trapped_total": 0
+   }
+  },
+  {
+   "round": 8,
+   "reply": "{\n  \"reasoning\": \"A tiny alarm delay (2\u202fs) and a minimal stagger (2\u202fs) smooth the initial outflow, lowering peak density in the lobby and thus reducing smoke exposure and traversal of dense smoke while keeping all exits open for redundancy.\",\n  \"plan\": {\n    \"exits_open\": [\n      \"E1\",\n      \"E2\",\n      \"E3\",\n      \"E4\"\n    ],\n    \"alarm_delay_s\": 2.0,\n    \"stagger_s\": 2.0\n  }\n}",
+   "plan_id": "G-E1234-a2-s2",
+   "reasoning": "A tiny alarm delay (2\u202fs) and a minimal stagger (2\u202fs) smooth the initial outflow, lowering peak density in the lobby and thus reducing smoke exposure and traversal of dense smoke while keeping all exits open for redundancy.",
+   "result": {
+    "plan_id": "G-E1234-a2-s2",
+    "robust_score": 165.3,
+    "worst_fire": "entrance",
+    "t90_by_fire": {
+     "central": 27.5,
+     "e2_north": 27.5,
+     "e3_east": 27.8,
+     "e4_west": 27.5,
+     "entrance": 29.0
+    },
+    "over_30s_smoke_by_fire": {
+     "central": 0,
+     "e2_north": 0,
+     "e3_east": 1,
+     "e4_west": 1,
+     "entrance": 6
+    },
+    "trapped_total": 0
+   }
+  }
+ ],
+ "finished": "20261017-194108"
+}

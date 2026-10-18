@@ -75,6 +75,47 @@
   "E3": 105,
   "E4": 126
  },
+ "door_crowding": {
+  "radius_m": 2.0,
+  "area_m2": 6.28,
+  "sample_dt_s": 1.0,
+  "per_door": {
+   "E1": {
+    "peak_people": 6,
+    "peak_ppm2": 1.0,
+    "peak_t_s": 22.0,
+    "s_over_4ppm2": 0.0,
+    "s_over_6ppm2": 0.0
+   },
+   "E2": {
+    "peak_people": 6,
+    "peak_ppm2": 1.0,
+    "peak_t_s": 24.0,
+    "s_over_4ppm2": 0.0,
+    "s_over_6ppm2": 0.0
+   },
+   "E3": {
+    "peak_people": 5,
+    "peak_ppm2": 0.8,
+    "peak_t_s": 14.0,
+    "s_over_4ppm2": 0.0,
+    "s_over_6ppm2": 0.0
+   },
+   "E4": {
+    "peak_people": 15,
+    "peak_ppm2": 2.4,
+    "peak_t_s": 34.0,
+    "s_over_4ppm2": 0.0,
+    "s_over_6ppm2": 0.0
+   }
+  },
+  "worst_door": "E4",
+  "worst_peak_people": 15,
+  "worst_peak_ppm2": 2.4,
+  "s_over_4ppm2_total": 0.0,
+  "s_over_6ppm2_total": 0.0,
+  "note": "people not yet out within 2.0 m of the door centre / 6.3 m\u00b2 half-disc, sampled every dt; thresholds 4 p/m\u00b2 (Fruin LOS E/F) and 6 p/m\u00b2 (crush band). Demand, not pressure: neither layer simulates body contact, so this flags crush RISK and never predicts a crush."
+ },
  "gate_peak_rate_ps": {},
  "exit_peak_rate_ps": {
   "E1": 2.4,
@@ -585,6 +626,5 @@
    299
   ]
  ],
- "model": "dynamic smoke-aware egress on a 0.5 m grid with staggered departures; the route field is recomputed every replan_s, smoky routes cost more and dense smoke is avoided; speed falls with smoke level; positions baked as USD time samples. Routing, throughput, timing and exposure only -- people do not collide, so NO density figure is derived or claimed from this run. Smoke is a simplified front model, not fire physics.",
- "tracks": "results/tracks_hospital_winner.json"
+ "model": "dynamic smoke-aware egress on a 0.5 m grid with staggered departures; the route field is recomputed every replan_s, smoky routes cost more and dense smoke is avoided; speed falls with smoke level; positions baked as USD time samples. Routing, throughput, timing and exposure -- people queue at the SFPE door cap but do not collide, so door_crowding is DEMAND at the door (crush-risk flag), never a crush prediction. Smoke is a simplified front model, not fire physics."
 }

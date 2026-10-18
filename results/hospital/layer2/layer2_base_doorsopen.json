@@ -29,6 +29,34 @@
  },
  "arrived": 40,
  "never_arrived": 0,
+ "arrived_after_closure": {},
+ "door_crowding": {
+  "radius_m": 2.0,
+  "area_m2": 6.28,
+  "sample_dt_s": 0.1,
+  "per_door": {
+   "E1": {
+    "peak_people": 0,
+    "peak_ppm2": 0.0,
+    "peak_t_s": null,
+    "s_over_4ppm2": 0.0,
+    "s_over_6ppm2": 0.0
+   },
+   "E2": {
+    "peak_people": 0,
+    "peak_ppm2": 0.0,
+    "peak_t_s": null,
+    "s_over_4ppm2": 0.0,
+    "s_over_6ppm2": 0.0
+   }
+  },
+  "worst_door": "E1",
+  "worst_peak_people": 0,
+  "worst_peak_ppm2": 0.0,
+  "s_over_4ppm2_total": 0.0,
+  "s_over_6ppm2_total": 0.0,
+  "note": "people not yet out within 2.0 m of the door centre / 6.3 m\u00b2 half-disc, sampled every dt; thresholds 4 p/m\u00b2 (Fruin LOS E/F) and 6 p/m\u00b2 (crush band). Demand, not pressure: neither layer simulates body contact, so this flags crush RISK and never predicts a crush."
+ },
  "redirected": {},
  "never_arrived_agents": {},
  "remaining_series_t_in_out": [
@@ -1025,5 +1053,5 @@
    0.0
   ]
  },
- "model": "Isaac Sim / IRA characters on a baked NavMesh, behaviour tree Wait(alarm+stagger) -> MoveTo exit; no collision or queuing between characters, so door throughput is not modelled here; exit = first frame within reach_m of the agent's exit target"
+ "model": "Isaac Sim / IRA characters on a baked NavMesh, behaviour tree Wait(alarm+stagger) -> MoveTo exit; local avoidance but no contact or queuing between characters, so door throughput is not modelled and door_crowding is DEMAND at the door (crush-risk flag), never a crush prediction; exit = first frame within reach_m of the agent's exit target"
 }

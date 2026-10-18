@@ -27,7 +27,11 @@ import traceback
 from isaacsim import SimulationApp
 
 BASE_EXP_PATH = os.path.join(os.environ["EXP_PATH"], "isaacsim.exp.action_and_event_data_generation.base.kit")
-APP_CONFIG = {"headless": True, "width": 1920, "height": 1080}
+# Flow (fire/smoke) must be on when the renderer starts: switching it on after the stage loads only affects stages
+# opened later, so a single-stage IRA run would never draw fire (found in sim/dev/flow_test6/7.py).
+FLOW_ARGS = ["--enable", "omni.flowusd"] + [f"--/rtx/flow/{k}=true" for k in
+             ("enabled", "rayTracedTranslucencyEnabled", "rayTracedReflectionsEnabled", "pathTracingEnabled")]
+APP_CONFIG = {"headless": True, "width": 1920, "height": 1080, "extra_args": FLOW_ARGS}
 
 
 class ActorSDGDump:

@@ -18,6 +18,10 @@ second half is "not yet testable", and the certificate says so.
 import argparse
 import json
 import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from crowding import summary as crowd_summary  # noqa: E402
 
 
 def fmt_t(v, span=None):
@@ -40,9 +44,9 @@ def main():
     ap.add_argument("--layer2-base", required=True, help="measure.py report for the base plan")
     ap.add_argument("--layer2-winner", required=True, help="measure.py report for the winner plan")
     ap.add_argument("--layer2-note", default="", help="one line on how the twin runs were set up (e.g. doors open)")
-    ap.add_argument("--sensitivity-base", help="measure.py report: the same base run under a different twin setup")
-    ap.add_argument("--sensitivity-winner", help="measure.py report: the same winner run under a different twin setup")
-    ap.add_argument("--sensitivity-label", default="alternative twin setup")
+    ap.add_argument("--sensitivity", action="append", default=[],
+                    help="repeatable: 'label::base_report.json::winner_report.json' — the same runs under another twin setup")
+    ap.add_argument("--crowding-check", help="rehearse.py report of a deliberately bad plan, to show the door-crowding flag fires")
     ap.add_argument("--out", required=True)
     ap.add_argument("--date", default="2026-10-17")
     a = ap.parse_args()
@@ -82,7 +86,9 @@ def main():
         verdict.append(f"- **Unusable exits:** Layer 1 {closed_1}, Layer 2 {{k: l2[k].get('closed_exits') for k in l2}} → **{'AGREE' if same_closed else 'DISAGREE'}**.")
     else:
         verdict.append(f"- **Unusable exits:** Layer 1 closes {closed_1['base'] or 'none'} (smoke reaches the opening). "
-                       "The twin has no smoke yet (Phase 4), so this half of the agreement test is **not yet testable** — stated, not assumed.")
+                       "In the twin the closure is *scripted from Layer 1's closure time* (characters assigned to that exit are re-assigned "
+                       "at 21.7 s; Flow renders the same fire) — it is not read back from the Flow smoke, so this half of the agreement test "
+                       "is **not independently testable yet** — stated, not assumed. The Flow-fire runs are reported under Sensitivity.")
     both = [k for k in l1 if ratio[k]]
     if both:
         verdict.append("- **Congestion caveat, measured:** Layer-2 / Layer-1 t90 = " +
@@ -108,20 +114,47 @@ def main():
         f"| people | {s['people']} | {s['people']} | {l2['base']['people']} ({l2['base']['arrived']} arrived, {l2['base']['never_arrived']} never) | {l2['winner']['people']} ({l2['winner']['arrived']} arrived, {l2['winner']['never_arrived']} never) |",
         f"| over 30 s smoke threshold | {l1['base']['n_over_exposure_threshold']} | {l1['winner']['n_over_exposure_threshold']} | n/a (no smoke in twin yet) | n/a |",
         f"| rerouted / redirected | {l1['base']['rerouted']} | {l1['winner']['rerouted']} | {len(l2['base']['redirected'])} | {len(l2['winner']['redirected'])} |",
+        f"| door crowding, worst door (demand) | {crowd_summary(l1['base'].get('door_crowding'))} | {crowd_summary(l1['winner'].get('door_crowding'))} "
+        f"| {crowd_summary(l2['base'].get('door_crowding'))} | {crowd_summary(l2['winner'].get('door_crowding'))} |",
+        "\nDoor crowding = people not yet out within 2 m of the door centre over a 6.3 m² half-disc, every sample; 4 p/m² is Fruin's "
+        "LOS E/F (movement stops), 6 p/m² the crush band. It is **demand** — how many people press on one door at once — a crush-risk "
+        "flag. Neither layer simulates body pressure (Layer 1 queues at the door cap but bodies overlap; IRA characters avoid each other "
+        "but are not stopped by contact), so a figure above 6 means *this door is asked to take more people than can physically fit*, "
+        "not *a crush happens*. In the twin a character counts as out 1.5 m from a target that sits 1.25 m inside the door, i.e. about "
+        "2.75 m before the door line, so the twin figure is a lower bound and a sanity check; the operative flag is Layer 1 (300 people, door cap).",
     ]
     if a.layer2_note:
         md.insert(3, f"Twin setup: {a.layer2_note}\n")
-    if a.sensitivity_base and a.sensitivity_winner:
-        sb, sw = json.load(open(a.sensitivity_base)), json.load(open(a.sensitivity_winner))
+    for spec in a.sensitivity:
+        label, pb, pw = spec.split("::")
+        sb, sw = json.load(open(pb)), json.load(open(pw))
         agree = sw["t90_s"] is not None and (sb["t90_s"] is None or sw["t90_s"] < sb["t90_s"])
-        md += [f"\n## Sensitivity — {a.sensitivity_label}\n",
-               "| plan | Layer-2 t50 / t90 / t100 (headline setup) | Layer-2 t50 / t90 / t100 (" + a.sensitivity_label + ") |", "|---|---|---|",
-               f"| base `{l1['base']['plan_id']}` | {l2['base']['t50_s']} / {l2['base']['t90_s']} / {l2['base']['t100_s']} | {sb['t50_s']} / {sb['t90_s']} / {sb['t100_s']} |",
-               f"| winner `{l1['winner']['plan_id']}` | {l2['winner']['t50_s']} / {l2['winner']['t90_s']} / {l2['winner']['t100_s']} | {sw['t50_s']} / {sw['t90_s']} / {sw['t100_s']} |",
-               f"\nWinner faster under this setup too: **{'yes' if agree else 'NO'}**. Same seed and spawn positions in both setups.\n"]
+        md += [f"\n## Sensitivity — {label}\n",
+               "| plan | Layer-2 t50 / t90 / t100 (headline setup) | Layer-2 t50 / t90 / t100 (this setup) | exits used (this setup) | door crowding (this setup) |",
+               "|---|---|---|---|---|",
+               f"| base `{l1['base']['plan_id']}` | {l2['base']['t50_s']} / {l2['base']['t90_s']} / {l2['base']['t100_s']} | {sb['t50_s']} / {sb['t90_s']} / {fmt_t(sb['t100_s'], sb['sim_span_s']) if sb['t100_s'] is None else sb['t100_s']} | {exits_str(sb['exit_throughput_total'])} | {crowd_summary(sb.get('door_crowding'))} |",
+               f"| winner `{l1['winner']['plan_id']}` | {l2['winner']['t50_s']} / {l2['winner']['t90_s']} / {l2['winner']['t100_s']} | {sw['t50_s']} / {sw['t90_s']} / {fmt_t(sw['t100_s'], sw['sim_span_s']) if sw['t100_s'] is None else sw['t100_s']} | {exits_str(sw['exit_throughput_total'])} | {crowd_summary(sw.get('door_crowding'))} |",
+               f"\nWinner faster under this setup too: **{'yes' if agree else 'NO'}**. Same seed and spawn positions in both setups."]
+        extra = []
+        for k, r in (("base", sb), ("winner", sw)):
+            if r.get("arrived_after_closure"):
+                extra.append(f"{k}: {sum(r['arrived_after_closure'].values())} of {r['people']} still reached "
+                             f"{', '.join(r['arrived_after_closure'])} after its smoke closure (they had already set off; IRA does not re-route mid-walk)")
+            if r.get("never_arrived"):
+                extra.append(f"{k}: {r['never_arrived']} never came within {r['reach_m']} m of an exit target — "
+                             f"they stopped {', '.join(str(v) for v in r['never_arrived_agents'].values())} m short behind characters parked on it")
+        if extra:
+            md.append("Caveats: " + "; ".join(extra) + ".")
+    if a.crowding_check:
+        c = json.load(open(a.crowding_check))
+        md += ["\n## Door-crowding flag — does it fire when it should?\n",
+               f"A deliberately bad plan `{c['plan_id']}` (everyone released at once) on the same fire and seed: "
+               f"{crowd_summary(c['door_crowding'])}, t90 {fmt_t(c['t90_s'])}. Faster on paper, flagged in red — this is the case the agent's "
+               "alarm/stagger floors exist for, and the flag now catches it from the data rather than from a rule."]
     md += [
         "\n## What this certificate claims — and does not\n",
-        "- *Rehearses, finds, ranks* — never *predicts*. *Exit saturated / corridor closed* — never *crush*. No crowd-density figure anywhere.",
+        "- *Rehearses, finds, ranks* — never *predicts*. *Exit saturated / corridor closed / door crowding (demand)* — never *crush*. "
+        "The only density-shaped number is door-crowding demand, labelled as a risk flag, not a prediction.",
         "- Fix = plan knobs only (exits opened, alarm earlier, stagger). Fire origin, spread, people count and seed held fixed within each layer.",
         "- Smoke: simplified grid front model in Layer 1; Flow in the twin is the visual of the same fire (Phase 4). Proxy venue, not a real hospital.",
         "- Most robust plan among those tried, not optimal. IRA has no congestion model — stated next to every Layer-2 number.",

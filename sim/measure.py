@@ -27,6 +27,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from make_exit_targets import inside_points  # noqa: E402
 from plan import plan_id  # noqa: E402
+from crowding import door_crowding  # noqa: E402
 
 GROUP_RE = re.compile(r"/evac_(E\d+)(?:_to_(E\d+))?/")   # evac_E1 -> E1 ; evac_E1_to_E2 -> E2 (set off after E1 closed)
 
@@ -132,6 +133,18 @@ def main():
                                              y - targets[agent_exit(p, open_exits) or open_exits[0]][1]) for _, x, y in tr), 1)
                       for p, tr in tracks.items() if p in never}
 
+    # Door-crowding demand: people NOT yet arrived within 2 m of each open door, every 0.1 s.
+    # Arrived characters stand still on their exit target (MoveTo ends there), so they are dropped
+    # from the count once they are out -- otherwise the doorway looks crowded by people who left.
+    snap = collections.defaultdict(list)
+    for prim, tr in tracks.items():
+        t_out = arrivals.get(prim, float("inf"))
+        for t, x, y in tr:
+            if t < t_out:
+                snap[round(t, 1)].append((x, y))
+    door_centre = {e: tuple(venue["exits"][e].get("centre_world") or targets[e][:2]) for e in open_exits}
+    crowding = door_crowding(sorted(snap.items()), door_centre, 0.1)
+
     after_closure = {}
     if a.closures_from:
         cl = {e: t for e, t in json.load(open(a.closures_from)).get("corridor_closed_at_s", {}).items() if t is not None}
@@ -146,11 +159,13 @@ def main():
         "t50_s": t50, "t90_s": t90, "t100_s": t100,
         "exit_throughput_total": dict(used), "arrived": len(arrivals), "never_arrived": len(never),
         "arrived_after_closure": after_closure,
+        "door_crowding": crowding,
         "redirected": redirected, "never_arrived_agents": {p.split('/')[-1]: straggler_dist[p] for p in never},
         "remaining_series_t_in_out": curve,
         "exit_targets_world": {e: [round(v, 2) for v in p] for e, p in targets.items()},
         "model": "Isaac Sim / IRA characters on a baked NavMesh, behaviour tree Wait(alarm+stagger) -> MoveTo exit; "
-                 "no collision or queuing between characters, so door throughput is not modelled here; "
+                 "local avoidance but no contact or queuing between characters, so door throughput is not modelled "
+                 "and door_crowding is DEMAND at the door (crush-risk flag), never a crush prediction; "
                  "exit = first frame within reach_m of the agent's exit target",
     }
     os.makedirs(os.path.dirname(os.path.abspath(a.report)), exist_ok=True)
@@ -158,6 +173,8 @@ def main():
     print(f"  source: {source}")
     print(f"  people {n}  arrived {len(arrivals)}  never {len(never)}  | t50 {t50}  t90 {t90}  t100 {t100}  (sim span {t_end:.1f} s)")
     print(f"  exits used {dict(used)}  redirected {len(redirected)}  never-arrived min dist to own exit {straggler_dist}")
+    print(f"  door crowding: worst {crowding['worst_door']} {crowding['worst_peak_ppm2']} p/m2 ({crowding['worst_peak_people']} people), "
+          f"{crowding['s_over_4ppm2_total']} s over 4/m2, {crowding['s_over_6ppm2_total']} s over 6/m2")
     print(f"  report -> {a.report}")
 
 

@@ -94,7 +94,8 @@ LAYER 3  CERTIFICATE
 
 - **t50 / t90 / t100** = time when 50 / 90 / 100 % of people have exited. Layer 1: from `rehearse.py`. Layer 2: first frame each agent's position is within **1.5 m** of its exit prim; frame → seconds via the writer's fixed step.
 - **Layer-2 position source (decided 2026-10-17):** IRA's per-agent `metro_agent_data.world_position` (exact, with `speed`), **not** camera 3D boxes — `object_detection_*.json` only lists agents visible to that camera (3 of 10 walkers across 3 cameras in Phase 0). Phase 2d needs a camera-independent per-frame dump of every agent's position; the RGB cameras serve the film only.
-- **Exit saturated** (never "crush"): Layer 1 door queue length > 0 for > 10 s. No density figure is ever quoted — people do not collide in either layer.
+- **Exit saturated** (never "crush"): Layer 1 door queue length > 0 for > 10 s.
+- **Door crowding (demand)** — `sim/crowding.py`, same definition in both layers: people not yet out within 2 m of the door centre over the 6.3 m² half-disc, every sample; flagged at 4 p/m² (Fruin LOS E/F) and 6 p/m² (crush band). It is *demand* — how many people press on one door at once — a crush-**risk** flag, never a crush prediction: people do not collide in either layer. In the twin it is a lower bound (a character is "out" ~2.75 m before the door line); Layer 1 with 300 people and the door cap is the operative flag. Added 2026-10-17; the alarm-0/stagger-0 loophole plan trips it (5.1 p/m² at E4), base and winner do not.
 - **Exposure** (Layer 1 only) = ∫ smoke level at the person's cell dt; **over threshold** = exposure > 30 s.
 - **Corridor / exit closed** = smoke level above `s_block` on the opening's cells (Layer 1) · Flow density above threshold at the exit prim (Layer 2, if read-back works).
 - **Agreement** = same ordering of base vs winner on t90 in both layers, and both layers report the same exits as unusable.
@@ -124,7 +125,7 @@ LAYER 3  CERTIFICATE
 
 ## Honesty rules
 
-- Say *rehearses / finds / ranks*. Never *predicts*. Say *exit saturated / corridor closed*. Never *crush*. **No crowd-density number, ever.**
+- Say *rehearses / finds / ranks*. Never *predicts*. Say *exit saturated / corridor closed / door crowding (demand)*. Never *crush*. **The only density-shaped number is door-crowding demand, always labelled as a risk flag, never as a prediction.**
 - *Simplified grid smoke model; Flow is the visual of that same fire* — unless Phase 4 proves read-back, in which case say exactly what Flow drives.
 - *Proxy venue, not a real hospital.* *Most robust plan among those tried*, not *optimal*.
 - IRA has no congestion model — state it next to every Layer-2 number.
@@ -132,4 +133,4 @@ LAYER 3  CERTIFICATE
 
 ## Deliberately out of scope
 
-Camera placement, coverage, detectors (Bankai). Incident reconstruction (Akiramenai). Validated fire physics (FDS) — Layer 1's smoke interface could ingest an FDS slice later; that is roadmap. Stampede / crush modelling.
+Camera placement, coverage, detectors (Bankai). Incident reconstruction (Akiramenai). Validated fire physics (FDS) — Layer 1's smoke interface could ingest an FDS slice later; that is roadmap. Stampede / crush *modelling* (body pressure, contact forces) — we flag door-crowding demand, we do not simulate a crush.

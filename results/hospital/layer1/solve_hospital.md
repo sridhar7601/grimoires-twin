@@ -55,6 +55,6 @@ Weights: `{'w_t90': 1.0, 'w_exp': 0.5, 'w_trap': 1000.0, 'w_dense': 5.0}`. Score
 
 ## Disclosure
 
-> dynamic smoke-aware egress on a 0.5 m grid with staggered departures; the route field is recomputed every replan_s, smoky routes cost more and dense smoke is avoided; speed falls with smoke level; positions baked as USD time samples. Routing, throughput, timing and exposure only -- people do not collide, so NO density figure is derived or claimed from this run. Smoke is a simplified front model, not fire physics.
+> dynamic smoke-aware egress on a 0.5 m grid with staggered departures; the route field is recomputed every replan_s, smoky routes cost more and dense smoke is avoided; speed falls with smoke level; positions baked as USD time samples. Routing, throughput, timing and exposure -- people queue at the SFPE door cap but do not collide, so door_crowding is DEMAND at the door (crush-risk flag), never a crush prediction. Smoke is a simplified front model, not fire physics.
 
 > Smoke params: `{'spread_speed_ms': 0.6, 'ramp_s': 20.0, 'reach_m': 45.0, 's_block': 0.7, 'k_slow': 0.6, 'origin_xy': [48.75, 6.25], 'model': 'front model: arrival by shortest walkable path / spread_speed, level ramps over ramp_s, ceiling 1 - d/reach_m'}`

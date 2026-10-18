@@ -86,6 +86,10 @@ Copy `scenarios/mall_*.json` → `scenarios/hospital_base_plan.json`, `hospital_
 
 **Artifact:** the twin reacts to the hazard, or an honest record of why not.
 
+**Outcome (2026-10-17):** 4a ✅ Omniverse Flow fire at the origin (cm preset referenced into the m/Z-up stage, forces ×0.1, Flow enabled by Kit launch args — a single-stage run never draws it otherwise). 4b/4c 🟡 not read back from Flow: the exit closure in the twin is *scripted from Layer 1's closure time* (21.7 s) — characters assigned to E1 are split into `evac_E1` (set off before closure) and `evac_E1_to_E3` (after). Honest line in the certificate: unusable-exit agreement is "not independently testable yet". Flow-fire runs measured: base t90 120.2 s (38/40 out; 2 stopped 1.6–1.8 m short behind parked characters), winner 45.1 s (6 of 40 still reached E1 after closure — IRA does not re-route mid-walk). 4d skipped. Repeat of both Flow-fire runs (same seed, brighter flames for the film): winner t90 45.1 s both times; base 120.2 vs 105.8 s — its t90 sits on the noisy tail of 2–3 characters stuck behind parked ones at E2, so the base figure is quoted as a range. Film: `renders/hospital_dollhouse_fire.mp4`.
+
+**Added 2026-10-17 — door-crowding flag (`sim/crowding.py`):** same definition in both layers — people not yet out within 2 m of the door centre over the 6.3 m² half-disc, red at 4 p/m² (Fruin LOS E/F), crush band 6. *Demand*, not pressure: a crush-risk flag, never a crush prediction (people do not collide in either layer; in the twin a character is "out" ~2.75 m before the door line, so the twin figure is a lower bound). Results: base 1.3 p/m² (E2, 8 people), winner 2.4 (E4, 15), twin ≤ 1.0; the alarm-0/stagger-0 loophole plan trips it at 5.1 p/m² (E4, 32 people) — the data now catches what the agent's floors were guarding. First probe that counted characters *parked on the exit target after arriving* read 7.2 p/m² at E1 — an artefact, discarded.
+
 ---
 
 ## Phase 5 — robustness sweep
@@ -97,6 +101,8 @@ Copy `scenarios/mall_*.json` → `scenarios/hospital_base_plan.json`, `hospital_
 
 **Outcome (2026-10-17):** Python sweep done — 5 fires × 24 plans = 120 runs in 81.5 s. Base ranks 24/24 under every fire; most robust = `G-E123-a5-s25` (worst 182.8); the demo-fire winner `G-E1234-a5-s25` is 2nd (weak spot: a fire inside E4). `grimoires/results/robustness_table.md`. Warp port not attempted — at 20 s per fire there is no speed problem to solve yet.
 
+**Correction (later, 2026-10-17):** that ranking was one seed. Re-run over 5 seeds (600 rehearsals, `results/hospital/layer1/solve_hospital_multiseed.json`): base still last (331.7, 24/24); most robust tried = `G-E1234-a15-s10` (167.3); the twin-certified `G-E1234-a5-s25` ranks 3rd (186.4); `G-E123-a5-s25` 4th. Lesson baked into the agent: plans are scored over 3 seeds and an agent pick must win on 5 held-out seeds. `docs/results/robustness_table.md` now shows the 5-seed table; the single-seed one is kept as `robustness_table_seed42.md`.
+
 ---
 
 ## Phase 6 — the film and the narration
@@ -107,6 +113,8 @@ Copy `scenarios/mall_*.json` → `scenarios/hospital_base_plan.json`, `hospital_
 **Artifact:** two MP4s, side by side.
 
 **Backlog — do LAST (requested 2026-10-17):** a CCTV-style demo film: several cameras inside different rooms and corridors shown as a security-monitor grid, base vs Grimoires side by side. Presentation only — note the boundary with Bankai (cameras/perception) stated in ARCHITECTURE.md before building it.
+
+**Outcome (2026-10-18):** ✅ `renders/hospital_cctv.mp4` — `make_ira_config.py --cctv` authors four fixed cameras in the stage (`CCTV_CAMS`: lobby looking at the entrance and the Flow fire, central corridor, west corridor at E4, north-west corridor at E2; 640×360, 12 mm, ceiling height), rendered via `sensor_prim_list`; `sim/stitch_cctv.py` builds the 2×2 monitor wall per plan, base vs Grimoires side by side, with camera id, REC, clock and a red banner on feeds watching an exit once smoke closed it. Two lessons: (1) camera positions read off the grid must be checked on the first rendered frames — the first attempt had three of six feeds looking at walls; (2) **each extra camera costs ~0.9 s per rendered frame** (six cameras: 5.5 s/frame), so the cut uses four cameras and 60 s / 120 s runs (winner all out by 60 s, base t90 at 120 s). Agent-plan twin run queued behind it: `G-E1234-a15-s10` t90 43.0 s, 40/40 out (see `agent_session.md`).
 
 ---
 
