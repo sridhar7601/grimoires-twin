@@ -1,0 +1,8 @@
+2026-10-17 11:56:34  queue: winner_dollhouse15s winner_dollhouse base_dollhouse
+2026-10-17 11:56:34  START winner_dollhouse15s  (log ~/ira_film_winner_dollhouse15s.log)
+2026-10-17 12:07:12  DONE  winner_dollhouse15s  exit=0  rgb frames=430
+2026-10-17 12:07:12  START winner_dollhouse  (log ~/ira_film_winner_dollhouse.log)
+2026-10-17 12:40:45  DONE  winner_dollhouse  exit=0  rgb frames=3493
+2026-10-17 12:40:45  START base_dollhouse  (log ~/ira_film_base_dollhouse.log)
+2026-10-17 13:32:18  DONE  base_dollhouse  exit=0  rgb frames=5791
+2026-10-17 13:32:18  ALL DONE

@@ -1,0 +1,3473 @@
+#usda 1.0
+(
+    customLayerData = {
+        dictionary navmeshSettings = {
+            dictionary areas = {
+                dictionary "0" = {
+                    string areaName = "Walkable"
+                    float3 color = (0.2, 0.8, 1)
+                    double defaultCost = 1
+                }
+                dictionary "1" = {
+                    string areaName = "NotWalkable"
+                    float3 color = (1, 0, 0)
+                    double defaultCost = -1
+                }
+                dictionary "2" = {
+                    string areaName = "Zone_E1"
+                    float3 color = (0.9, 0.6, 0.1)
+                    double defaultCost = 1
+                }
+                dictionary "3" = {
+                    string areaName = "Zone_E2"
+                    float3 color = (0.1, 0.7, 0.3)
+                    double defaultCost = 1
+                }
+            }
+        }
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    subLayers = [
+        @./hospital.usd@
+    ]
+    upAxis = "Z"
+)
+
+over "Root"
+{
+    over "GlassDoor_55" (
+        active = false
+    )
+    {
+    }
+
+    over "GlassDoor2_5" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_01c_8" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_01c2" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_01c3" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_01c4" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_01c5" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_01b_2" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_01b2" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_01b3" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_01b4" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_01b5_8" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_01b6" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_01b7" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_01b8" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_01b9" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_01b10" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_01_48" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_02b_51" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_02b2" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_02b3" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_02b4" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_2" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_3" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_02b5" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_02b6" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_02b7" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_02b8" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_02b9" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_02b10" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_02b11" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_02b12" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_01c6" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_01c7" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_01c8" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_01c9" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_01c10" (
+        active = false
+    )
+    {
+    }
+
+    over "SM_Door_01c11" (
+        active = false
+    )
+    {
+    }
+}
+
+def "World"
+{
+    def Xform "Fire" (
+        prepend references = @/isaac-sim/extscache/omni.flowusd-110.0.3+110.0.0.lx64.r.cp312.u7f4/data/presets/Fire/Fire.usda@
+    )
+    {
+        over "flowEmitterSphere"
+        {
+            custom float coupleRateSmoke = 2
+            custom float3 position = (-1.25, 1.25, 0.6)
+            custom float radius = 2
+            custom float smoke = 1
+        }
+
+        over "flowRender"
+        {
+            over "rayMarch"
+            {
+                custom float attenuation = 5
+            }
+        }
+
+        over "flowOffscreen"
+        {
+            over "shadow"
+            {
+                custom float attenuation = 4.5
+            }
+        }
+
+        over "flowSimulate"
+        {
+            custom float densityCellSize = 0.1
+
+            over "advection"
+            {
+                float buoyancyPerTemp = 0.6
+                float3 gravity = (0, 0, -10)
+                custom float smokePerBurn = 10
+
+                over "smoke"
+                {
+                    float fade = 0.05
+                }
+            }
+        }
+    }
+
+    def Scope "FilmCams"
+    {
+        def Camera "CAM01"
+        {
+            float2 clippingRange = (0.2, 500)
+            float focalLength = 12
+            float horizontalAperture = 20.955
+            float verticalAperture = 11.787188
+            float3 xformOp:rotateXYZ = (79.192444, 0, 78.40782)
+            double3 xformOp:translate = (8.5, -2, 2.7)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+        }
+
+        def Camera "CAM02"
+        {
+            float2 clippingRange = (0.2, 500)
+            float focalLength = 12
+            float horizontalAperture = 20.955
+            float verticalAperture = 11.787188
+            float3 xformOp:rotateXYZ = (85.66165, 0, -93.43363)
+            double3 xformOp:translate = (-20, 10.5, 2.7)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+        }
+
+        def Camera "CAM03"
+        {
+            float2 clippingRange = (0.2, 500)
+            float focalLength = 12
+            float horizontalAperture = 20.955
+            float verticalAperture = 11.787188
+            float3 xformOp:rotateXYZ = (79.606766, 0, -261.67435)
+            double3 xformOp:translate = (-28, 11, 2.7)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+        }
+
+        def Camera "CAM04"
+        {
+            float2 clippingRange = (0.2, 500)
+            float focalLength = 12
+            float horizontalAperture = 20.955
+            float verticalAperture = 11.787188
+            float3 xformOp:rotateXYZ = (74.635544, 0, 77.47119)
+            double3 xformOp:translate = (-34, 31.5, 2.7)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+        }
+    }
+
+    def Scope "ExitTargets"
+    {
+        def Xform "E1"
+        {
+            custom string grimoires:exit_id = "E1"
+            custom bool grimoires:open = 1
+            double3 xformOp:translate = (-1.25, -1.25, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Xform "E2"
+        {
+            custom string grimoires:exit_id = "E2"
+            custom bool grimoires:open = 1
+            double3 xformOp:translate = (-40.25, 31.75, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Xform "E3"
+        {
+            custom string grimoires:exit_id = "E3"
+            custom bool grimoires:open = 0
+            double3 xformOp:translate = (19.25, 31.25, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Xform "E4"
+        {
+            custom string grimoires:exit_id = "E4"
+            custom bool grimoires:open = 0
+            double3 xformOp:translate = (-39.75, 8.75, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+    }
+
+    def Scope "NavZones"
+    {
+        def NavMeshVolume "E1_000" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (5, 0.5, 3)
+            double3 xformOp:translate = (18.5, -3.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_001" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 4.5, 3)
+            double3 xformOp:translate = (22, -1.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_002" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 2.5, 3)
+            double3 xformOp:translate = (24.5, -2.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_003" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (4.5, 1, 3)
+            double3 xformOp:translate = (18.75, -3, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_004" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (5, 2, 3)
+            double3 xformOp:translate = (-8, -1.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_005" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (7.5, 2, 3)
+            double3 xformOp:translate = (-1.25, -1.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_006" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 4, 3)
+            double3 xformOp:translate = (3.25, -0.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_007" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (5.5, 3.5, 3)
+            double3 xformOp:translate = (6.75, -0.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_008" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2, 0.5, 3)
+            double3 xformOp:translate = (13, -2.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_009" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (5, 3, 3)
+            double3 xformOp:translate = (18, -1, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_010" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1.5, 3)
+            double3 xformOp:translate = (-5.25, -1.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_011" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 3.5, 3)
+            double3 xformOp:translate = (2.75, -0.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_012" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 3.5, 3)
+            double3 xformOp:translate = (3.75, -0.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_013" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 2.5, 3)
+            double3 xformOp:translate = (13.25, -0.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_014" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 12, 3)
+            double3 xformOp:translate = (15, 4, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_015" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 2, 3)
+            double3 xformOp:translate = (22.75, -1, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_016" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 0.5, 3)
+            double3 xformOp:translate = (12, -1.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_017" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 2, 3)
+            double3 xformOp:translate = (21, -0.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_018" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 1.5, 3)
+            double3 xformOp:translate = (23.75, -0.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_019" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 5, 3)
+            double3 xformOp:translate = (-11, 1.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_020" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 2.5, 3)
+            double3 xformOp:translate = (10.25, 0.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_021" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1, 3)
+            double3 xformOp:translate = (12.25, -0.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_022" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1.5, 3)
+            double3 xformOp:translate = (14.25, -0.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_023" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 5, 3)
+            double3 xformOp:translate = (-9.75, 2, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_024" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (6, 2, 3)
+            double3 xformOp:translate = (-0.5, 0.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_025" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 0.5, 3)
+            double3 xformOp:translate = (24, 0.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_026" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (4.5, 8.5, 3)
+            double3 xformOp:translate = (17.75, 4.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_027" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 2, 3)
+            double3 xformOp:translate = (22.25, 1.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_028" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 0.5, 3)
+            double3 xformOp:translate = (4.5, 1.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_029" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (4, 0.5, 3)
+            double3 xformOp:translate = (7.5, 1.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_030" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2, 0.5, 3)
+            double3 xformOp:translate = (13, 1.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_031" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (8, 3, 3)
+            double3 xformOp:translate = (-5, 3, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_032" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (4, 9.5, 3)
+            double3 xformOp:translate = (8, 6.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_033" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 2.5, 3)
+            double3 xformOp:translate = (13.25, 2.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_034" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 11.5, 3)
+            double3 xformOp:translate = (20.25, 7.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_035" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (3.5, 0.5, 3)
+            double3 xformOp:translate = (-32.25, 2.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_036" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (7.5, 0.5, 3)
+            double3 xformOp:translate = (-24.25, 2.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_037" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2.5, 3, 3)
+            double3 xformOp:translate = (-17.25, 3.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_038" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2.5, 2, 3)
+            double3 xformOp:translate = (-12.75, 3, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_039" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 0.5, 3)
+            double3 xformOp:translate = (12, 2.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_040" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (3.5, 2.5, 3)
+            double3 xformOp:translate = (-31.25, 3.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_041" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (7, 2.5, 3)
+            double3 xformOp:translate = (-24.5, 3.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_042" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 2.5, 3)
+            double3 xformOp:translate = (-15.75, 3.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_043" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 2.5, 3)
+            double3 xformOp:translate = (-14.25, 3.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_044" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1, 3)
+            double3 xformOp:translate = (12.25, 3, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_045" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1.5, 3)
+            double3 xformOp:translate = (14.25, 3.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_046" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 4.5, 3)
+            double3 xformOp:translate = (-28.75, 5.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_047" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 2, 3)
+            double3 xformOp:translate = (-19.25, 4, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_048" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 2, 3)
+            double3 xformOp:translate = (-15, 4, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_049" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2, 2, 3)
+            double3 xformOp:translate = (2.5, 4, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_050" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 0.5, 3)
+            double3 xformOp:translate = (5.5, 3.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_051" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 8, 3)
+            double3 xformOp:translate = (10.5, 7, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_052" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 29.5, 3)
+            double3 xformOp:translate = (-40.25, 18.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_053" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 1.5, 3)
+            double3 xformOp:translate = (-20.5, 4.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_054" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 15.5, 3)
+            double3 xformOp:translate = (5.75, 11.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_055" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 2, 3)
+            double3 xformOp:translate = (20.75, 4.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_056" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 29, 3)
+            double3 xformOp:translate = (-39.75, 18.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_057" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 0.5, 3)
+            double3 xformOp:translate = (-33.5, 4.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_058" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 1, 3)
+            double3 xformOp:translate = (-13.25, 4.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_059" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 1, 3)
+            double3 xformOp:translate = (1, 4.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_060" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (5.5, 0.5, 3)
+            double3 xformOp:translate = (-7.25, 4.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_061" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2.5, 0.5, 3)
+            double3 xformOp:translate = (-2.25, 4.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_062" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2, 2, 3)
+            double3 xformOp:translate = (4.5, 5.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_063" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (3.5, 4.5, 3)
+            double3 xformOp:translate = (12.75, 6.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_064" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2, 1.5, 3)
+            double3 xformOp:translate = (22, 5.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_065" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2, 1.5, 3)
+            double3 xformOp:translate = (-41.5, 5.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_066" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 9, 3)
+            double3 xformOp:translate = (-39, 9.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_067" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 2, 3)
+            double3 xformOp:translate = (-32.25, 6, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_068" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2, 0.5, 3)
+            double3 xformOp:translate = (-30.5, 5.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_069" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (3, 0.5, 3)
+            double3 xformOp:translate = (-26.5, 5.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_070" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 10, 3)
+            double3 xformOp:translate = (-31.25, 10.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_071" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 0.5, 3)
+            double3 xformOp:translate = (-30.25, 5.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_072" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2, 3.5, 3)
+            double3 xformOp:translate = (-27, 7.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_073" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 9.5, 3)
+            double3 xformOp:translate = (-30.75, 10.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_074" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 0.5, 3)
+            double3 xformOp:translate = (-30, 6.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_075" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (10, 2.5, 3)
+            double3 xformOp:translate = (-19.5, 7.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_076" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (5.5, 1.5, 3)
+            double3 xformOp:translate = (-6.75, 6.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_077" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2, 1.5, 3)
+            double3 xformOp:translate = (-2.5, 6.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_078" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (3, 1.5, 3)
+            double3 xformOp:translate = (1.5, 6.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_079" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 0.5, 3)
+            double3 xformOp:translate = (-41.25, 6.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_080" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 8.5, 3)
+            double3 xformOp:translate = (-30.25, 10.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_081" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 0.5, 3)
+            double3 xformOp:translate = (-25.5, 6.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_082" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 2, 3)
+            double3 xformOp:translate = (-11.75, 7.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_083" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 5.5, 3)
+            double3 xformOp:translate = (4.75, 9.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_084" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 17, 3)
+            double3 xformOp:translate = (-41, 15.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_085" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 8.5, 3)
+            double3 xformOp:translate = (-31.75, 11.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_086" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 8, 3)
+            double3 xformOp:translate = (-29.75, 11, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_087" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 3.5, 3)
+            double3 xformOp:translate = (-25.75, 8.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_088" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 0.5, 3)
+            double3 xformOp:translate = (-0.75, 7.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_089" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (5.5, 3, 3)
+            double3 xformOp:translate = (23.75, 8.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_090" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 15.5, 3)
+            double3 xformOp:translate = (-29.25, 15.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_091" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 0.5, 3)
+            double3 xformOp:translate = (-28.5, 7.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_092" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 3.5, 3)
+            double3 xformOp:translate = (-12.75, 9.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_093" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 4.5, 3)
+            double3 xformOp:translate = (-9, 9.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_094" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2, 1, 3)
+            double3 xformOp:translate = (-5, 8, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_095" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 4.5, 3)
+            double3 xformOp:translate = (-2, 9.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_096" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 0.5, 3)
+            double3 xformOp:translate = (2.25, 7.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_097" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (5, 1.5, 3)
+            double3 xformOp:translate = (-44, 8.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_098" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 15, 3)
+            double3 xformOp:translate = (-28.75, 15.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_099" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 2.5, 3)
+            double3 xformOp:translate = (-13.5, 9.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_100" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1, 3)
+            double3 xformOp:translate = (20.75, 8.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_101" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 1.5, 3)
+            double3 xformOp:translate = (-47.25, 9.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_102" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 14.5, 3)
+            double3 xformOp:translate = (-28.25, 15.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_103" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 2, 3)
+            double3 xformOp:translate = (-25.25, 9.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_104" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2.5, 2, 3)
+            double3 xformOp:translate = (-23.25, 9.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_105" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 2.5, 3)
+            double3 xformOp:translate = (-12.25, 9.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_106" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 6, 3)
+            double3 xformOp:translate = (-8.25, 11.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_107" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 3.5, 3)
+            double3 xformOp:translate = (-2.75, 10.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_108" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 3.5, 3)
+            double3 xformOp:translate = (3.75, 10.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_109" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 6, 3)
+            double3 xformOp:translate = (-27.75, 12, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_110" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 0.5, 3)
+            double3 xformOp:translate = (-26.75, 9.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_111" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1.5, 3)
+            double3 xformOp:translate = (-24.75, 9.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_112" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (8, 1.5, 3)
+            double3 xformOp:translate = (-18, 9.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_113" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2.5, 3, 3)
+            double3 xformOp:translate = (-10.75, 10.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_114" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (5, 3, 3)
+            double3 xformOp:translate = (-5.5, 10.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_115" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (4, 3, 3)
+            double3 xformOp:translate = (1.5, 10.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_116" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 1, 3)
+            double3 xformOp:translate = (11.5, 9.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_117" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 1, 3)
+            double3 xformOp:translate = (13.75, 9.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_118" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1, 3)
+            double3 xformOp:translate = (15.75, 9.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_119" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2.5, 1.5, 3)
+            double3 xformOp:translate = (18.75, 9.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_120" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2, 0.5, 3)
+            double3 xformOp:translate = (-45.5, 9.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_121" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 0.5, 3)
+            double3 xformOp:translate = (-43, 9.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_122" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 11.5, 3)
+            double3 xformOp:translate = (-27.25, 15.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_123" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 0.5, 3)
+            double3 xformOp:translate = (-26.5, 9.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_124" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 6, 3)
+            double3 xformOp:translate = (-1, 12.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_125" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 11.5, 3)
+            double3 xformOp:translate = (-26.75, 15.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_126" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (8, 2, 3)
+            double3 xformOp:translate = (-22.5, 11.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_127" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (3.5, 0.5, 3)
+            double3 xformOp:translate = (-16.75, 10.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_128" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (5.5, 3, 3)
+            double3 xformOp:translate = (14.25, 12, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_129" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 10, 3)
+            double3 xformOp:translate = (18.25, 15.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_130" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (5.5, 3, 3)
+            double3 xformOp:translate = (-45.25, 12.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_131" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (6.5, 3, 3)
+            double3 xformOp:translate = (-35.25, 12.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_132" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1.5, 3)
+            double3 xformOp:translate = (-18.25, 11.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_133" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (3, 0.5, 3)
+            double3 xformOp:translate = (-16.5, 11.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_134" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 8, 3)
+            double3 xformOp:translate = (6.75, 15, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_135" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 8, 3)
+            double3 xformOp:translate = (10.75, 15, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_136" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 22, 3)
+            double3 xformOp:translate = (19.5, 22, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_137" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (3, 0.5, 3)
+            double3 xformOp:translate = (22.5, 11.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_138" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 2, 3)
+            double3 xformOp:translate = (-41.75, 12.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_139" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 4, 3)
+            double3 xformOp:translate = (-17.75, 13.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_140" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2.5, 0.5, 3)
+            double3 xformOp:translate = (-16.25, 11.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_141" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1, 3)
+            double3 xformOp:translate = (17.25, 12, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_142" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2, 1, 3)
+            double3 xformOp:translate = (21.5, 12, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_143" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1, 3)
+            double3 xformOp:translate = (-42.25, 12.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_144" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 3.5, 3)
+            double3 xformOp:translate = (-17.25, 13.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_145" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 3, 3)
+            double3 xformOp:translate = (-8.75, 13.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_146" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 2, 3)
+            double3 xformOp:translate = (-7.75, 13, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_147" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 3.5, 3)
+            double3 xformOp:translate = (-4.5, 13.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_148" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 3.5, 3)
+            double3 xformOp:translate = (2.5, 13.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_149" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 7, 3)
+            double3 xformOp:translate = (5, 15.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_150" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2.5, 3.5, 3)
+            double3 xformOp:translate = (-25.25, 14.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_151" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 3, 3)
+            double3 xformOp:translate = (-21.25, 14, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_152" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 2.5, 3)
+            double3 xformOp:translate = (-9.25, 13.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_153" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 0.5, 3)
+            double3 xformOp:translate = (-7, 12.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_154" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 3, 3)
+            double3 xformOp:translate = (-5.25, 14, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_155" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 3, 3)
+            double3 xformOp:translate = (-3.5, 14, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_156" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 3, 3)
+            double3 xformOp:translate = (-1.75, 14, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_157" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 3, 3)
+            double3 xformOp:translate = (0, 14, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_158" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 3, 3)
+            double3 xformOp:translate = (1.75, 14, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_159" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 3, 3)
+            double3 xformOp:translate = (3.25, 14, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_160" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2, 1, 3)
+            double3 xformOp:translate = (22, 13, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_161" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 2.5, 3)
+            double3 xformOp:translate = (-22.5, 14.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_162" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 2.5, 3)
+            double3 xformOp:translate = (-18.75, 14.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_163" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (6.5, 2.5, 3)
+            double3 xformOp:translate = (-12.75, 14.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_164" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 2, 3)
+            double3 xformOp:translate = (-7.25, 14, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_165" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 3, 3)
+            double3 xformOp:translate = (-39.25, 15.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_166" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1.5, 3)
+            double3 xformOp:translate = (3.75, 14.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_167" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 1.5, 3)
+            double3 xformOp:translate = (12.25, 15.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_168" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 1.5, 3)
+            double3 xformOp:translate = (16.25, 15.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_169" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 20.5, 3)
+            double3 xformOp:translate = (20.25, 24.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_170" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (5.5, 2.5, 3)
+            double3 xformOp:translate = (23.75, 15.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_171" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (3, 0.5, 3)
+            double3 xformOp:translate = (-37, 15.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_172" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (3, 4, 3)
+            double3 xformOp:translate = (9, 17, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_173" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1.5, 3)
+            double3 xformOp:translate = (20.75, 15.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_174" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 1, 3)
+            double3 xformOp:translate = (-45.75, 16, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_175" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2, 1.5, 3)
+            double3 xformOp:translate = (-42.5, 16.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_176" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2, 1.5, 3)
+            double3 xformOp:translate = (-38, 16.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_177" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 5.5, 3)
+            double3 xformOp:translate = (-27.75, 18.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_178" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2.5, 0.5, 3)
+            double3 xformOp:translate = (14.25, 15.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_179" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1, 3)
+            double3 xformOp:translate = (17.25, 16, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_180" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 0.5, 3)
+            double3 xformOp:translate = (-47.25, 16.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_181" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 1.5, 3)
+            double3 xformOp:translate = (-44.25, 16.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_182" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1, 3)
+            double3 xformOp:translate = (-36.75, 16.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_183" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2, 5.5, 3)
+            double3 xformOp:translate = (-25.5, 18.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_184" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 0.5, 3)
+            double3 xformOp:translate = (12, 16.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_185" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 0.5, 3)
+            double3 xformOp:translate = (14.5, 16.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_186" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 0.5, 3)
+            double3 xformOp:translate = (-36, 16.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_187" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 0.5, 3)
+            double3 xformOp:translate = (-43, 17.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_188" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 3, 3)
+            double3 xformOp:translate = (-24, 19, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_189" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 4, 3)
+            double3 xformOp:translate = (-41.75, 20, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_190" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 1.5, 3)
+            double3 xformOp:translate = (16.25, 18.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_191" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (5.5, 2, 3)
+            double3 xformOp:translate = (-44.75, 19.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_192" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 6, 3)
+            double3 xformOp:translate = (-39.25, 21.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_193" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (5.5, 3, 3)
+            double3 xformOp:translate = (-35.75, 20, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_194" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 2.5, 3)
+            double3 xformOp:translate = (21.25, 19.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_195" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (3, 2.5, 3)
+            double3 xformOp:translate = (24, 19.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_196" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1, 3)
+            double3 xformOp:translate = (17.25, 19.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_197" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1, 3)
+            double3 xformOp:translate = (20.75, 19.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_198" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1, 3)
+            double3 xformOp:translate = (-38.75, 20, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_199" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 0.5, 3)
+            double3 xformOp:translate = (-30.25, 19.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_200" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 0.5, 3)
+            double3 xformOp:translate = (16.5, 19.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_201" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 1.5, 3)
+            double3 xformOp:translate = (22, 20.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_202" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 1.5, 3)
+            double3 xformOp:translate = (26, 20.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_203" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 3, 3)
+            double3 xformOp:translate = (-30, 21.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_204" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (4.5, 0.5, 3)
+            double3 xformOp:translate = (-44.25, 20.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_205" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 12.5, 3)
+            double3 xformOp:translate = (18.75, 26.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_206" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (3, 0.5, 3)
+            double3 xformOp:translate = (-43.5, 21.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_207" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 0.5, 3)
+            double3 xformOp:translate = (-25.75, 21.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_208" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (5.5, 3, 3)
+            double3 xformOp:translate = (-35.75, 23.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_209" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1.5, 3)
+            double3 xformOp:translate = (-30.75, 22.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_210" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2.5, 0.5, 3)
+            double3 xformOp:translate = (-26.75, 22.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_211" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (5.5, 2.5, 3)
+            double3 xformOp:translate = (14.25, 23.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_212" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 2.5, 3)
+            double3 xformOp:translate = (18, 23.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_213" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (5.5, 2.5, 3)
+            double3 xformOp:translate = (23.75, 23.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_214" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2, 0.5, 3)
+            double3 xformOp:translate = (-45.5, 22.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_215" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 2.5, 3)
+            double3 xformOp:translate = (-43, 23.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_216" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1.5, 3)
+            double3 xformOp:translate = (17.25, 23.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_217" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1, 3)
+            double3 xformOp:translate = (20.75, 23, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_218" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 1, 3)
+            double3 xformOp:translate = (-45.75, 23.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_219" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 1, 3)
+            double3 xformOp:translate = (-42, 23.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_220" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1, 3)
+            double3 xformOp:translate = (-38.75, 23.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_221" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 0.5, 3)
+            double3 xformOp:translate = (-47.25, 23.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_222" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 1.5, 3)
+            double3 xformOp:translate = (-44.25, 24.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_223" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 9, 3)
+            double3 xformOp:translate = (-40.75, 28.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_224" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 7.5, 3)
+            double3 xformOp:translate = (18.25, 28.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_225" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 7.5, 3)
+            double3 xformOp:translate = (-41.25, 29.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_226" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 7.5, 3)
+            double3 xformOp:translate = (-39.25, 29.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_227" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (5.5, 1, 3)
+            double3 xformOp:translate = (14.25, 26, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_228" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (5.5, 3, 3)
+            double3 xformOp:translate = (23.75, 27, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_229" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (5.5, 2.5, 3)
+            double3 xformOp:translate = (-45.25, 27.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_230" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (3, 0.5, 3)
+            double3 xformOp:translate = (-37, 26.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_231" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 6, 3)
+            double3 xformOp:translate = (17.75, 29, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_232" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1.5, 3)
+            double3 xformOp:translate = (20.75, 26.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_233" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 1.5, 3)
+            double3 xformOp:translate = (-42, 27.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_234" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2, 1.5, 3)
+            double3 xformOp:translate = (-38, 27.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_235" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (5.5, 0.5, 3)
+            double3 xformOp:translate = (14.75, 26.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_236" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (3, 1, 3)
+            double3 xformOp:translate = (13.5, 27.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_237" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 0.5, 3)
+            double3 xformOp:translate = (17, 27.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_238" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 0.5, 3)
+            double3 xformOp:translate = (-36.25, 27.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_239" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (4.5, 3, 3)
+            double3 xformOp:translate = (13.75, 30.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_240" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 4, 3)
+            double3 xformOp:translate = (17.25, 31, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_241" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (5.5, 3, 3)
+            double3 xformOp:translate = (-35.75, 31, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_242" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 3.5, 3)
+            double3 xformOp:translate = (16.5, 31.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_243" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 2.5, 3)
+            double3 xformOp:translate = (-47.5, 31.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_244" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (2.5, 1, 3)
+            double3 xformOp:translate = (-43.75, 30.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_245" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 3, 3)
+            double3 xformOp:translate = (-41.75, 31.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_246" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 2, 3)
+            double3 xformOp:translate = (-46.75, 31.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_247" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 2, 3)
+            double3 xformOp:translate = (-45.5, 31.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_248" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 2, 3)
+            double3 xformOp:translate = (-42.25, 31.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_249" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 2, 3)
+            double3 xformOp:translate = (-38.75, 31.5, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_250" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1.5, 3)
+            double3 xformOp:translate = (-46.25, 31.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_251" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1.5, 1.5, 3)
+            double3 xformOp:translate = (-43.25, 31.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E2_252" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E2"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 0.5, 3)
+            double3 xformOp:translate = (-44.5, 32.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_253" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 2.5, 3)
+            double3 xformOp:translate = (19.75, 34.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_254" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (1, 1.5, 3)
+            double3 xformOp:translate = (19, 34.75, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def NavMeshVolume "E1_255" (
+            prepend apiSchemas = ["NavMeshAreaAPI"]
+        )
+        {
+            custom float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            custom string nav:area = "Zone_E1"
+            float3 xformOp:rotateXYZ = (0, 0, 0)
+            float3 xformOp:scale = (0.5, 1, 3)
+            double3 xformOp:translate = (18.75, 36, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+    }
+}
+

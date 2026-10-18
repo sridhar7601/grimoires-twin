@@ -1,0 +1,620 @@
+{
+ "venue": "hospital_ground_floor_v1",
+ "scenario": "fire_evacuation",
+ "seed": 42,
+ "plan": {
+  "gates_open": [],
+  "route_bias": {},
+  "exits_open": [
+   "E1",
+   "E2",
+   "E3",
+   "E4"
+  ],
+  "alarm_delay_s": 15.0,
+  "stagger_s": 10.0
+ },
+ "plan_id": "G-E1234-a15-s10",
+ "fire": {
+  "name": "hospital_main_entrance",
+  "origin": [
+   48.75,
+   6.25
+  ]
+ },
+ "smoke_params": {
+  "spread_speed_ms": 0.6,
+  "ramp_s": 20.0,
+  "reach_m": 45.0,
+  "s_block": 0.7,
+  "k_slow": 0.6,
+  "origin_xy": [
+   48.75,
+   6.25
+  ],
+  "model": "front model: arrival by shortest walkable path / spread_speed, level ramps over ramp_s, ceiling 1 - d/reach_m"
+ },
+ "people": 300,
+ "open_gates": [],
+ "open_exits": [
+  "E1",
+  "E2",
+  "E3",
+  "E4"
+ ],
+ "t50_s": 35.2,
+ "t90_s": 55.0,
+ "t100_s": 95.0,
+ "trapped": 0,
+ "ever_without_route": 0,
+ "rerouted": 40,
+ "exposure_mean_s": 2.7,
+ "exposure_max_s": 54.8,
+ "exposure_threshold_s": 30.0,
+ "n_over_exposure_threshold": 6,
+ "n_in_dense_smoke": 30,
+ "dense_smoke_max_s": 41.6,
+ "dense_smoke_total_person_s": 376.7,
+ "routing": {
+  "alpha_avoid": 4.0,
+  "dense_cost_factor": 20.0,
+  "min_speed_ms": 0.3,
+  "note": "route cost x (1 + alpha*s); dense cells impassable for planning; someone already inside dense smoke walks out at min_speed along the cheapest path"
+ },
+ "door_flow_pms": 1.3,
+ "exit_capacity_ps": {
+  "E1": 4.16,
+  "E2": 4.16,
+  "E3": 4.16,
+  "E4": 4.16
+ },
+ "gate_throughput_total": {},
+ "exit_throughput_total": {
+  "E1": 26,
+  "E2": 29,
+  "E3": 108,
+  "E4": 137
+ },
+ "door_crowding": {
+  "radius_m": 2.0,
+  "area_m2": 6.28,
+  "sample_dt_s": 1.0,
+  "per_door": {
+   "E1": {
+    "peak_people": 7,
+    "peak_ppm2": 1.1,
+    "peak_t_s": 30.0,
+    "s_over_4ppm2": 0.0,
+    "s_over_6ppm2": 0.0
+   },
+   "E2": {
+    "peak_people": 5,
+    "peak_ppm2": 0.8,
+    "peak_t_s": 25.0,
+    "s_over_4ppm2": 0.0,
+    "s_over_6ppm2": 0.0
+   },
+   "E3": {
+    "peak_people": 5,
+    "peak_ppm2": 0.8,
+    "peak_t_s": 22.0,
+    "s_over_4ppm2": 0.0,
+    "s_over_6ppm2": 0.0
+   },
+   "E4": {
+    "peak_people": 30,
+    "peak_ppm2": 4.8,
+    "peak_t_s": 37.0,
+    "s_over_4ppm2": 7.0,
+    "s_over_6ppm2": 0.0
+   }
+  },
+  "worst_door": "E4",
+  "worst_peak_people": 30,
+  "worst_peak_ppm2": 4.8,
+  "s_over_4ppm2_total": 7.0,
+  "s_over_6ppm2_total": 0.0,
+  "note": "people not yet out within 2.0 m of the door centre / 6.3 m\u00b2 half-disc, sampled every dt; thresholds 4 p/m\u00b2 (Fruin LOS E/F) and 6 p/m\u00b2 (crush band). Demand, not pressure: neither layer simulates body contact, so this flags crush RISK and never predicts a crush."
+ },
+ "gate_peak_rate_ps": {},
+ "exit_peak_rate_ps": {
+  "E1": 2.4,
+  "E2": 3.0,
+  "E3": 3.6,
+  "E4": 4.2
+ },
+ "corridor_closed_at_s": {
+  "E1": 21.7,
+  "E2": null,
+  "E3": null,
+  "E4": null
+ },
+ "sim_span_s": 95.0,
+ "fps": 12.0,
+ "replan_s": 5.0,
+ "stopped": "all_out",
+ "walk_speed_mean_ms": 1.25,
+ "remaining_series_t_in_out": [
+  [
+   0.0,
+   300,
+   0
+  ],
+  [
+   1.0,
+   300,
+   0
+  ],
+  [
+   2.0,
+   300,
+   0
+  ],
+  [
+   3.0,
+   300,
+   0
+  ],
+  [
+   4.0,
+   300,
+   0
+  ],
+  [
+   5.0,
+   300,
+   0
+  ],
+  [
+   6.0,
+   300,
+   0
+  ],
+  [
+   7.0,
+   300,
+   0
+  ],
+  [
+   8.0,
+   300,
+   0
+  ],
+  [
+   9.0,
+   300,
+   0
+  ],
+  [
+   10.0,
+   300,
+   0
+  ],
+  [
+   11.0,
+   300,
+   0
+  ],
+  [
+   12.0,
+   300,
+   0
+  ],
+  [
+   13.0,
+   300,
+   0
+  ],
+  [
+   14.0,
+   300,
+   0
+  ],
+  [
+   15.0,
+   300,
+   0
+  ],
+  [
+   16.0,
+   300,
+   0
+  ],
+  [
+   17.0,
+   299,
+   1
+  ],
+  [
+   18.0,
+   296,
+   4
+  ],
+  [
+   19.0,
+   292,
+   8
+  ],
+  [
+   20.0,
+   289,
+   11
+  ],
+  [
+   21.0,
+   288,
+   12
+  ],
+  [
+   22.0,
+   281,
+   19
+  ],
+  [
+   23.0,
+   273,
+   27
+  ],
+  [
+   24.0,
+   262,
+   38
+  ],
+  [
+   25.0,
+   252,
+   48
+  ],
+  [
+   26.0,
+   240,
+   60
+  ],
+  [
+   27.0,
+   227,
+   73
+  ],
+  [
+   28.0,
+   217,
+   83
+  ],
+  [
+   29.0,
+   203,
+   97
+  ],
+  [
+   30.0,
+   194,
+   106
+  ],
+  [
+   31.0,
+   183,
+   117
+  ],
+  [
+   32.0,
+   173,
+   127
+  ],
+  [
+   33.0,
+   168,
+   132
+  ],
+  [
+   34.0,
+   159,
+   141
+  ],
+  [
+   35.0,
+   151,
+   149
+  ],
+  [
+   36.0,
+   143,
+   157
+  ],
+  [
+   37.0,
+   138,
+   162
+  ],
+  [
+   38.0,
+   131,
+   169
+  ],
+  [
+   39.0,
+   126,
+   174
+  ],
+  [
+   40.0,
+   118,
+   182
+  ],
+  [
+   41.0,
+   111,
+   189
+  ],
+  [
+   42.0,
+   106,
+   194
+  ],
+  [
+   43.0,
+   99,
+   201
+  ],
+  [
+   44.0,
+   94,
+   206
+  ],
+  [
+   45.0,
+   88,
+   212
+  ],
+  [
+   46.0,
+   82,
+   218
+  ],
+  [
+   47.0,
+   77,
+   223
+  ],
+  [
+   48.0,
+   70,
+   230
+  ],
+  [
+   49.0,
+   62,
+   238
+  ],
+  [
+   50.0,
+   56,
+   244
+  ],
+  [
+   51.0,
+   51,
+   249
+  ],
+  [
+   52.0,
+   45,
+   255
+  ],
+  [
+   53.0,
+   36,
+   264
+  ],
+  [
+   54.0,
+   34,
+   266
+  ],
+  [
+   55.0,
+   29,
+   271
+  ],
+  [
+   56.0,
+   27,
+   273
+  ],
+  [
+   57.0,
+   26,
+   274
+  ],
+  [
+   58.0,
+   22,
+   278
+  ],
+  [
+   59.0,
+   20,
+   280
+  ],
+  [
+   60.0,
+   20,
+   280
+  ],
+  [
+   61.0,
+   15,
+   285
+  ],
+  [
+   62.0,
+   14,
+   286
+  ],
+  [
+   63.0,
+   13,
+   287
+  ],
+  [
+   64.0,
+   12,
+   288
+  ],
+  [
+   65.0,
+   12,
+   288
+  ],
+  [
+   66.0,
+   11,
+   289
+  ],
+  [
+   67.0,
+   11,
+   289
+  ],
+  [
+   68.0,
+   10,
+   290
+  ],
+  [
+   69.0,
+   10,
+   290
+  ],
+  [
+   70.0,
+   10,
+   290
+  ],
+  [
+   71.0,
+   10,
+   290
+  ],
+  [
+   72.0,
+   9,
+   291
+  ],
+  [
+   73.0,
+   9,
+   291
+  ],
+  [
+   74.0,
+   8,
+   292
+  ],
+  [
+   75.0,
+   7,
+   293
+  ],
+  [
+   76.0,
+   6,
+   294
+  ],
+  [
+   77.0,
+   6,
+   294
+  ],
+  [
+   78.0,
+   5,
+   295
+  ],
+  [
+   79.0,
+   5,
+   295
+  ],
+  [
+   80.0,
+   5,
+   295
+  ],
+  [
+   81.0,
+   4,
+   296
+  ],
+  [
+   82.0,
+   4,
+   296
+  ],
+  [
+   83.0,
+   4,
+   296
+  ],
+  [
+   84.0,
+   4,
+   296
+  ],
+  [
+   85.0,
+   4,
+   296
+  ],
+  [
+   86.0,
+   4,
+   296
+  ],
+  [
+   87.0,
+   4,
+   296
+  ],
+  [
+   88.0,
+   4,
+   296
+  ],
+  [
+   89.0,
+   4,
+   296
+  ],
+  [
+   90.0,
+   3,
+   297
+  ],
+  [
+   91.0,
+   3,
+   297
+  ],
+  [
+   92.0,
+   3,
+   297
+  ],
+  [
+   93.0,
+   2,
+   298
+  ],
+  [
+   94.0,
+   2,
+   298
+  ],
+  [
+   95.0,
+   0,
+   300
+  ]
+ ],
+ "model": "dynamic smoke-aware egress on a 0.5 m grid with staggered departures; the route field is recomputed every replan_s, smoky routes cost more and dense smoke is avoided; speed falls with smoke level; positions baked as USD time samples. Routing, throughput, timing and exposure -- people queue at the SFPE door cap but do not collide, so door_crowding is DEMAND at the door (crush-risk flag), never a crush prediction. Smoke is a simplified front model, not fire physics."
+}

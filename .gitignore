@@ -12,16 +12,13 @@ assets/textures/
 # --- run outputs that are regenerated ------------------------------------------
 results/*.usd
 results/ira_*/
+!results/twin_runs/
 results/_discard*/
 results/hospital/ira_pull/
-renders/*.png
-renders/*.mp4
 
 # --- python -----------------------------------------------------------------------
 __pycache__/
 *.pyc
 
-# stitched videos (large; live in renders/ locally)
-results/films/
 
 .DS_Store

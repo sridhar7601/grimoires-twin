@@ -1,8 +1,3 @@
-# IRA smoke test A — copied from IRA's sample_configs/full_pipeline.yaml, made short.
-# Uses NVIDIA's own warehouse (it ships with a NavMesh), so a failure here means IRA
-# itself, not our venue. Proves: animated characters walk, cameras get placed,
-# Replicator writes RGB + ground-truth boxes.
-#   /isaac-sim/python.sh /isaac-sim/tools/actor_sdg/actor_sdg.py -c /workspace/sim/ira/ira_warehouse_test.yaml
 isaacsim.replicator.agent:
   version: 1.6.0
   seed: 42

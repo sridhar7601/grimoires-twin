@@ -1,0 +1,41 @@
+2026-10-17 05:41:37  queue: winner_film60s base_film60s winner_film base_film
+2026-10-17 05:41:37  waiting: another Isaac run is on GPU 0
+2026-10-17 05:42:37  waiting: another Isaac run is on GPU 0
+2026-10-17 05:43:37  waiting: another Isaac run is on GPU 0
+2026-10-17 05:44:37  waiting: another Isaac run is on GPU 0
+2026-10-17 05:45:37  waiting: another Isaac run is on GPU 0
+2026-10-17 05:46:37  waiting: another Isaac run is on GPU 0
+2026-10-17 05:47:38  waiting: another Isaac run is on GPU 0
+2026-10-17 05:48:38  waiting: another Isaac run is on GPU 0
+2026-10-17 05:49:38  waiting: another Isaac run is on GPU 0
+2026-10-17 05:50:38  waiting: another Isaac run is on GPU 0
+2026-10-17 05:51:38  waiting: another Isaac run is on GPU 0
+2026-10-17 05:52:38  waiting: another Isaac run is on GPU 0
+2026-10-17 05:53:38  waiting: another Isaac run is on GPU 0
+2026-10-17 05:54:38  waiting: another Isaac run is on GPU 0
+2026-10-17 05:55:38  waiting: another Isaac run is on GPU 0
+2026-10-17 05:56:38  waiting: another Isaac run is on GPU 0
+2026-10-17 05:57:38  waiting: another Isaac run is on GPU 0
+2026-10-17 05:58:39  waiting: another Isaac run is on GPU 0
+2026-10-17 05:59:39  waiting: another Isaac run is on GPU 0
+2026-10-17 06:00:39  waiting: another Isaac run is on GPU 0
+2026-10-17 06:01:39  waiting: another Isaac run is on GPU 0
+2026-10-17 06:02:39  waiting: another Isaac run is on GPU 0
+2026-10-17 06:03:39  waiting: another Isaac run is on GPU 0
+2026-10-17 06:04:39  waiting: another Isaac run is on GPU 0
+2026-10-17 06:05:39  waiting: another Isaac run is on GPU 0
+2026-10-17 06:06:39  waiting: another Isaac run is on GPU 0
+2026-10-17 06:07:39  waiting: another Isaac run is on GPU 0
+2026-10-17 06:08:39  waiting: another Isaac run is on GPU 0
+2026-10-17 06:09:40  waiting: another Isaac run is on GPU 0
+2026-10-17 06:10:40  waiting: another Isaac run is on GPU 0
+2026-10-17 06:11:40  waiting: another Isaac run is on GPU 0
+2026-10-17 06:12:40  START winner_film60s  (log ~/ira_film_winner_film60s.log)
+2026-10-17 06:45:40  DONE  winner_film60s  exit=0  rgb frames=3560
+2026-10-17 06:45:40  START base_film60s  (log ~/ira_film_base_film60s.log)
+2026-10-17 07:17:56  DONE  base_film60s  exit=0  rgb frames=3560
+2026-10-17 07:17:56  START winner_film  (log ~/ira_film_winner_film.log)
+2026-10-17 08:15:13  DONE  winner_film  exit=0  rgb frames=6986
+2026-10-17 08:15:13  START base_film  (log ~/ira_film_base_film.log)
+2026-10-17 09:42:35  DONE  base_film  exit=0  rgb frames=11582
+2026-10-17 09:42:36  ALL DONE

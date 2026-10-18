@@ -32,7 +32,7 @@ entrance (120.2 s vs 45.1 s) — see `docs/results/certificate.md`. The door-cro
 red at 4 p/m²) stays green for both plans and goes red for the "everyone at once" plan
 (5.1 p/m², 32 people on one door) — it is *demand* at the door, a crush-risk flag, not a crush model.
 
-Videos (in `renders/`, not in git): `hospital_map_layer1.mp4` (top-down, 300 people, smoke),
+Videos (in `renders/`): `hospital_map_layer1.mp4` (top-down, 300 people, smoke),
 `hospital_map_layer2_twin.mp4` (top-down, the twin's 40 characters), `hospital_dollhouse_overlay.mp4`
 (real Isaac render, roof off, rings on every character from the recorded positions),
 `hospital_dollhouse_fire.mp4` (same, with the Flow fire burning at the entrance),
@@ -116,3 +116,17 @@ assets/            venue USDs; the 1 GB hospital textures/props are fetched, not
 
 The mall venue from the first iteration (`assets/venue_mall.usdc`, `scenarios/mall_*.json`,
 `results/mall_*`) still works with the same commands; the hospital is the primary venue.
+
+## Evidence pulled from the GPU box (LaunchPad was decommissioned after the event)
+
+| Path | What it is |
+|---|---|
+| `renders/*.mp4` | every stitched film, plus `grimoires_demo.mp4` (the 53-second captioned reel) |
+| `results/twin_runs/<run>/agent_positions.jsonl.gz` | every character's world position every frame, for all 19 Isaac runs — the raw input to `sim/measure.py` (`gunzip` first) |
+| `results/twin_runs/<run>/frames/<camera>/` | every 400th rendered RGB frame of every camera, as visual evidence of each run |
+| `results/twin_runs/<run>/metadata.txt` | the IRA run metadata as written on the box |
+| `results/box_results/` | the box's `results/` folder as it was: rehearsal reports, solver outputs, venue grids, Layer-2 reports |
+| `results/box_home/` | the run queue status files, every Isaac run log (gzipped), the progress script and the NavMesh-cap patch exactly as bind-mounted |
+| `sim/ira/*.yaml`, `sim/bt/*.json`, `assets/hospital/hospital_evac_*.usda` | every generated IRA config, behaviour tree and stage, including the CCTV, fire and agent-plan runs |
+
+The hospital environment itself (`assets/hospital/` textures, props, `hospital.usd`) is NVIDIA's and is not redistributed; fetch it from the Isaac assets root as described above.

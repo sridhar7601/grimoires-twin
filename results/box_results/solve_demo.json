@@ -1,0 +1,4117 @@
+{
+ "tag": "demo",
+ "seed": 42,
+ "fps": 4.0,
+ "people": 450,
+ "weights": {
+  "w_t90": 1.0,
+  "w_exp": 0.5,
+  "w_trap": 1000.0,
+  "w_dense": 5.0
+ },
+ "fires": [
+  {
+   "name": "ne_concourse",
+   "origin": [
+    44.0,
+    17.0
+   ]
+  }
+ ],
+ "base_plan_id": "G12-E123-a30-s25",
+ "winner_plan_id": "G123-E1234-a5-s10",
+ "ranked": [
+  {
+   "plan_id": "G123-E1234-a5-s10",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2",
+     "G3"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3",
+     "E4"
+    ],
+    "alarm_delay_s": 5.0,
+    "stagger_s": 10.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 146.0,
+   "score_by_fire": {
+    "ne_concourse": 146.0
+   },
+   "t90_by_fire": {
+    "ne_concourse": 124.8
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  },
+  {
+   "plan_id": "G123-E123-a5-s10",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2",
+     "G3"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3"
+    ],
+    "alarm_delay_s": 5.0,
+    "stagger_s": 10.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 146.4,
+   "score_by_fire": {
+    "ne_concourse": 146.4
+   },
+   "t90_by_fire": {
+    "ne_concourse": 125.2
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  },
+  {
+   "plan_id": "G123-E123-a5-s25",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2",
+     "G3"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3"
+    ],
+    "alarm_delay_s": 5.0,
+    "stagger_s": 25.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 178.9,
+   "score_by_fire": {
+    "ne_concourse": 178.9
+   },
+   "t90_by_fire": {
+    "ne_concourse": 173.8
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  },
+  {
+   "plan_id": "G123-E1234-a5-s25",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2",
+     "G3"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3",
+     "E4"
+    ],
+    "alarm_delay_s": 5.0,
+    "stagger_s": 25.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 178.9,
+   "score_by_fire": {
+    "ne_concourse": 178.9
+   },
+   "t90_by_fire": {
+    "ne_concourse": 173.8
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  },
+  {
+   "plan_id": "G123-E123-a15-s10",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2",
+     "G3"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3"
+    ],
+    "alarm_delay_s": 15.0,
+    "stagger_s": 10.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 202.2,
+   "score_by_fire": {
+    "ne_concourse": 202.2
+   },
+   "t90_by_fire": {
+    "ne_concourse": 196.5
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  },
+  {
+   "plan_id": "G123-E1234-a15-s10",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2",
+     "G3"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3",
+     "E4"
+    ],
+    "alarm_delay_s": 15.0,
+    "stagger_s": 10.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 202.2,
+   "score_by_fire": {
+    "ne_concourse": 202.2
+   },
+   "t90_by_fire": {
+    "ne_concourse": 196.5
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  },
+  {
+   "plan_id": "G12-E123-a15-s10",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3"
+    ],
+    "alarm_delay_s": 15.0,
+    "stagger_s": 10.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 235.8,
+   "score_by_fire": {
+    "ne_concourse": 235.8
+   },
+   "t90_by_fire": {
+    "ne_concourse": 205.5
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  },
+  {
+   "plan_id": "G12-E1234-a15-s10",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3",
+     "E4"
+    ],
+    "alarm_delay_s": 15.0,
+    "stagger_s": 10.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 235.8,
+   "score_by_fire": {
+    "ne_concourse": 235.8
+   },
+   "t90_by_fire": {
+    "ne_concourse": 205.5
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  },
+  {
+   "plan_id": "G123-E123-a15-s25",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2",
+     "G3"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3"
+    ],
+    "alarm_delay_s": 15.0,
+    "stagger_s": 25.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 241.8,
+   "score_by_fire": {
+    "ne_concourse": 241.8
+   },
+   "t90_by_fire": {
+    "ne_concourse": 220.2
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  },
+  {
+   "plan_id": "G123-E1234-a15-s25",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2",
+     "G3"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3",
+     "E4"
+    ],
+    "alarm_delay_s": 15.0,
+    "stagger_s": 25.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 241.8,
+   "score_by_fire": {
+    "ne_concourse": 241.8
+   },
+   "t90_by_fire": {
+    "ne_concourse": 220.2
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  },
+  {
+   "plan_id": "G12-E123-a15-s25",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3"
+    ],
+    "alarm_delay_s": 15.0,
+    "stagger_s": 25.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 257.3,
+   "score_by_fire": {
+    "ne_concourse": 257.3
+   },
+   "t90_by_fire": {
+    "ne_concourse": 225.8
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  },
+  {
+   "plan_id": "G12-E1234-a15-s25",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3",
+     "E4"
+    ],
+    "alarm_delay_s": 15.0,
+    "stagger_s": 25.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 257.3,
+   "score_by_fire": {
+    "ne_concourse": 257.3
+   },
+   "t90_by_fire": {
+    "ne_concourse": 225.8
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  },
+  {
+   "plan_id": "G123-E123-a30-s10",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2",
+     "G3"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3"
+    ],
+    "alarm_delay_s": 30.0,
+    "stagger_s": 10.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 296.2,
+   "score_by_fire": {
+    "ne_concourse": 296.2
+   },
+   "t90_by_fire": {
+    "ne_concourse": 243.0
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  },
+  {
+   "plan_id": "G123-E1234-a30-s10",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2",
+     "G3"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3",
+     "E4"
+    ],
+    "alarm_delay_s": 30.0,
+    "stagger_s": 10.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 296.2,
+   "score_by_fire": {
+    "ne_concourse": 296.2
+   },
+   "t90_by_fire": {
+    "ne_concourse": 243.0
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  },
+  {
+   "plan_id": "G12-E123-a30-s10",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3"
+    ],
+    "alarm_delay_s": 30.0,
+    "stagger_s": 10.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 300.2,
+   "score_by_fire": {
+    "ne_concourse": 300.2
+   },
+   "t90_by_fire": {
+    "ne_concourse": 247.0
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  },
+  {
+   "plan_id": "G12-E1234-a30-s10",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3",
+     "E4"
+    ],
+    "alarm_delay_s": 30.0,
+    "stagger_s": 10.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 300.2,
+   "score_by_fire": {
+    "ne_concourse": 300.2
+   },
+   "t90_by_fire": {
+    "ne_concourse": 247.0
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  },
+  {
+   "plan_id": "G123-E123-a30-s25",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2",
+     "G3"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3"
+    ],
+    "alarm_delay_s": 30.0,
+    "stagger_s": 25.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 301.5,
+   "score_by_fire": {
+    "ne_concourse": 301.5
+   },
+   "t90_by_fire": {
+    "ne_concourse": 226.2
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  },
+  {
+   "plan_id": "G123-E1234-a30-s25",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2",
+     "G3"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3",
+     "E4"
+    ],
+    "alarm_delay_s": 30.0,
+    "stagger_s": 25.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 301.5,
+   "score_by_fire": {
+    "ne_concourse": 301.5
+   },
+   "t90_by_fire": {
+    "ne_concourse": 226.2
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  },
+  {
+   "plan_id": "G12-E123-a30-s25",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3"
+    ],
+    "alarm_delay_s": 30.0,
+    "stagger_s": 25.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 324.4,
+   "score_by_fire": {
+    "ne_concourse": 324.4
+   },
+   "t90_by_fire": {
+    "ne_concourse": 249.2
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  },
+  {
+   "plan_id": "G12-E1234-a30-s25",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3",
+     "E4"
+    ],
+    "alarm_delay_s": 30.0,
+    "stagger_s": 25.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 324.4,
+   "score_by_fire": {
+    "ne_concourse": 324.4
+   },
+   "t90_by_fire": {
+    "ne_concourse": 249.2
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  },
+  {
+   "plan_id": "G12-E123-a5-s25",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3"
+    ],
+    "alarm_delay_s": 5.0,
+    "stagger_s": 25.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 362.4,
+   "score_by_fire": {
+    "ne_concourse": 362.4
+   },
+   "t90_by_fire": {
+    "ne_concourse": 176.8
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  },
+  {
+   "plan_id": "G12-E1234-a5-s25",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3",
+     "E4"
+    ],
+    "alarm_delay_s": 5.0,
+    "stagger_s": 25.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 363.5,
+   "score_by_fire": {
+    "ne_concourse": 363.5
+   },
+   "t90_by_fire": {
+    "ne_concourse": 177.8
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  },
+  {
+   "plan_id": "G12-E123-a5-s10",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3"
+    ],
+    "alarm_delay_s": 5.0,
+    "stagger_s": 10.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 602.5,
+   "score_by_fire": {
+    "ne_concourse": 602.5
+   },
+   "t90_by_fire": {
+    "ne_concourse": 129.0
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  },
+  {
+   "plan_id": "G12-E1234-a5-s10",
+   "plan": {
+    "gates_open": [
+     "G1",
+     "G2"
+    ],
+    "exits_open": [
+     "E1",
+     "E2",
+     "E3",
+     "E4"
+    ],
+    "alarm_delay_s": 5.0,
+    "stagger_s": 10.0,
+    "route_bias": {}
+   },
+   "worst_fire": "ne_concourse",
+   "score_worst": 619.0,
+   "score_by_fire": {
+    "ne_concourse": 619.0
+   },
+   "t90_by_fire": {
+    "ne_concourse": 130.5
+   },
+   "trapped_by_fire": {
+    "ne_concourse": 0
+   }
+  }
+ ],
+ "runs": [
+  {
+   "plan_id": "G12-E123-a30-s25",
+   "fire": "ne_concourse",
+   "score": 324.4,
+   "t50_s": 163.8,
+   "t90_s": 249.2,
+   "t100_s": 270.2,
+   "trapped": 0,
+   "rerouted": 108,
+   "exposure_mean_s": 20.5,
+   "exposure_max_s": 55.7,
+   "n_over_exposure_threshold": 105,
+   "n_in_dense_smoke": 13,
+   "dense_smoke_max_s": 8.8,
+   "exit_throughput_total": {
+    "E1": 428,
+    "E2": 0,
+    "E3": 0
+   },
+   "gate_throughput_total": {
+    "G1": 428,
+    "G2": 0
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 0.0,
+    "E3": 0.0
+   },
+   "gate_peak_rate_ps": {
+    "G1": 10.6,
+    "G2": 0.0
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "E1": null,
+    "E2": null,
+    "E3": null
+   },
+   "sim_span_s": 270.2,
+   "stopped": "all_out"
+  },
+  {
+   "plan_id": "G12-E123-a30-s10",
+   "fire": "ne_concourse",
+   "score": 300.2,
+   "t50_s": 161.5,
+   "t90_s": 247.0,
+   "t100_s": 268.0,
+   "trapped": 0,
+   "rerouted": 279,
+   "exposure_mean_s": 16.4,
+   "exposure_max_s": 54.3,
+   "n_over_exposure_threshold": 43,
+   "n_in_dense_smoke": 9,
+   "dense_smoke_max_s": 9.0,
+   "exit_throughput_total": {
+    "E1": 428,
+    "E2": 0,
+    "E3": 0
+   },
+   "gate_throughput_total": {
+    "G1": 428,
+    "G2": 0
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 0.0,
+    "E3": 0.0
+   },
+   "gate_peak_rate_ps": {
+    "G1": 21.8,
+    "G2": 0.0
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "E1": null,
+    "E2": null,
+    "E3": null
+   },
+   "sim_span_s": 268.0,
+   "stopped": "all_out"
+  },
+  {
+   "plan_id": "G12-E123-a15-s25",
+   "fire": "ne_concourse",
+   "score": 257.3,
+   "t50_s": 140.2,
+   "t90_s": 225.8,
+   "t100_s": 246.8,
+   "trapped": 0,
+   "rerouted": 259,
+   "exposure_mean_s": 13.0,
+   "exposure_max_s": 53.6,
+   "n_over_exposure_threshold": 23,
+   "n_in_dense_smoke": 5,
+   "dense_smoke_max_s": 25.0,
+   "exit_throughput_total": {
+    "E1": 405,
+    "E2": 23,
+    "E3": 0
+   },
+   "gate_throughput_total": {
+    "G1": 427,
+    "G2": 1
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 2.2,
+    "E3": 0.0
+   },
+   "gate_peak_rate_ps": {
+    "G1": 13.4,
+    "G2": 0.2
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "E1": null,
+    "E2": null,
+    "E3": null
+   },
+   "sim_span_s": 246.8,
+   "stopped": "all_out"
+  },
+  {
+   "plan_id": "G12-E123-a15-s10",
+   "fire": "ne_concourse",
+   "score": 235.8,
+   "t50_s": 120.0,
+   "t90_s": 205.5,
+   "t100_s": 226.5,
+   "trapped": 0,
+   "rerouted": 228,
+   "exposure_mean_s": 10.7,
+   "exposure_max_s": 53.9,
+   "n_over_exposure_threshold": 6,
+   "n_in_dense_smoke": 5,
+   "dense_smoke_max_s": 26.2,
+   "exit_throughput_total": {
+    "E1": 371,
+    "E2": 57,
+    "E3": 0
+   },
+   "gate_throughput_total": {
+    "G1": 426,
+    "G2": 2
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 2.2,
+    "E3": 0.0
+   },
+   "gate_peak_rate_ps": {
+    "G1": 26.2,
+    "G2": 0.4
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "E1": null,
+    "E2": null,
+    "E3": null
+   },
+   "sim_span_s": 226.5,
+   "stopped": "all_out"
+  },
+  {
+   "plan_id": "G12-E123-a5-s25",
+   "fire": "ne_concourse",
+   "score": 362.4,
+   "t50_s": 91.2,
+   "t90_s": 176.8,
+   "t100_s": 197.8,
+   "trapped": 0,
+   "rerouted": 205,
+   "exposure_mean_s": 11.2,
+   "exposure_max_s": 61.3,
+   "n_over_exposure_threshold": 31,
+   "n_in_dense_smoke": 36,
+   "dense_smoke_max_s": 28.5,
+   "exit_throughput_total": {
+    "E1": 327,
+    "E2": 101,
+    "E3": 0
+   },
+   "gate_throughput_total": {
+    "G1": 387,
+    "G2": 42
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 2.2,
+    "E3": 0.0
+   },
+   "gate_peak_rate_ps": {
+    "G1": 12.8,
+    "G2": 6.2
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "E1": null,
+    "E2": null,
+    "E3": null
+   },
+   "sim_span_s": 197.8,
+   "stopped": "all_out"
+  },
+  {
+   "plan_id": "G12-E123-a5-s10",
+   "fire": "ne_concourse",
+   "score": 602.5,
+   "t50_s": 83.8,
+   "t90_s": 129.0,
+   "t100_s": 150.0,
+   "trapped": 0,
+   "rerouted": 156,
+   "exposure_mean_s": 16.9,
+   "exposure_max_s": 61.1,
+   "n_over_exposure_threshold": 114,
+   "n_in_dense_smoke": 93,
+   "dense_smoke_max_s": 30.2,
+   "exit_throughput_total": {
+    "E1": 238,
+    "E2": 190,
+    "E3": 0
+   },
+   "gate_throughput_total": {
+    "G1": 319,
+    "G2": 123
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 2.2,
+    "E3": 0.0
+   },
+   "gate_peak_rate_ps": {
+    "G1": 20.4,
+    "G2": 16.2
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "E1": null,
+    "E2": null,
+    "E3": null
+   },
+   "sim_span_s": 150.0,
+   "stopped": "all_out"
+  },
+  {
+   "plan_id": "G12-E1234-a30-s25",
+   "fire": "ne_concourse",
+   "score": 324.4,
+   "t50_s": 163.8,
+   "t90_s": 249.2,
+   "t100_s": 270.2,
+   "trapped": 0,
+   "rerouted": 108,
+   "exposure_mean_s": 20.5,
+   "exposure_max_s": 55.7,
+   "n_over_exposure_threshold": 105,
+   "n_in_dense_smoke": 13,
+   "dense_smoke_max_s": 8.8,
+   "exit_throughput_total": {
+    "E1": 428,
+    "E2": 0,
+    "E3": 0,
+    "E4": 0
+   },
+   "gate_throughput_total": {
+    "G1": 428,
+    "G2": 0
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 0.0,
+    "E3": 0.0,
+    "E4": 0.0
+   },
+   "gate_peak_rate_ps": {
+    "G1": 10.6,
+    "G2": 0.0
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "E1": null,
+    "E2": null,
+    "E3": null,
+    "E4": null
+   },
+   "sim_span_s": 270.2,
+   "stopped": "all_out"
+  },
+  {
+   "plan_id": "G12-E1234-a30-s10",
+   "fire": "ne_concourse",
+   "score": 300.2,
+   "t50_s": 161.5,
+   "t90_s": 247.0,
+   "t100_s": 268.0,
+   "trapped": 0,
+   "rerouted": 279,
+   "exposure_mean_s": 16.4,
+   "exposure_max_s": 54.3,
+   "n_over_exposure_threshold": 43,
+   "n_in_dense_smoke": 9,
+   "dense_smoke_max_s": 9.0,
+   "exit_throughput_total": {
+    "E1": 428,
+    "E2": 0,
+    "E3": 0,
+    "E4": 0
+   },
+   "gate_throughput_total": {
+    "G1": 428,
+    "G2": 0
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 0.0,
+    "E3": 0.0,
+    "E4": 0.0
+   },
+   "gate_peak_rate_ps": {
+    "G1": 21.8,
+    "G2": 0.0
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "E1": null,
+    "E2": null,
+    "E3": null,
+    "E4": null
+   },
+   "sim_span_s": 268.0,
+   "stopped": "all_out"
+  },
+  {
+   "plan_id": "G12-E1234-a15-s25",
+   "fire": "ne_concourse",
+   "score": 257.3,
+   "t50_s": 140.2,
+   "t90_s": 225.8,
+   "t100_s": 246.8,
+   "trapped": 0,
+   "rerouted": 259,
+   "exposure_mean_s": 13.0,
+   "exposure_max_s": 53.6,
+   "n_over_exposure_threshold": 23,
+   "n_in_dense_smoke": 5,
+   "dense_smoke_max_s": 25.0,
+   "exit_throughput_total": {
+    "E1": 405,
+    "E2": 23,
+    "E3": 0,
+    "E4": 0
+   },
+   "gate_throughput_total": {
+    "G1": 427,
+    "G2": 1
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 2.2,
+    "E3": 0.0,
+    "E4": 0.0
+   },
+   "gate_peak_rate_ps": {
+    "G1": 13.4,
+    "G2": 0.2
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "E1": null,
+    "E2": null,
+    "E3": null,
+    "E4": null
+   },
+   "sim_span_s": 246.8,
+   "stopped": "all_out"
+  },
+  {
+   "plan_id": "G12-E1234-a15-s10",
+   "fire": "ne_concourse",
+   "score": 235.8,
+   "t50_s": 120.0,
+   "t90_s": 205.5,
+   "t100_s": 226.5,
+   "trapped": 0,
+   "rerouted": 229,
+   "exposure_mean_s": 10.7,
+   "exposure_max_s": 53.9,
+   "n_over_exposure_threshold": 6,
+   "n_in_dense_smoke": 5,
+   "dense_smoke_max_s": 26.2,
+   "exit_throughput_total": {
+    "E1": 371,
+    "E2": 57,
+    "E3": 0,
+    "E4": 0
+   },
+   "gate_throughput_total": {
+    "G1": 426,
+    "G2": 2
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 2.2,
+    "E3": 0.0,
+    "E4": 0.0
+   },
+   "gate_peak_rate_ps": {
+    "G1": 26.0,
+    "G2": 0.4
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "E1": null,
+    "E2": null,
+    "E3": null,
+    "E4": null
+   },
+   "sim_span_s": 226.5,
+   "stopped": "all_out"
+  },
+  {
+   "plan_id": "G12-E1234-a5-s25",
+   "fire": "ne_concourse",
+   "score": 363.5,
+   "t50_s": 92.2,
+   "t90_s": 177.8,
+   "t100_s": 198.8,
+   "trapped": 0,
+   "rerouted": 232,
+   "exposure_mean_s": 11.3,
+   "exposure_max_s": 61.4,
+   "n_over_exposure_threshold": 31,
+   "n_in_dense_smoke": 36,
+   "dense_smoke_max_s": 28.5,
+   "exit_throughput_total": {
+    "E1": 329,
+    "E2": 98,
+    "E3": 0,
+    "E4": 1
+   },
+   "gate_throughput_total": {
+    "G1": 385,
+    "G2": 44
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 2.2,
+    "E3": 0.0,
+    "E4": 0.2
+   },
+   "gate_peak_rate_ps": {
+    "G1": 13.0,
+    "G2": 6.6
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "E1": null,
+    "E2": null,
+    "E3": null,
+    "E4": null
+   },
+   "sim_span_s": 198.8,
+   "stopped": "all_out"
+  },
+  {
+   "plan_id": "G12-E1234-a5-s10",
+   "fire": "ne_concourse",
+   "score": 619.0,
+   "t50_s": 84.0,
+   "t90_s": 130.5,
+   "t100_s": 151.5,
+   "trapped": 0,
+   "rerouted": 226,
+   "exposure_mean_s": 17.0,
+   "exposure_max_s": 60.5,
+   "n_over_exposure_threshold": 116,
+   "n_in_dense_smoke": 96,
+   "dense_smoke_max_s": 30.2,
+   "exit_throughput_total": {
+    "E1": 241,
+    "E2": 185,
+    "E3": 0,
+    "E4": 2
+   },
+   "gate_throughput_total": {
+    "G1": 314,
+    "G2": 128
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 2.2,
+    "E3": 0.0,
+    "E4": 0.4
+   },
+   "gate_peak_rate_ps": {
+    "G1": 17.8,
+    "G2": 16.8
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "E1": null,
+    "E2": null,
+    "E3": null,
+    "E4": null
+   },
+   "sim_span_s": 151.5,
+   "stopped": "all_out"
+  },
+  {
+   "plan_id": "G123-E123-a30-s25",
+   "fire": "ne_concourse",
+   "score": 301.5,
+   "t50_s": 141.2,
+   "t90_s": 226.2,
+   "t100_s": 247.2,
+   "trapped": 0,
+   "rerouted": 151,
+   "exposure_mean_s": 20.6,
+   "exposure_max_s": 60.2,
+   "n_over_exposure_threshold": 103,
+   "n_in_dense_smoke": 13,
+   "dense_smoke_max_s": 8.8,
+   "exit_throughput_total": {
+    "E1": 381,
+    "E2": 47,
+    "E3": 0
+   },
+   "gate_throughput_total": {
+    "G1": 381,
+    "G2": 0,
+    "G3": 47
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 2.2,
+    "E3": 0.0
+   },
+   "gate_peak_rate_ps": {
+    "G1": 10.6,
+    "G2": 0.0,
+    "G3": 2.6
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "G3": null,
+    "E1": null,
+    "E2": null,
+    "E3": null
+   },
+   "sim_span_s": 247.2,
+   "stopped": "all_out"
+  },
+  {
+   "plan_id": "G123-E123-a30-s10",
+   "fire": "ne_concourse",
+   "score": 296.2,
+   "t50_s": 157.5,
+   "t90_s": 243.0,
+   "t100_s": 264.0,
+   "trapped": 0,
+   "rerouted": 281,
+   "exposure_mean_s": 16.5,
+   "exposure_max_s": 61.1,
+   "n_over_exposure_threshold": 42,
+   "n_in_dense_smoke": 9,
+   "dense_smoke_max_s": 9.0,
+   "exit_throughput_total": {
+    "E1": 419,
+    "E2": 9,
+    "E3": 0
+   },
+   "gate_throughput_total": {
+    "G1": 418,
+    "G2": 0,
+    "G3": 10
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 0.6,
+    "E3": 0.0
+   },
+   "gate_peak_rate_ps": {
+    "G1": 22.2,
+    "G2": 0.0,
+    "G3": 0.8
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "G3": null,
+    "E1": null,
+    "E2": null,
+    "E3": null
+   },
+   "sim_span_s": 264.0,
+   "stopped": "all_out"
+  },
+  {
+   "plan_id": "G123-E123-a15-s25",
+   "fire": "ne_concourse",
+   "score": 241.8,
+   "t50_s": 134.8,
+   "t90_s": 220.2,
+   "t100_s": 241.2,
+   "trapped": 0,
+   "rerouted": 251,
+   "exposure_mean_s": 13.3,
+   "exposure_max_s": 60.9,
+   "n_over_exposure_threshold": 21,
+   "n_in_dense_smoke": 3,
+   "dense_smoke_max_s": 5.0,
+   "exit_throughput_total": {
+    "E1": 394,
+    "E2": 34,
+    "E3": 0
+   },
+   "gate_throughput_total": {
+    "G1": 360,
+    "G2": 0,
+    "G3": 68
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 2.2,
+    "E3": 0.0
+   },
+   "gate_peak_rate_ps": {
+    "G1": 13.4,
+    "G2": 0.0,
+    "G3": 6.6
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "G3": null,
+    "E1": null,
+    "E2": null,
+    "E3": null
+   },
+   "sim_span_s": 241.2,
+   "stopped": "all_out"
+  },
+  {
+   "plan_id": "G123-E123-a15-s10",
+   "fire": "ne_concourse",
+   "score": 202.2,
+   "t50_s": 111.0,
+   "t90_s": 196.5,
+   "t100_s": 217.5,
+   "trapped": 0,
+   "rerouted": 210,
+   "exposure_mean_s": 11.3,
+   "exposure_max_s": 26.8,
+   "n_over_exposure_threshold": 0,
+   "n_in_dense_smoke": 0,
+   "dense_smoke_max_s": 0.0,
+   "exit_throughput_total": {
+    "E1": 353,
+    "E2": 75,
+    "E3": 0
+   },
+   "gate_throughput_total": {
+    "G1": 285,
+    "G2": 0,
+    "G3": 143
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 2.2,
+    "E3": 0.0
+   },
+   "gate_peak_rate_ps": {
+    "G1": 13.4,
+    "G2": 0.0,
+    "G3": 12.8
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "G3": null,
+    "E1": null,
+    "E2": null,
+    "E3": null
+   },
+   "sim_span_s": 217.5,
+   "stopped": "all_out"
+  },
+  {
+   "plan_id": "G123-E123-a5-s25",
+   "fire": "ne_concourse",
+   "score": 178.9,
+   "t50_s": 88.2,
+   "t90_s": 173.8,
+   "t100_s": 194.8,
+   "trapped": 0,
+   "rerouted": 190,
+   "exposure_mean_s": 10.2,
+   "exposure_max_s": 33.3,
+   "n_over_exposure_threshold": 1,
+   "n_in_dense_smoke": 0,
+   "dense_smoke_max_s": 0.0,
+   "exit_throughput_total": {
+    "E1": 321,
+    "E2": 107,
+    "E3": 0
+   },
+   "gate_throughput_total": {
+    "G1": 265,
+    "G2": 5,
+    "G3": 158
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 2.2,
+    "E3": 0.0
+   },
+   "gate_peak_rate_ps": {
+    "G1": 7.4,
+    "G2": 1.0,
+    "G3": 8.8
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "G3": null,
+    "E1": null,
+    "E2": null,
+    "E3": null
+   },
+   "sim_span_s": 194.8,
+   "stopped": "all_out"
+  },
+  {
+   "plan_id": "G123-E123-a5-s10",
+   "fire": "ne_concourse",
+   "score": 146.4,
+   "t50_s": 82.5,
+   "t90_s": 125.2,
+   "t100_s": 145.5,
+   "trapped": 0,
+   "rerouted": 129,
+   "exposure_mean_s": 12.4,
+   "exposure_max_s": 55.8,
+   "n_over_exposure_threshold": 50,
+   "n_in_dense_smoke": 3,
+   "dense_smoke_max_s": 21.2,
+   "exit_throughput_total": {
+    "E1": 229,
+    "E2": 199,
+    "E3": 0
+   },
+   "gate_throughput_total": {
+    "G1": 182,
+    "G2": 15,
+    "G3": 231
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 2.2,
+    "E3": 0.0
+   },
+   "gate_peak_rate_ps": {
+    "G1": 13.4,
+    "G2": 1.8,
+    "G3": 13.4
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "G3": null,
+    "E1": null,
+    "E2": null,
+    "E3": null
+   },
+   "sim_span_s": 145.5,
+   "stopped": "all_out"
+  },
+  {
+   "plan_id": "G123-E1234-a30-s25",
+   "fire": "ne_concourse",
+   "score": 301.5,
+   "t50_s": 141.2,
+   "t90_s": 226.2,
+   "t100_s": 247.2,
+   "trapped": 0,
+   "rerouted": 151,
+   "exposure_mean_s": 20.6,
+   "exposure_max_s": 60.2,
+   "n_over_exposure_threshold": 103,
+   "n_in_dense_smoke": 13,
+   "dense_smoke_max_s": 8.8,
+   "exit_throughput_total": {
+    "E1": 381,
+    "E2": 47,
+    "E3": 0,
+    "E4": 0
+   },
+   "gate_throughput_total": {
+    "G1": 381,
+    "G2": 0,
+    "G3": 47
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 2.2,
+    "E3": 0.0,
+    "E4": 0.0
+   },
+   "gate_peak_rate_ps": {
+    "G1": 10.6,
+    "G2": 0.0,
+    "G3": 2.6
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "G3": null,
+    "E1": null,
+    "E2": null,
+    "E3": null,
+    "E4": null
+   },
+   "sim_span_s": 247.2,
+   "stopped": "all_out"
+  },
+  {
+   "plan_id": "G123-E1234-a30-s10",
+   "fire": "ne_concourse",
+   "score": 296.2,
+   "t50_s": 157.5,
+   "t90_s": 243.0,
+   "t100_s": 264.0,
+   "trapped": 0,
+   "rerouted": 281,
+   "exposure_mean_s": 16.5,
+   "exposure_max_s": 61.1,
+   "n_over_exposure_threshold": 42,
+   "n_in_dense_smoke": 9,
+   "dense_smoke_max_s": 9.0,
+   "exit_throughput_total": {
+    "E1": 419,
+    "E2": 9,
+    "E3": 0,
+    "E4": 0
+   },
+   "gate_throughput_total": {
+    "G1": 418,
+    "G2": 0,
+    "G3": 10
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 0.6,
+    "E3": 0.0,
+    "E4": 0.0
+   },
+   "gate_peak_rate_ps": {
+    "G1": 22.2,
+    "G2": 0.0,
+    "G3": 0.8
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "G3": null,
+    "E1": null,
+    "E2": null,
+    "E3": null,
+    "E4": null
+   },
+   "sim_span_s": 264.0,
+   "stopped": "all_out"
+  },
+  {
+   "plan_id": "G123-E1234-a15-s25",
+   "fire": "ne_concourse",
+   "score": 241.8,
+   "t50_s": 134.8,
+   "t90_s": 220.2,
+   "t100_s": 241.2,
+   "trapped": 0,
+   "rerouted": 251,
+   "exposure_mean_s": 13.3,
+   "exposure_max_s": 60.9,
+   "n_over_exposure_threshold": 21,
+   "n_in_dense_smoke": 3,
+   "dense_smoke_max_s": 5.0,
+   "exit_throughput_total": {
+    "E1": 394,
+    "E2": 34,
+    "E3": 0,
+    "E4": 0
+   },
+   "gate_throughput_total": {
+    "G1": 360,
+    "G2": 0,
+    "G3": 68
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 2.2,
+    "E3": 0.0,
+    "E4": 0.0
+   },
+   "gate_peak_rate_ps": {
+    "G1": 13.4,
+    "G2": 0.0,
+    "G3": 6.6
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "G3": null,
+    "E1": null,
+    "E2": null,
+    "E3": null,
+    "E4": null
+   },
+   "sim_span_s": 241.2,
+   "stopped": "all_out"
+  },
+  {
+   "plan_id": "G123-E1234-a15-s10",
+   "fire": "ne_concourse",
+   "score": 202.2,
+   "t50_s": 111.0,
+   "t90_s": 196.5,
+   "t100_s": 217.5,
+   "trapped": 0,
+   "rerouted": 210,
+   "exposure_mean_s": 11.3,
+   "exposure_max_s": 26.8,
+   "n_over_exposure_threshold": 0,
+   "n_in_dense_smoke": 0,
+   "dense_smoke_max_s": 0.0,
+   "exit_throughput_total": {
+    "E1": 353,
+    "E2": 75,
+    "E3": 0,
+    "E4": 0
+   },
+   "gate_throughput_total": {
+    "G1": 285,
+    "G2": 0,
+    "G3": 143
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 2.2,
+    "E3": 0.0,
+    "E4": 0.0
+   },
+   "gate_peak_rate_ps": {
+    "G1": 13.4,
+    "G2": 0.0,
+    "G3": 12.8
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "G3": null,
+    "E1": null,
+    "E2": null,
+    "E3": null,
+    "E4": null
+   },
+   "sim_span_s": 217.5,
+   "stopped": "all_out"
+  },
+  {
+   "plan_id": "G123-E1234-a5-s25",
+   "fire": "ne_concourse",
+   "score": 178.9,
+   "t50_s": 88.2,
+   "t90_s": 173.8,
+   "t100_s": 194.8,
+   "trapped": 0,
+   "rerouted": 198,
+   "exposure_mean_s": 10.2,
+   "exposure_max_s": 35.0,
+   "n_over_exposure_threshold": 2,
+   "n_in_dense_smoke": 0,
+   "dense_smoke_max_s": 0.0,
+   "exit_throughput_total": {
+    "E1": 321,
+    "E2": 106,
+    "E3": 0,
+    "E4": 1
+   },
+   "gate_throughput_total": {
+    "G1": 265,
+    "G2": 5,
+    "G3": 158
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 2.2,
+    "E3": 0.0,
+    "E4": 0.2
+   },
+   "gate_peak_rate_ps": {
+    "G1": 7.4,
+    "G2": 1.0,
+    "G3": 8.8
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "G3": null,
+    "E1": null,
+    "E2": null,
+    "E3": null,
+    "E4": null
+   },
+   "sim_span_s": 194.8,
+   "stopped": "all_out"
+  },
+  {
+   "plan_id": "G123-E1234-a5-s10",
+   "fire": "ne_concourse",
+   "score": 146.0,
+   "t50_s": 82.0,
+   "t90_s": 124.8,
+   "t100_s": 145.0,
+   "trapped": 0,
+   "rerouted": 149,
+   "exposure_mean_s": 12.4,
+   "exposure_max_s": 55.5,
+   "n_over_exposure_threshold": 49,
+   "n_in_dense_smoke": 3,
+   "dense_smoke_max_s": 21.2,
+   "exit_throughput_total": {
+    "E1": 228,
+    "E2": 198,
+    "E3": 0,
+    "E4": 2
+   },
+   "gate_throughput_total": {
+    "G1": 182,
+    "G2": 20,
+    "G3": 226
+   },
+   "exit_peak_rate_ps": {
+    "E1": 2.2,
+    "E2": 2.2,
+    "E3": 0.0,
+    "E4": 0.4
+   },
+   "gate_peak_rate_ps": {
+    "G1": 13.4,
+    "G2": 2.8,
+    "G3": 13.4
+   },
+   "corridor_closed_at_s": {
+    "G1": null,
+    "G2": 23.6,
+    "G3": null,
+    "E1": null,
+    "E2": null,
+    "E3": null,
+    "E4": null
+   },
+   "sim_span_s": 145.0,
+   "stopped": "all_out"
+  }
+ ],
+ "before": {
+  "venue": "stadium_section_proxy_v1",
+  "scenario": "fire_evacuation",
+  "seed": 42,
+  "plan": {
+   "gates_open": [
+    "G1",
+    "G2"
+   ],
+   "exits_open": [
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "alarm_delay_s": 30.0,
+   "stagger_s": 25.0,
+   "route_bias": {}
+  },
+  "plan_id": "G12-E123-a30-s25",
+  "fire": {
+   "name": "ne_concourse",
+   "origin": [
+    44.0,
+    17.0
+   ]
+  },
+  "smoke_params": {
+   "spread_speed_ms": 0.6,
+   "ramp_s": 20.0,
+   "reach_m": 45.0,
+   "s_block": 0.7,
+   "k_slow": 0.6,
+   "origin_xy": [
+    44.0,
+    17.0
+   ],
+   "model": "front model: arrival by shortest walkable path / spread_speed, level ramps over ramp_s, ceiling 1 - d/reach_m"
+  },
+  "people": 428,
+  "open_gates": [
+   "G1",
+   "G2"
+  ],
+  "open_exits": [
+   "E1",
+   "E2",
+   "E3"
+  ],
+  "t50_s": 163.8,
+  "t90_s": 249.2,
+  "t100_s": 270.2,
+  "trapped": 0,
+  "ever_without_route": 0,
+  "rerouted": 108,
+  "exposure_mean_s": 20.5,
+  "exposure_max_s": 55.7,
+  "exposure_threshold_s": 30.0,
+  "n_over_exposure_threshold": 105,
+  "n_in_dense_smoke": 13,
+  "dense_smoke_max_s": 8.8,
+  "dense_smoke_total_person_s": 52.5,
+  "routing": {
+   "alpha_avoid": 4.0,
+   "dense_cost_factor": 20.0,
+   "min_speed_ms": 0.3,
+   "note": "route cost x (1 + alpha*s); dense cells impassable for planning; someone already inside dense smoke walks out at min_speed along the cheapest path"
+  },
+  "door_flow_pms": 1.3,
+  "exit_capacity_ps": {
+   "E1": 3.9,
+   "E2": 3.9,
+   "E3": 3.9
+  },
+  "gate_throughput_total": {
+   "G1": 428,
+   "G2": 0
+  },
+  "exit_throughput_total": {
+   "E1": 428,
+   "E2": 0,
+   "E3": 0
+  },
+  "gate_peak_rate_ps": {
+   "G1": 10.6,
+   "G2": 0.0
+  },
+  "exit_peak_rate_ps": {
+   "E1": 2.2,
+   "E2": 0.0,
+   "E3": 0.0
+  },
+  "corridor_closed_at_s": {
+   "G1": null,
+   "G2": 23.6,
+   "E1": null,
+   "E2": null,
+   "E3": null
+  },
+  "sim_span_s": 270.2,
+  "fps": 4.0,
+  "replan_s": 5.0,
+  "stopped": "all_out",
+  "walk_speed_mean_ms": 1.25,
+  "remaining_series_t_in_out": [
+   [
+    0.0,
+    428,
+    0
+   ],
+   [
+    1.0,
+    428,
+    0
+   ],
+   [
+    2.0,
+    428,
+    0
+   ],
+   [
+    3.0,
+    428,
+    0
+   ],
+   [
+    4.0,
+    428,
+    0
+   ],
+   [
+    5.0,
+    428,
+    0
+   ],
+   [
+    6.0,
+    428,
+    0
+   ],
+   [
+    7.0,
+    428,
+    0
+   ],
+   [
+    8.0,
+    428,
+    0
+   ],
+   [
+    9.0,
+    428,
+    0
+   ],
+   [
+    10.0,
+    428,
+    0
+   ],
+   [
+    11.0,
+    428,
+    0
+   ],
+   [
+    12.0,
+    428,
+    0
+   ],
+   [
+    13.0,
+    428,
+    0
+   ],
+   [
+    14.0,
+    428,
+    0
+   ],
+   [
+    15.0,
+    428,
+    0
+   ],
+   [
+    16.0,
+    428,
+    0
+   ],
+   [
+    17.0,
+    428,
+    0
+   ],
+   [
+    18.0,
+    428,
+    0
+   ],
+   [
+    19.0,
+    428,
+    0
+   ],
+   [
+    20.0,
+    428,
+    0
+   ],
+   [
+    21.0,
+    428,
+    0
+   ],
+   [
+    22.0,
+    428,
+    0
+   ],
+   [
+    23.0,
+    428,
+    0
+   ],
+   [
+    24.0,
+    428,
+    0
+   ],
+   [
+    25.0,
+    428,
+    0
+   ],
+   [
+    26.0,
+    428,
+    0
+   ],
+   [
+    27.0,
+    428,
+    0
+   ],
+   [
+    28.0,
+    428,
+    0
+   ],
+   [
+    29.0,
+    428,
+    0
+   ],
+   [
+    30.0,
+    428,
+    0
+   ],
+   [
+    31.0,
+    428,
+    0
+   ],
+   [
+    32.0,
+    428,
+    0
+   ],
+   [
+    33.0,
+    428,
+    0
+   ],
+   [
+    34.0,
+    428,
+    0
+   ],
+   [
+    35.0,
+    428,
+    0
+   ],
+   [
+    36.0,
+    428,
+    0
+   ],
+   [
+    37.0,
+    428,
+    0
+   ],
+   [
+    38.0,
+    428,
+    0
+   ],
+   [
+    39.0,
+    428,
+    0
+   ],
+   [
+    40.0,
+    428,
+    0
+   ],
+   [
+    41.0,
+    428,
+    0
+   ],
+   [
+    42.0,
+    428,
+    0
+   ],
+   [
+    43.0,
+    428,
+    0
+   ],
+   [
+    44.0,
+    428,
+    0
+   ],
+   [
+    45.0,
+    428,
+    0
+   ],
+   [
+    46.0,
+    428,
+    0
+   ],
+   [
+    47.0,
+    428,
+    0
+   ],
+   [
+    48.0,
+    428,
+    0
+   ],
+   [
+    49.0,
+    428,
+    0
+   ],
+   [
+    50.0,
+    428,
+    0
+   ],
+   [
+    51.0,
+    428,
+    0
+   ],
+   [
+    52.0,
+    428,
+    0
+   ],
+   [
+    53.0,
+    428,
+    0
+   ],
+   [
+    54.0,
+    428,
+    0
+   ],
+   [
+    55.0,
+    428,
+    0
+   ],
+   [
+    56.0,
+    426,
+    2
+   ],
+   [
+    57.0,
+    425,
+    3
+   ],
+   [
+    58.0,
+    425,
+    3
+   ],
+   [
+    59.0,
+    423,
+    5
+   ],
+   [
+    60.0,
+    421,
+    7
+   ],
+   [
+    61.0,
+    419,
+    9
+   ],
+   [
+    62.0,
+    417,
+    11
+   ],
+   [
+    63.0,
+    415,
+    13
+   ],
+   [
+    64.0,
+    413,
+    15
+   ],
+   [
+    65.0,
+    411,
+    17
+   ],
+   [
+    66.0,
+    409,
+    19
+   ],
+   [
+    67.0,
+    407,
+    21
+   ],
+   [
+    68.0,
+    405,
+    23
+   ],
+   [
+    69.0,
+    403,
+    25
+   ],
+   [
+    70.0,
+    401,
+    27
+   ],
+   [
+    71.0,
+    399,
+    29
+   ],
+   [
+    72.0,
+    397,
+    31
+   ],
+   [
+    73.0,
+    395,
+    33
+   ],
+   [
+    74.0,
+    393,
+    35
+   ],
+   [
+    75.0,
+    391,
+    37
+   ],
+   [
+    76.0,
+    389,
+    39
+   ],
+   [
+    77.0,
+    387,
+    41
+   ],
+   [
+    78.0,
+    385,
+    43
+   ],
+   [
+    79.0,
+    383,
+    45
+   ],
+   [
+    80.0,
+    381,
+    47
+   ],
+   [
+    81.0,
+    379,
+    49
+   ],
+   [
+    82.0,
+    377,
+    51
+   ],
+   [
+    83.0,
+    375,
+    53
+   ],
+   [
+    84.0,
+    373,
+    55
+   ],
+   [
+    85.0,
+    371,
+    57
+   ],
+   [
+    86.0,
+    369,
+    59
+   ],
+   [
+    87.0,
+    367,
+    61
+   ],
+   [
+    88.0,
+    365,
+    63
+   ],
+   [
+    89.0,
+    363,
+    65
+   ],
+   [
+    90.0,
+    361,
+    67
+   ],
+   [
+    91.0,
+    359,
+    69
+   ],
+   [
+    92.0,
+    357,
+    71
+   ],
+   [
+    93.0,
+    355,
+    73
+   ],
+   [
+    94.0,
+    353,
+    75
+   ],
+   [
+    95.0,
+    351,
+    77
+   ],
+   [
+    96.0,
+    349,
+    79
+   ],
+   [
+    97.0,
+    347,
+    81
+   ],
+   [
+    98.0,
+    345,
+    83
+   ],
+   [
+    99.0,
+    343,
+    85
+   ],
+   [
+    100.0,
+    341,
+    87
+   ],
+   [
+    101.0,
+    339,
+    89
+   ],
+   [
+    102.0,
+    337,
+    91
+   ],
+   [
+    103.0,
+    335,
+    93
+   ],
+   [
+    104.0,
+    333,
+    95
+   ],
+   [
+    105.0,
+    331,
+    97
+   ],
+   [
+    106.0,
+    329,
+    99
+   ],
+   [
+    107.0,
+    327,
+    101
+   ],
+   [
+    108.0,
+    325,
+    103
+   ],
+   [
+    109.0,
+    323,
+    105
+   ],
+   [
+    110.0,
+    321,
+    107
+   ],
+   [
+    111.0,
+    319,
+    109
+   ],
+   [
+    112.0,
+    317,
+    111
+   ],
+   [
+    113.0,
+    315,
+    113
+   ],
+   [
+    114.0,
+    313,
+    115
+   ],
+   [
+    115.0,
+    311,
+    117
+   ],
+   [
+    116.0,
+    309,
+    119
+   ],
+   [
+    117.0,
+    307,
+    121
+   ],
+   [
+    118.0,
+    305,
+    123
+   ],
+   [
+    119.0,
+    303,
+    125
+   ],
+   [
+    120.0,
+    301,
+    127
+   ],
+   [
+    121.0,
+    299,
+    129
+   ],
+   [
+    122.0,
+    297,
+    131
+   ],
+   [
+    123.0,
+    295,
+    133
+   ],
+   [
+    124.0,
+    293,
+    135
+   ],
+   [
+    125.0,
+    291,
+    137
+   ],
+   [
+    126.0,
+    289,
+    139
+   ],
+   [
+    127.0,
+    287,
+    141
+   ],
+   [
+    128.0,
+    285,
+    143
+   ],
+   [
+    129.0,
+    283,
+    145
+   ],
+   [
+    130.0,
+    281,
+    147
+   ],
+   [
+    131.0,
+    279,
+    149
+   ],
+   [
+    132.0,
+    277,
+    151
+   ],
+   [
+    133.0,
+    275,
+    153
+   ],
+   [
+    134.0,
+    273,
+    155
+   ],
+   [
+    135.0,
+    271,
+    157
+   ],
+   [
+    136.0,
+    269,
+    159
+   ],
+   [
+    137.0,
+    267,
+    161
+   ],
+   [
+    138.0,
+    265,
+    163
+   ],
+   [
+    139.0,
+    263,
+    165
+   ],
+   [
+    140.0,
+    261,
+    167
+   ],
+   [
+    141.0,
+    259,
+    169
+   ],
+   [
+    142.0,
+    257,
+    171
+   ],
+   [
+    143.0,
+    255,
+    173
+   ],
+   [
+    144.0,
+    253,
+    175
+   ],
+   [
+    145.0,
+    251,
+    177
+   ],
+   [
+    146.0,
+    249,
+    179
+   ],
+   [
+    147.0,
+    247,
+    181
+   ],
+   [
+    148.0,
+    245,
+    183
+   ],
+   [
+    149.0,
+    243,
+    185
+   ],
+   [
+    150.0,
+    241,
+    187
+   ],
+   [
+    151.0,
+    239,
+    189
+   ],
+   [
+    152.0,
+    237,
+    191
+   ],
+   [
+    153.0,
+    235,
+    193
+   ],
+   [
+    154.0,
+    233,
+    195
+   ],
+   [
+    155.0,
+    231,
+    197
+   ],
+   [
+    156.0,
+    229,
+    199
+   ],
+   [
+    157.0,
+    227,
+    201
+   ],
+   [
+    158.0,
+    225,
+    203
+   ],
+   [
+    159.0,
+    223,
+    205
+   ],
+   [
+    160.0,
+    221,
+    207
+   ],
+   [
+    161.0,
+    219,
+    209
+   ],
+   [
+    162.0,
+    217,
+    211
+   ],
+   [
+    163.0,
+    215,
+    213
+   ],
+   [
+    164.0,
+    213,
+    215
+   ],
+   [
+    165.0,
+    211,
+    217
+   ],
+   [
+    166.0,
+    209,
+    219
+   ],
+   [
+    167.0,
+    207,
+    221
+   ],
+   [
+    168.0,
+    205,
+    223
+   ],
+   [
+    169.0,
+    203,
+    225
+   ],
+   [
+    170.0,
+    201,
+    227
+   ],
+   [
+    171.0,
+    199,
+    229
+   ],
+   [
+    172.0,
+    197,
+    231
+   ],
+   [
+    173.0,
+    195,
+    233
+   ],
+   [
+    174.0,
+    193,
+    235
+   ],
+   [
+    175.0,
+    191,
+    237
+   ],
+   [
+    176.0,
+    189,
+    239
+   ],
+   [
+    177.0,
+    187,
+    241
+   ],
+   [
+    178.0,
+    185,
+    243
+   ],
+   [
+    179.0,
+    183,
+    245
+   ],
+   [
+    180.0,
+    181,
+    247
+   ],
+   [
+    181.0,
+    179,
+    249
+   ],
+   [
+    182.0,
+    177,
+    251
+   ],
+   [
+    183.0,
+    175,
+    253
+   ],
+   [
+    184.0,
+    173,
+    255
+   ],
+   [
+    185.0,
+    171,
+    257
+   ],
+   [
+    186.0,
+    169,
+    259
+   ],
+   [
+    187.0,
+    167,
+    261
+   ],
+   [
+    188.0,
+    165,
+    263
+   ],
+   [
+    189.0,
+    163,
+    265
+   ],
+   [
+    190.0,
+    161,
+    267
+   ],
+   [
+    191.0,
+    159,
+    269
+   ],
+   [
+    192.0,
+    157,
+    271
+   ],
+   [
+    193.0,
+    155,
+    273
+   ],
+   [
+    194.0,
+    153,
+    275
+   ],
+   [
+    195.0,
+    151,
+    277
+   ],
+   [
+    196.0,
+    149,
+    279
+   ],
+   [
+    197.0,
+    147,
+    281
+   ],
+   [
+    198.0,
+    145,
+    283
+   ],
+   [
+    199.0,
+    143,
+    285
+   ],
+   [
+    200.0,
+    141,
+    287
+   ],
+   [
+    201.0,
+    139,
+    289
+   ],
+   [
+    202.0,
+    137,
+    291
+   ],
+   [
+    203.0,
+    135,
+    293
+   ],
+   [
+    204.0,
+    133,
+    295
+   ],
+   [
+    205.0,
+    131,
+    297
+   ],
+   [
+    206.0,
+    129,
+    299
+   ],
+   [
+    207.0,
+    127,
+    301
+   ],
+   [
+    208.0,
+    125,
+    303
+   ],
+   [
+    209.0,
+    123,
+    305
+   ],
+   [
+    210.0,
+    121,
+    307
+   ],
+   [
+    211.0,
+    119,
+    309
+   ],
+   [
+    212.0,
+    117,
+    311
+   ],
+   [
+    213.0,
+    115,
+    313
+   ],
+   [
+    214.0,
+    113,
+    315
+   ],
+   [
+    215.0,
+    111,
+    317
+   ],
+   [
+    216.0,
+    109,
+    319
+   ],
+   [
+    217.0,
+    107,
+    321
+   ],
+   [
+    218.0,
+    105,
+    323
+   ],
+   [
+    219.0,
+    103,
+    325
+   ],
+   [
+    220.0,
+    101,
+    327
+   ],
+   [
+    221.0,
+    99,
+    329
+   ],
+   [
+    222.0,
+    97,
+    331
+   ],
+   [
+    223.0,
+    95,
+    333
+   ],
+   [
+    224.0,
+    93,
+    335
+   ],
+   [
+    225.0,
+    91,
+    337
+   ],
+   [
+    226.0,
+    89,
+    339
+   ],
+   [
+    227.0,
+    87,
+    341
+   ],
+   [
+    228.0,
+    85,
+    343
+   ],
+   [
+    229.0,
+    83,
+    345
+   ],
+   [
+    230.0,
+    81,
+    347
+   ],
+   [
+    231.0,
+    79,
+    349
+   ],
+   [
+    232.0,
+    77,
+    351
+   ],
+   [
+    233.0,
+    75,
+    353
+   ],
+   [
+    234.0,
+    73,
+    355
+   ],
+   [
+    235.0,
+    71,
+    357
+   ],
+   [
+    236.0,
+    69,
+    359
+   ],
+   [
+    237.0,
+    67,
+    361
+   ],
+   [
+    238.0,
+    65,
+    363
+   ],
+   [
+    239.0,
+    63,
+    365
+   ],
+   [
+    240.0,
+    61,
+    367
+   ],
+   [
+    241.0,
+    59,
+    369
+   ],
+   [
+    242.0,
+    57,
+    371
+   ],
+   [
+    243.0,
+    55,
+    373
+   ],
+   [
+    244.0,
+    53,
+    375
+   ],
+   [
+    245.0,
+    51,
+    377
+   ],
+   [
+    246.0,
+    49,
+    379
+   ],
+   [
+    247.0,
+    47,
+    381
+   ],
+   [
+    248.0,
+    45,
+    383
+   ],
+   [
+    249.0,
+    43,
+    385
+   ],
+   [
+    250.0,
+    41,
+    387
+   ],
+   [
+    251.0,
+    39,
+    389
+   ],
+   [
+    252.0,
+    37,
+    391
+   ],
+   [
+    253.0,
+    35,
+    393
+   ],
+   [
+    254.0,
+    33,
+    395
+   ],
+   [
+    255.0,
+    31,
+    397
+   ],
+   [
+    256.0,
+    29,
+    399
+   ],
+   [
+    257.0,
+    27,
+    401
+   ],
+   [
+    258.0,
+    25,
+    403
+   ],
+   [
+    259.0,
+    23,
+    405
+   ],
+   [
+    260.0,
+    21,
+    407
+   ],
+   [
+    261.0,
+    19,
+    409
+   ],
+   [
+    262.0,
+    17,
+    411
+   ],
+   [
+    263.0,
+    15,
+    413
+   ],
+   [
+    264.0,
+    13,
+    415
+   ],
+   [
+    265.0,
+    11,
+    417
+   ],
+   [
+    266.0,
+    9,
+    419
+   ],
+   [
+    267.0,
+    7,
+    421
+   ],
+   [
+    268.0,
+    5,
+    423
+   ],
+   [
+    269.0,
+    3,
+    425
+   ],
+   [
+    270.0,
+    1,
+    427
+   ]
+  ],
+  "model": "dynamic smoke-aware egress on a 0.5 m grid with staggered departures; the route field is recomputed every replan_s, smoky routes cost more and dense smoke is avoided; speed falls with smoke level; positions baked as USD time samples. Routing, throughput, timing and exposure only -- people do not collide, so NO density figure is derived or claimed from this run. Smoke is a simplified front model, not fire physics.",
+  "score": 324.4
+ },
+ "after": {
+  "venue": "stadium_section_proxy_v1",
+  "scenario": "fire_evacuation",
+  "seed": 42,
+  "plan": {
+   "gates_open": [
+    "G1",
+    "G2",
+    "G3"
+   ],
+   "exits_open": [
+    "E1",
+    "E2",
+    "E3",
+    "E4"
+   ],
+   "alarm_delay_s": 5.0,
+   "stagger_s": 10.0,
+   "route_bias": {}
+  },
+  "plan_id": "G123-E1234-a5-s10",
+  "fire": {
+   "name": "ne_concourse",
+   "origin": [
+    44.0,
+    17.0
+   ]
+  },
+  "smoke_params": {
+   "spread_speed_ms": 0.6,
+   "ramp_s": 20.0,
+   "reach_m": 45.0,
+   "s_block": 0.7,
+   "k_slow": 0.6,
+   "origin_xy": [
+    44.0,
+    17.0
+   ],
+   "model": "front model: arrival by shortest walkable path / spread_speed, level ramps over ramp_s, ceiling 1 - d/reach_m"
+  },
+  "people": 428,
+  "open_gates": [
+   "G1",
+   "G2",
+   "G3"
+  ],
+  "open_exits": [
+   "E1",
+   "E2",
+   "E3",
+   "E4"
+  ],
+  "t50_s": 82.0,
+  "t90_s": 124.8,
+  "t100_s": 145.0,
+  "trapped": 0,
+  "ever_without_route": 0,
+  "rerouted": 149,
+  "exposure_mean_s": 12.4,
+  "exposure_max_s": 55.5,
+  "exposure_threshold_s": 30.0,
+  "n_over_exposure_threshold": 49,
+  "n_in_dense_smoke": 3,
+  "dense_smoke_max_s": 21.2,
+  "dense_smoke_total_person_s": 23.8,
+  "routing": {
+   "alpha_avoid": 4.0,
+   "dense_cost_factor": 20.0,
+   "min_speed_ms": 0.3,
+   "note": "route cost x (1 + alpha*s); dense cells impassable for planning; someone already inside dense smoke walks out at min_speed along the cheapest path"
+  },
+  "door_flow_pms": 1.3,
+  "exit_capacity_ps": {
+   "E1": 3.9,
+   "E2": 3.9,
+   "E3": 3.9,
+   "E4": 3.9
+  },
+  "gate_throughput_total": {
+   "G1": 182,
+   "G2": 20,
+   "G3": 226
+  },
+  "exit_throughput_total": {
+   "E1": 228,
+   "E2": 198,
+   "E3": 0,
+   "E4": 2
+  },
+  "gate_peak_rate_ps": {
+   "G1": 13.4,
+   "G2": 2.8,
+   "G3": 13.4
+  },
+  "exit_peak_rate_ps": {
+   "E1": 2.2,
+   "E2": 2.2,
+   "E3": 0.0,
+   "E4": 0.4
+  },
+  "corridor_closed_at_s": {
+   "G1": null,
+   "G2": 23.6,
+   "G3": null,
+   "E1": null,
+   "E2": null,
+   "E3": null,
+   "E4": null
+  },
+  "sim_span_s": 145.0,
+  "fps": 4.0,
+  "replan_s": 5.0,
+  "stopped": "all_out",
+  "walk_speed_mean_ms": 1.25,
+  "remaining_series_t_in_out": [
+   [
+    0.0,
+    428,
+    0
+   ],
+   [
+    1.0,
+    428,
+    0
+   ],
+   [
+    2.0,
+    428,
+    0
+   ],
+   [
+    3.0,
+    428,
+    0
+   ],
+   [
+    4.0,
+    428,
+    0
+   ],
+   [
+    5.0,
+    428,
+    0
+   ],
+   [
+    6.0,
+    428,
+    0
+   ],
+   [
+    7.0,
+    428,
+    0
+   ],
+   [
+    8.0,
+    428,
+    0
+   ],
+   [
+    9.0,
+    428,
+    0
+   ],
+   [
+    10.0,
+    428,
+    0
+   ],
+   [
+    11.0,
+    428,
+    0
+   ],
+   [
+    12.0,
+    428,
+    0
+   ],
+   [
+    13.0,
+    428,
+    0
+   ],
+   [
+    14.0,
+    428,
+    0
+   ],
+   [
+    15.0,
+    428,
+    0
+   ],
+   [
+    16.0,
+    428,
+    0
+   ],
+   [
+    17.0,
+    428,
+    0
+   ],
+   [
+    18.0,
+    428,
+    0
+   ],
+   [
+    19.0,
+    428,
+    0
+   ],
+   [
+    20.0,
+    428,
+    0
+   ],
+   [
+    21.0,
+    428,
+    0
+   ],
+   [
+    22.0,
+    428,
+    0
+   ],
+   [
+    23.0,
+    428,
+    0
+   ],
+   [
+    24.0,
+    428,
+    0
+   ],
+   [
+    25.0,
+    428,
+    0
+   ],
+   [
+    26.0,
+    428,
+    0
+   ],
+   [
+    27.0,
+    427,
+    1
+   ],
+   [
+    28.0,
+    425,
+    3
+   ],
+   [
+    29.0,
+    423,
+    5
+   ],
+   [
+    30.0,
+    419,
+    9
+   ],
+   [
+    31.0,
+    416,
+    12
+   ],
+   [
+    32.0,
+    412,
+    16
+   ],
+   [
+    33.0,
+    409,
+    19
+   ],
+   [
+    34.0,
+    405,
+    23
+   ],
+   [
+    35.0,
+    401,
+    27
+   ],
+   [
+    36.0,
+    397,
+    31
+   ],
+   [
+    37.0,
+    393,
+    35
+   ],
+   [
+    38.0,
+    389,
+    39
+   ],
+   [
+    39.0,
+    385,
+    43
+   ],
+   [
+    40.0,
+    381,
+    47
+   ],
+   [
+    41.0,
+    377,
+    51
+   ],
+   [
+    42.0,
+    373,
+    55
+   ],
+   [
+    43.0,
+    369,
+    59
+   ],
+   [
+    44.0,
+    365,
+    63
+   ],
+   [
+    45.0,
+    361,
+    67
+   ],
+   [
+    46.0,
+    357,
+    71
+   ],
+   [
+    47.0,
+    353,
+    75
+   ],
+   [
+    48.0,
+    349,
+    79
+   ],
+   [
+    49.0,
+    345,
+    83
+   ],
+   [
+    50.0,
+    341,
+    87
+   ],
+   [
+    51.0,
+    337,
+    91
+   ],
+   [
+    52.0,
+    333,
+    95
+   ],
+   [
+    53.0,
+    329,
+    99
+   ],
+   [
+    54.0,
+    325,
+    103
+   ],
+   [
+    55.0,
+    321,
+    107
+   ],
+   [
+    56.0,
+    317,
+    111
+   ],
+   [
+    57.0,
+    313,
+    115
+   ],
+   [
+    58.0,
+    309,
+    119
+   ],
+   [
+    59.0,
+    305,
+    123
+   ],
+   [
+    60.0,
+    301,
+    127
+   ],
+   [
+    61.0,
+    297,
+    131
+   ],
+   [
+    62.0,
+    293,
+    135
+   ],
+   [
+    63.0,
+    289,
+    139
+   ],
+   [
+    64.0,
+    285,
+    143
+   ],
+   [
+    65.0,
+    281,
+    147
+   ],
+   [
+    66.0,
+    277,
+    151
+   ],
+   [
+    67.0,
+    273,
+    155
+   ],
+   [
+    68.0,
+    269,
+    159
+   ],
+   [
+    69.0,
+    265,
+    163
+   ],
+   [
+    70.0,
+    261,
+    167
+   ],
+   [
+    71.0,
+    257,
+    171
+   ],
+   [
+    72.0,
+    253,
+    175
+   ],
+   [
+    73.0,
+    249,
+    179
+   ],
+   [
+    74.0,
+    245,
+    183
+   ],
+   [
+    75.0,
+    241,
+    187
+   ],
+   [
+    76.0,
+    237,
+    191
+   ],
+   [
+    77.0,
+    233,
+    195
+   ],
+   [
+    78.0,
+    229,
+    199
+   ],
+   [
+    79.0,
+    225,
+    203
+   ],
+   [
+    80.0,
+    221,
+    207
+   ],
+   [
+    81.0,
+    217,
+    211
+   ],
+   [
+    82.0,
+    213,
+    215
+   ],
+   [
+    83.0,
+    209,
+    219
+   ],
+   [
+    84.0,
+    205,
+    223
+   ],
+   [
+    85.0,
+    201,
+    227
+   ],
+   [
+    86.0,
+    197,
+    231
+   ],
+   [
+    87.0,
+    193,
+    235
+   ],
+   [
+    88.0,
+    189,
+    239
+   ],
+   [
+    89.0,
+    185,
+    243
+   ],
+   [
+    90.0,
+    181,
+    247
+   ],
+   [
+    91.0,
+    177,
+    251
+   ],
+   [
+    92.0,
+    173,
+    255
+   ],
+   [
+    93.0,
+    169,
+    259
+   ],
+   [
+    94.0,
+    165,
+    263
+   ],
+   [
+    95.0,
+    161,
+    267
+   ],
+   [
+    96.0,
+    157,
+    271
+   ],
+   [
+    97.0,
+    153,
+    275
+   ],
+   [
+    98.0,
+    149,
+    279
+   ],
+   [
+    99.0,
+    145,
+    283
+   ],
+   [
+    100.0,
+    141,
+    287
+   ],
+   [
+    101.0,
+    137,
+    291
+   ],
+   [
+    102.0,
+    133,
+    295
+   ],
+   [
+    103.0,
+    129,
+    299
+   ],
+   [
+    104.0,
+    125,
+    303
+   ],
+   [
+    105.0,
+    121,
+    307
+   ],
+   [
+    106.0,
+    117,
+    311
+   ],
+   [
+    107.0,
+    113,
+    315
+   ],
+   [
+    108.0,
+    109,
+    319
+   ],
+   [
+    109.0,
+    105,
+    323
+   ],
+   [
+    110.0,
+    101,
+    327
+   ],
+   [
+    111.0,
+    97,
+    331
+   ],
+   [
+    112.0,
+    93,
+    335
+   ],
+   [
+    113.0,
+    89,
+    339
+   ],
+   [
+    114.0,
+    85,
+    343
+   ],
+   [
+    115.0,
+    81,
+    347
+   ],
+   [
+    116.0,
+    77,
+    351
+   ],
+   [
+    117.0,
+    73,
+    355
+   ],
+   [
+    118.0,
+    69,
+    359
+   ],
+   [
+    119.0,
+    65,
+    363
+   ],
+   [
+    120.0,
+    61,
+    367
+   ],
+   [
+    121.0,
+    57,
+    371
+   ],
+   [
+    122.0,
+    53,
+    375
+   ],
+   [
+    123.0,
+    49,
+    379
+   ],
+   [
+    124.0,
+    45,
+    383
+   ],
+   [
+    125.0,
+    41,
+    387
+   ],
+   [
+    126.0,
+    38,
+    390
+   ],
+   [
+    127.0,
+    36,
+    392
+   ],
+   [
+    128.0,
+    34,
+    394
+   ],
+   [
+    129.0,
+    32,
+    396
+   ],
+   [
+    130.0,
+    30,
+    398
+   ],
+   [
+    131.0,
+    28,
+    400
+   ],
+   [
+    132.0,
+    26,
+    402
+   ],
+   [
+    133.0,
+    24,
+    404
+   ],
+   [
+    134.0,
+    22,
+    406
+   ],
+   [
+    135.0,
+    20,
+    408
+   ],
+   [
+    136.0,
+    18,
+    410
+   ],
+   [
+    137.0,
+    16,
+    412
+   ],
+   [
+    138.0,
+    14,
+    414
+   ],
+   [
+    139.0,
+    12,
+    416
+   ],
+   [
+    140.0,
+    10,
+    418
+   ],
+   [
+    141.0,
+    8,
+    420
+   ],
+   [
+    142.0,
+    6,
+    422
+   ],
+   [
+    143.0,
+    4,
+    424
+   ],
+   [
+    144.0,
+    2,
+    426
+   ],
+   [
+    145.0,
+    0,
+    428
+   ]
+  ],
+  "model": "dynamic smoke-aware egress on a 0.5 m grid with staggered departures; the route field is recomputed every replan_s, smoky routes cost more and dense smoke is avoided; speed falls with smoke level; positions baked as USD time samples. Routing, throughput, timing and exposure only -- people do not collide, so NO density figure is derived or claimed from this run. Smoke is a simplified front model, not fire physics.",
+  "score": 146.0
+ },
+ "elapsed_s": 29.2,
+ "model_note": "dynamic smoke-aware egress on a 0.5 m grid with staggered departures; the route field is recomputed every replan_s, smoky routes cost more and dense smoke is avoided; speed falls with smoke level; positions baked as USD time samples. Routing, throughput, timing and exposure only -- people do not collide, so NO density figure is derived or claimed from this run. Smoke is a simplified front model, not fire physics."
+}

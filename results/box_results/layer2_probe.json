@@ -1,0 +1,96 @@
+{
+ "layer": 2,
+ "venue": "hospital_ground_floor_v1",
+ "plan": {
+  "gates_open": [],
+  "exits_open": [
+   "E1"
+  ],
+  "alarm_delay_s": 3.0,
+  "stagger_s": 5.0,
+  "route_bias": {}
+ },
+ "plan_id": "G-E1-a3-s5",
+ "open_exits": [
+  "E1"
+ ],
+ "source": "object_detection (camera-visible agents only \u2014 PARTIAL)",
+ "reach_m": 1.5,
+ "people": 1,
+ "sim_span_s": 7.4,
+ "t50_s": null,
+ "t90_s": null,
+ "t100_s": null,
+ "exit_throughput_total": {},
+ "arrived": 0,
+ "never_arrived": 1,
+ "redirected": {},
+ "never_arrived_agents": {
+  "female_adult_police_03": 31.6
+ },
+ "remaining_series_t_in_out": [
+  [
+   0.0,
+   1,
+   0
+  ],
+  [
+   1.0,
+   1,
+   0
+  ],
+  [
+   2.0,
+   1,
+   0
+  ],
+  [
+   3.0,
+   1,
+   0
+  ],
+  [
+   4.0,
+   1,
+   0
+  ],
+  [
+   5.0,
+   1,
+   0
+  ],
+  [
+   6.0,
+   1,
+   0
+  ],
+  [
+   7.0,
+   1,
+   0
+  ]
+ ],
+ "exit_targets_world": {
+  "E1": [
+   -1.25,
+   -1.25,
+   0.0
+  ],
+  "E2": [
+   -40.25,
+   31.75,
+   0.0
+  ],
+  "E3": [
+   19.25,
+   31.25,
+   0.0
+  ],
+  "E4": [
+   -39.75,
+   8.75,
+   0.0
+  ]
+ },
+ "model": "Isaac Sim / IRA characters on a baked NavMesh, behaviour tree Wait(alarm+stagger) -> MoveTo exit; no collision or queuing between characters, so door throughput is not modelled here; exit = first frame within reach_m of the agent's exit target"
+}

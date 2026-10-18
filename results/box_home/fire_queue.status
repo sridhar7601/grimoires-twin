@@ -1,0 +1,8 @@
+2026-10-17 13:58:56  queue: winner_dollhouse20s_fire winner_dollhouse_fire base_dollhouse_fire
+2026-10-17 13:58:56  START winner_dollhouse20s_fire  (log ~/ira_film_winner_dollhouse20s_fire.log)
+2026-10-17 14:11:10  DONE  winner_dollhouse20s_fire  exit=0  rgb frames=580
+2026-10-17 14:11:10  START winner_dollhouse_fire  (log ~/ira_film_winner_dollhouse_fire.log)
+2026-10-17 14:43:08  DONE  winner_dollhouse_fire  exit=0  rgb frames=3493
+2026-10-17 14:43:08  START base_dollhouse_fire  (log ~/ira_film_base_dollhouse_fire.log)
+2026-10-17 15:44:42  DONE  base_dollhouse_fire  exit=0  rgb frames=5791
+2026-10-17 15:44:42  ALL DONE

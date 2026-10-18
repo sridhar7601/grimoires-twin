@@ -9,17 +9,6 @@ isaacsim.replicator.agent:
   simulation_duration: 15.0
   environment:
     base_stage_asset_path: /workspace/assets/hospital/hospital_evac_winner_dollhouse.usda
-  sensor:
-    groups:
-      cam_overhead:
-        num: 1
-        aim_at_targets:
-          height_range: [38.0, 40.0]
-          look_down_angle_range: [84.0, 88.0]
-          focal_length_range: [10.0, 10.0]
-          distance_range: [38.0, 40.5]
-          yaw_range: [265.0, 275.0]
-          targets: [/World/FilmTargets/Centre]
   character:
     groups:
       evac_E1:
@@ -50,6 +39,7 @@ isaacsim.replicator.agent:
         camera_params: true
         object_info_bounding_box_3d: true
         start_frame: 20
-        resolution: [1280, 720]
+        resolution: [1920, 1080]
         rgb: true
         object_info_bounding_box_2d_tight: false
+        sensor_prim_list: [/World/FilmCams/Overhead]

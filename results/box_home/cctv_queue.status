@@ -1,0 +1,6 @@
+2026-10-17 18:16:03  queue: winner_cctv60s_fire base_cctv120s_fire
+2026-10-17 18:16:03  START winner_cctv60s_fire  (log ~/ira_film_winner_cctv60s_fire.log)
+2026-10-17 19:37:11  DONE  winner_cctv60s_fire  exit=0  rgb frames=7120
+2026-10-17 19:37:11  START base_cctv120s_fire  (log ~/ira_film_base_cctv120s_fire.log)
+2026-10-17 22:27:02  DONE  base_cctv120s_fire  exit=0  rgb frames=14320
+2026-10-17 22:27:02  ALL DONE
