@@ -8,6 +8,10 @@ hands back a certificate: *where the plan fails, the fix, and before → after o
 Venue: NVIDIA's Isaac **Hospital** environment (ground floor, 4 exits). Every number below
 comes from files in `results/` and is reproduced by the commands in this README.
 
+**Start here (5 minutes):** `renders/grimoires_demo.mp4` (53-second captioned reel) →
+`docs/results/certificate.md` (the certificate, both layers) → `docs/results/agent_session.md`
+(the Nemotron session, with its twin check) → `docs/PLAN.md` (every phase, outcome and decision).
+
 ## The result so far (hospital, fire 4 m inside the main entrance, seed 42)
 
 | | base plan `E1+E2, alarm 30 s` | recommended `E1–E4, alarm 5 s` |
@@ -46,7 +50,7 @@ no door queuing (so it clears faster — stated next to every Layer-2 number); p
 ## How it works
 
 ```
-venue USD ─► sim/mall_plan.py ──► 0.5 m walkable grid + named exits (results/hospital_plan.json)
+venue USD ─► sim/mall_plan.py ──► 0.5 m walkable grid + named exits (results/hospital/hospital_plan.json)
 plan knobs: exits_open, alarm_delay_s, stagger_s                 (scenarios/*.json)
 
 LAYER 1  sim/solve.py → sim/rehearse.py per variant: Dijkstra routing, smoke front,
@@ -62,18 +66,20 @@ LAYER 3  sim/certificate.py → docs/results/certificate.md: both layers, same f
 ```
 
 NVIDIA pieces: OpenUSD · Isaac Sim 6.0.1 · Isaac Replicator Agent (NavMesh, behaviour trees,
-Replicator writers) · Isaac People characters · Hospital environment · Cosmos Reason 2 NIM
-(narration, Phase 6) · Nemotron / NemoClaw (agent loop, Phase 7).
+Replicator writers) · Isaac People characters · Hospital environment · Omniverse Flow (fire and
+smoke) · Cosmos Reason 2 NIM (narration, self-hosted on the second L40S) · Nemotron 3 Super via
+build.nvidia.com driving the pipeline through an MCP server (`sim/agent/`). Compute: NVIDIA
+LaunchPad, 2 × L40S.
 
 ## Run it
 
 **Layer 1 — any machine with Python 3 + numpy, no GPU** (the slicer needs `pxr`; see below):
 
 ```bash
-python3 sim/rehearse.py --venue results/hospital_plan.json --plan scenarios/hospital_base_plan.json \
+python3 sim/rehearse.py --venue results/hospital/hospital_plan.json --plan scenarios/hospital_base_plan.json \
     --fire scenarios/hospital_fire_entrance.json --seed 42 --fps 12 --people 300 --report /tmp/base.json
-python3 sim/solve.py --venue results/hospital_plan.json --base scenarios/hospital_base_plan.json \
-    --fires scenarios/hospital_fire_entrance.json --people 300 --fps 12 --tag hospital          # 24 variants, ~20 s
+python3 sim/solve.py --venue results/hospital/hospital_plan.json --base scenarios/hospital_base_plan.json \
+    --fires scenarios/hospital_fire_entrance.json --people 300 --fps 12 --tag hospital --results results/hospital/layer1   # 24 variants, ~20 s
 python3 sim/solve.py ... --fires scenarios/hospital_fire_entrance.json,scenarios/hospital_fire_e2_north.json,scenarios/hospital_fire_e3_east.json,scenarios/hospital_fire_e4_west.json,scenarios/hospital_fire_central.json --tag hospital_robust
 ```
 
@@ -84,18 +90,24 @@ python3 sim/solve.py ... --fires scenarios/hospital_fire_entrance.json,scenarios
 # hospital geometry: copy Isaac/Environments/Hospital/ from the Isaac assets root to assets/hospital/
 bash sim/usdpy.sh sim/mall_plan.py --usd assets/hospital/hospital.usd --name hospital_ground_floor_v1 \
     --ignore door --seal-perimeter --doors "E1:-1.25,-2.75;E2:-40.5,33.25;E3:20.75,31.25;E4:-38.25,8.75" \
-    --out results/hospital_plan.json --png results/hospital_plan.png
-bash sim/usdpy.sh sim/make_ira_config.py --plan scenarios/hospital_winner_plan.json --venue results/hospital_plan.json \
-    --layer1-report results/rehearse_hospital_winner.json --people 40 --measure-only
+    --out results/hospital/hospital_plan.json --png results/hospital/hospital_plan.png
+bash sim/usdpy.sh sim/make_ira_config.py --plan scenarios/hospital_winner_plan.json --venue results/hospital/hospital_plan.json \
+    --layer1-report results/hospital/layer1/rehearse_hospital_winner.json --people 40 --measure-only
 # then, with the container's python and GPU — note the NavMesh-cap patch bind-mount (sim/ira/patches/):
 /isaac-sim/python.sh /workspace/sim/ira/actor_sdg_dump.py -c /workspace/sim/ira/hospital_winner_measure.yaml \
     --dump /workspace/results/ira_hospital_winner_measure/agent_positions.jsonl
-python3 sim/measure.py --venue results/hospital_plan.json --plan scenarios/hospital_winner_plan.json \
-    --positions results/ira_hospital_winner_measure/agent_positions.jsonl --report results/layer2_winner.json
-python3 sim/certificate.py --layer1 results/solve_hospital.json --layer2-base results/layer2_base.json \
-    --layer2-winner results/layer2_winner.json --out docs/results/certificate.md \
-    --sensitivity "Flow fire::results/layer2_base_fire.json::results/layer2_winner_fire.json" \
-    --crowding-check results/rehearse_hospital_loophole_a0s0.json      # repeatable --sensitivity; the flag check is optional
+# measure needs no GPU: the recorded positions of every run are in the repo (gzipped)
+gunzip -kc results/twin_runs/ira_hospital_winner_measure/agent_positions.jsonl.gz > /tmp/winner.jsonl
+python3 sim/measure.py --venue results/hospital/hospital_plan.json --plan scenarios/hospital_winner_plan.json \
+    --positions /tmp/winner.jsonl --report /tmp/layer2_winner.json
+# the certificate exactly as committed (docs/results/certificate.md):
+python3 sim/certificate.py --layer1 results/hospital/layer1/solve_hospital.json \
+    --layer2-base results/hospital/layer2/layer2_base_doorsopen.json --layer2-winner results/hospital/layer2/layer2_winner_doorsopen.json \
+    --layer2-note "door leaves switched off (doors open), as Layer 1 assumes; 40 characters; same seed and spawn positions in all twin setups" \
+    --sensitivity "door leaves closed (NVIDIA asset as shipped)::results/hospital/layer2/layer2_base.json::results/hospital/layer2/layer2_winner.json" \
+    --sensitivity "Omniverse Flow fire at the origin, E1 closed by smoke at 21.7 s::results/hospital/layer2/layer2_base_fire.json::results/hospital/layer2/layer2_winner_fire.json" \
+    --sensitivity "the same Flow-fire run repeated (same seed; film render with brighter flames)::results/hospital/layer2/layer2_base_fire2.json::results/hospital/layer2/layer2_winner_fire2.json" \
+    --crowding-check results/hospital/layer1/rehearse_hospital_loophole_a0s0.json --out docs/results/certificate.md
 ```
 
 Three things that were not obvious and are handled in code: NVIDIA environments mark walls
@@ -107,11 +119,14 @@ read from IRA's agent objects, never from USD transforms.
 ## Layout
 
 ```
-docs/              PLAN.md (phases, outcomes, decisions) · ARCHITECTURE.md · results/*.md (the tables)
-sim/               all code; sim/ira/ = Isaac configs, behaviour-tree generator inputs, NavMesh patch; sim/bt/ = trees
+docs/              PLAN.md (phases, outcomes, decisions) · ARCHITECTURE.md · results/*.md (certificate, tables, agent sessions)
+sim/               all code; sim/agent/ = MCP server + Nemotron loop; sim/ira/ = Isaac configs + NavMesh patch; sim/bt/ = trees
 scenarios/         plans and fire origins (JSON)
-results/           walkable maps, Layer-1 reports and tracks, Layer-2 reports (run outputs with frames are git-ignored)
-assets/            venue USDs; the 1 GB hospital textures/props are fetched, not committed (see .gitignore)
+results/hospital/  the curated numbers: walkable map, Layer-1 reports (layer1/), Layer-2 reports (layer2/), agent sessions (agent/)
+results/twin_runs/ every Isaac run: positions (gzipped), metadata, sampled frames   — see "Evidence" below
+results/box_*/     the GPU box's results folder and run logs, as they were
+renders/           all films, including the 53-second reel
+assets/            venue USDs and generated stages; the 1 GB hospital textures/props are fetched, not committed
 ```
 
 The mall venue from the first iteration (`assets/venue_mall.usdc`, `scenarios/mall_*.json`,
@@ -122,7 +137,7 @@ The mall venue from the first iteration (`assets/venue_mall.usdc`, `scenarios/ma
 | Path | What it is |
 |---|---|
 | `renders/*.mp4` | every stitched film, plus `grimoires_demo.mp4` (the 53-second captioned reel) |
-| `results/twin_runs/<run>/agent_positions.jsonl.gz` | every character's world position every frame, for all 19 Isaac runs — the raw input to `sim/measure.py` (`gunzip` first) |
+| `results/twin_runs/<run>/agent_positions.jsonl.gz` | every character's world position every frame, for 18 Isaac runs (one early probe wrote none) — the raw input to `sim/measure.py` (`gunzip` first) |
 | `results/twin_runs/<run>/frames/<camera>/` | every 400th rendered RGB frame of every camera, as visual evidence of each run |
 | `results/twin_runs/<run>/metadata.txt` | the IRA run metadata as written on the box |
 | `results/box_results/` | the box's `results/` folder as it was: rehearsal reports, solver outputs, venue grids, Layer-2 reports |
