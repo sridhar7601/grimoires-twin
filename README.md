@@ -12,6 +12,27 @@ comes from files in `results/` and is reproduced by the commands in this README.
 `docs/results/certificate.md` (the certificate, both layers) → `docs/results/agent_session.md`
 (the Nemotron session, with its twin check) → `docs/PLAN.md` (every phase, outcome and decision).
 
+## See it
+
+The 53-second reel: the search (top-down, 300 people), the Isaac twin with the Omniverse Flow fire,
+and the security-camera wall — each section labelled on screen.
+
+![Grimoires demo reel](renders/grimoires_demo.mp4)
+
+![Isaac Sim twin, roof off: Grimoires plan (left) vs today's plan (right) with the Flow fire at the entrance — at 40.7 s, 35 of 40 out vs 0 of 40](docs/img/twin_fire_sidebyside.png)
+
+*Isaac Sim twin, roof off, real Omniverse Flow fire at the main entrance. At 40.7 s the Grimoires plan has 35 of 40 out; today's plan has none. Every ring is a recorded character position.*
+
+![Four security cameras per plan, side by side; the lobby feed shows the fire and a red "Exit E1 closed - smoke" banner](docs/img/cctv_wall.png)
+
+*The same run as a security-camera wall (`renders/hospital_cctv.mp4`): at 44.7 s, 35 of 40 out vs 3 of 40.*
+
+![Security-camera film](renders/hospital_cctv.mp4)
+
+![Top-down Layer-1 rehearsal: found plan left, today's plan right, smoke front from the entrance, live clearance curves](docs/img/map_search.png)
+
+*Layer 1, top-down: 300 people, the smoke front closing the entrance at 21.7 s, and the live race of the two clearance curves (`renders/hospital_map_layer1.mp4`).*
+
 ## The result so far (hospital, fire 4 m inside the main entrance, seed 42)
 
 | | base plan `E1+E2, alarm 30 s` | recommended `E1–E4, alarm 5 s` |
@@ -48,6 +69,10 @@ no door queuing (so it clears faster — stated next to every Layer-2 number); p
 *most robust plan among those tried*, not optimal.
 
 ## How it works
+
+![Architecture: building → Layer 1 Search (local, CPU) → Layer 2 Prove (GPU, L40S) → Layer 3 Certify, with the Nemotron agent loop feeding back into Search](docs/img/architecture.png)
+
+Only the twin needs a GPU; the search and the certificate run on a laptop. In text:
 
 ```
 venue USD ─► sim/mall_plan.py ──► 0.5 m walkable grid + named exits (results/hospital/hospital_plan.json)
